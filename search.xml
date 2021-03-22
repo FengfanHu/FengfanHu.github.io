@@ -4,112 +4,19 @@
   
     
     <entry>
-      <title>新的文章</title>
-      <link href="2021/03/22/%E6%96%B0%E7%9A%84%E6%96%87%E7%AB%A0/"/>
-      <url>2021/03/22/%E6%96%B0%E7%9A%84%E6%96%87%E7%AB%A0/</url>
-      
-        <content type="html"><![CDATA[<p>这次真的是我新写的文章了</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Test4</title>
-      <link href="2021/03/22/Test4/"/>
-      <url>2021/03/22/Test4/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 测试 </tag>
-            
-            <tag> 随笔 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Test3</title>
-      <link href="2021/03/22/Test3/"/>
-      <url>2021/03/22/Test3/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 测试 </tag>
-            
-            <tag> 随笔 </tag>
-            
-            <tag> 文章 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Test2</title>
-      <link href="2021/03/22/Test2/"/>
-      <url>2021/03/22/Test2/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第二个测试了哈哈哈哈"><a href="#第二个测试了哈哈哈哈" class="headerlink" title="第二个测试了哈哈哈哈"></a>第二个测试了哈哈哈哈</h1>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 测试 </tag>
-            
-            <tag> 随笔 </tag>
-            
-            <tag> 文章 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>test</title>
-      <link href="2021/03/21/test/"/>
-      <url>2021/03/21/test/</url>
-      
-        <content type="html"><![CDATA[<h1 id="This-is-a-Test"><a href="#This-is-a-Test" class="headerlink" title="This is a Test"></a>This is a Test</h1><p>let’s see what will happen</p><img src="/2021/03/21/test/test.jpeg" class="">]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 测试 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Hello World</title>
       <link href="2021/03/21/hello-world/"/>
       <url>2021/03/21/hello-world/</url>
       
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new &quot;My New Post&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is my very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h3 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h3><p>I’m using <a href="https://github.com/adisaktijrs/hexo-theme-minima">minima</a> as the hexo theme.</p><p>My blog will be little different from the original one. so, if you like my version, you can fork the code from <a href="https://github.com/FengfanHu/blog">here</a>.</p><h3 id="Support-Latex"><a href="#Support-Latex" class="headerlink" title="Support Latex"></a>Support Latex</h3><p>$g(Z)=1/(1+e^{-z})$</p><h3 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'hello world!'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> 杂文 </tag>
+            
+        </tags>
       
     </entry>
     
