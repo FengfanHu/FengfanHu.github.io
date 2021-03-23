@@ -174,7 +174,7 @@
   <div class="nine columns">
     <div class="row">
       <h1 class="six columns mt-1 typing">
-        Spaghetti.ink
+        Spaghetti<spn style="color: #0FA0CE">.ink</spn>
       </h1>
     </div>
     <div class="twelve columns">
@@ -216,6 +216,12 @@
 <h3 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'hello world!'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
   <p><a class="classtest-link" href="/tags/%E6%9D%82%E6%96%87/" rel="tag">杂文</a> — 2021年3月21日</p>
+  <div class="row" style="justify-content: center; font-weight: lighter;">
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  </div>
+
   
   <hr>
 <section id="comments" class="mt-2 mb-3">
@@ -250,10 +256,6 @@
 </section>
 
 
-
-  <span id="busuanzi_container_page_pv">
-    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-  </span>
 
           <div class="row mt-2">
   
@@ -292,7 +294,10 @@
   
 </div>
 
-<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+<div class="row" style="justify-content: center; font-weight: lighter;">
+  <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+</div>
+
 
         </div>
       </div>
@@ -312,6 +317,22 @@
     nanobar.go(100);
   </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 
 </html>
