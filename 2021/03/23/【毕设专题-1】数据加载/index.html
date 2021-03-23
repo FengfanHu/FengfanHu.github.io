@@ -11,11 +11,11 @@
   <meta charset="utf-8">
 
   
-  <title>标签 - Frank</title>
+  <title>【毕设专题-1】数据加载</title>
   
-  <link rel="canonical" href="http://136.244.107.20/tags/">
+  <link rel="canonical" href="http://136.244.107.20/2021/03/23/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E9%A2%98-1%E3%80%91%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/">
   
-  <meta name="description" content="undefined">
+  <meta name="description" content="前言本科毕设选题为“基于Web日志的网站优化技术研究”，本次毕设的核心任务就是对Web日志进行数据挖掘，寻找出网站的频繁模式（用户频繁访问路径），并根据频繁模式优化原有的网站结构，使得大多数用户的平均访问代价减少。该系列文章将详细记录我毕设各个工作阶段，希望能给以后研究相关方向的人一些参考同时也激励">
   
   
   <meta name="keywords" content="blog">
@@ -26,21 +26,21 @@
   
   <meta property="og:site_name" content="Spaghetti" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="标签 - Frank" />
+  <meta property="og:title" content="【毕设专题-1】数据加载" />
   
-  <meta property="og:description" content="undefined">
+  <meta property="og:description" content="前言本科毕设选题为“基于Web日志的网站优化技术研究”，本次毕设的核心任务就是对Web日志进行数据挖掘，寻找出网站的频繁模式（用户频繁访问路径），并根据频繁模式优化原有的网站结构，使得大多数用户的平均访问代价减少。该系列文章将详细记录我毕设各个工作阶段，希望能给以后研究相关方向的人一些参考同时也激励">
   
-  <meta property="og:url" content="http://136.244.107.20/tags/" />
+  <meta property="og:url" content="http://136.244.107.20/2021/03/23/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E9%A2%98-1%E3%80%91%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="标签 - Frank">
+  <meta name="twitter:title" content="【毕设专题-1】数据加载">
   
-  <meta name="twitter:description" content="undefined">
+  <meta name="twitter:description" content="前言本科毕设选题为“基于Web日志的网站优化技术研究”，本次毕设的核心任务就是对Web日志进行数据挖掘，寻找出网站的频繁模式（用户频繁访问路径），并根据频繁模式优化原有的网站结构，使得大多数用户的平均访问代价减少。该系列文章将详细记录我毕设各个工作阶段，希望能给以后研究相关方向的人一些参考同时也激励">
   
   
   <meta name="twitter:image" content="http://136.244.107.20undefined">
   
-  <meta name="twitter:url" content="http://136.244.107.20/tags/" />
+  <meta name="twitter:url" content="http://136.244.107.20/2021/03/23/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E9%A2%98-1%E3%80%91%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -207,70 +207,93 @@
 <hr style="margin-bottom: 2.6rem">
 
         <div class="trans">
-          
-    <article>
-        <div class="row">
-            <h2>杂文 </h2>
-            
-                <div class="row">
-                    <div class="three columns left lit">
-                      <p class="bottom">2021年3月21日</p>
-                    </div>
-                    <div class="nine columns left mb-3">
-                      <a href="/2021/03/21/hello-world/" class="">
-                        
-                          Hello World
-                        
-                      </a>
-                    </div>
-                  </div>
-            
-        </div>
-      </article>
+            <h2>【毕设专题-1】数据加载</h2>
+
+  <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本科毕设选题为“基于Web日志的网站优化技术研究”，本次毕设的核心任务就是对Web日志进行数据挖掘，寻找出网站的频繁模式（<strong>用户频繁访问路径</strong>），并根据频繁模式优化原有的网站结构，使得大多数用户的平均访问代价减少。该系列文章将详细记录我毕设各个工作阶段，希望能给以后研究相关方向的人一些参考同时也激励自己学习、创作。</p>
+<h3 id="Web日志挖掘的各个阶段"><a href="#Web日志挖掘的各个阶段" class="headerlink" title="Web日志挖掘的各个阶段"></a>Web日志挖掘的各个阶段</h3><ul>
+<li>数据准备阶段<ul>
+<li>数据集筛选</li>
+<li>数据预处理</li>
+</ul>
+</li>
+<li>数据挖掘阶段<ul>
+<li>数据挖掘算法</li>
+</ul>
+</li>
+<li>结果解释阶段<ul>
+<li>可视化</li>
+<li>归纳总结</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h2><blockquote>
+<p>本次研究采用的数据集为<a target="_blank" rel="noopener" href="https://figshare.com/articles/dataset/Charles_University_SIS_Access_Log_Dataset/8245763?file=15372923">Charles University SIS Access Log Dataset</a><br><br /><br>该数据集合采用<a target="_blank" rel="noopener" href="http://mattmahoney.net/dc/zpaq.html">ZPAQ</a>压缩，有需要的同学安装ZPAQ CLI进行解压即可，文件数据量非常大，如有需要请中止解压过程</p>
+</blockquote>
+<p>数据分析主要采用<code>Python</code>及其数据分析库<code>Pandas</code>实现</p>
+<h3 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h3><p>一般的我们通过<code>pandas</code>库中的<code>read_xxx</code>函数来读取我们的文件即可，我们的文件扩展名为<code>txt</code>，这里通过<code>read_table</code>来读取Web日志。</p>
+<h4 id="获取文件路径"><a href="#获取文件路径" class="headerlink" title="获取文件路径"></a>获取文件路径</h4><pre class="line-numbers language-py" data-language="py"><code class="language-py">import os;
+
+&#39;&#39;&#39;
+  os.path.join: 拼接路径
+  注意如果所有的参数中存在绝对路径的话，那么之前的参数将会被抛弃
+  e.g.
+    os.path.join(&#39;a&#39;, &#39;&#x2F;&#39;, &#39;b&#39;) &#x3D;&#x3D;&#x3D; &#39;&#x2F;b&#39;
+    os.path.join(&#39;&#x2F;&#39;, &#39;a&#39;, &#39;b&#39;) &#x3D;&#x3D;&#x3D; &#39;&#x2F;a&#x2F;b&#39;
+&#39;&#39;&#39;
+
+# os.sep: 获取当前OS的文件分隔符
+
+# os.path.exists: 确认目标文件是否存在
+
+# 获取文件地址
+currentDirectory &#x3D; os.getcwd()
+logPath &#x3D; os.path.join(currentDirectory, &#39;log&#39;, &#39;sis-log-201805-anonymous.txt&#39;)
+
+# 确认文件是否存在
+os.path.exists(logPath)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2>
+  <p><a class="classtest-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a>, <a class="classtest-link" href="/tags/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" rel="tag">毕业设计</a> — 2021年3月23日</p>
+  <div class="row" style="justify-content: center; font-weight: lighter;">
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  </div>
+
+  
+  <hr>
+<section id="comments" class="mt-2 mb-3">
+
+  <div id="disqus_thread">
+    <a href="#" class="button button-primary" onclick="loadDisqus();return false;">View / Make Comments</a>
+  </div>
+
+  <script>
+    var disqus_config = function() {
+      this.page.url = 'http://136.244.107.20/2021/03/23/【毕设专题-1】数据加载/index.html';
+      this.page.identifier = '2021/03/23/【毕设专题-1】数据加载/index.html';
+      this.page.title = '【毕设专题-1】数据加载';
+    };
+
+    var is_disqus_loaded = false;
+
+    function loadDisqus() {
+      if (!is_disqus_loaded) {
+        is_disqus_loaded = true;
+
+        var d = document,
+          s = d.createElement('script');
+        s.src = 'https://spaghetti-ink.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+    }
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
 
 
-    <article>
-        <div class="row">
-            <h2>数据分析 </h2>
-            
-                <div class="row">
-                    <div class="three columns left lit">
-                      <p class="bottom">2021年3月23日</p>
-                    </div>
-                    <div class="nine columns left mb-3">
-                      <a href="/2021/03/23/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E9%A2%98-1%E3%80%91%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/" class="">
-                        
-                          【毕设专题-1】数据加载
-                        
-                      </a>
-                    </div>
-                  </div>
-            
-        </div>
-      </article>
 
-
-    <article>
-        <div class="row">
-            <h2>毕业设计 </h2>
-            
-                <div class="row">
-                    <div class="three columns left lit">
-                      <p class="bottom">2021年3月23日</p>
-                    </div>
-                    <div class="nine columns left mb-3">
-                      <a href="/2021/03/23/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E9%A2%98-1%E3%80%91%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/" class="">
-                        
-                          【毕设专题-1】数据加载
-                        
-                      </a>
-                    </div>
-                  </div>
-            
-        </div>
-      </article>
-
- 
           <div class="row mt-2">
   
     <div class="eight columns">

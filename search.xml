@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>【毕设专题-1】数据加载</title>
+      <link href="2021/03/23/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E9%A2%98-1%E3%80%91%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/"/>
+      <url>2021/03/23/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E9%A2%98-1%E3%80%91%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本科毕设选题为“基于Web日志的网站优化技术研究”，本次毕设的核心任务就是对Web日志进行数据挖掘，寻找出网站的频繁模式（<strong>用户频繁访问路径</strong>），并根据频繁模式优化原有的网站结构，使得大多数用户的平均访问代价减少。该系列文章将详细记录我毕设各个工作阶段，希望能给以后研究相关方向的人一些参考同时也激励自己学习、创作。</p><h3 id="Web日志挖掘的各个阶段"><a href="#Web日志挖掘的各个阶段" class="headerlink" title="Web日志挖掘的各个阶段"></a>Web日志挖掘的各个阶段</h3><ul><li>数据准备阶段<ul><li>数据集筛选</li><li>数据预处理</li></ul></li><li>数据挖掘阶段<ul><li>数据挖掘算法</li></ul></li><li>结果解释阶段<ul><li>可视化</li><li>归纳总结</li></ul></li></ul><h2 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h2><blockquote><p>本次研究采用的数据集为<a href="https://figshare.com/articles/dataset/Charles_University_SIS_Access_Log_Dataset/8245763?file=15372923">Charles University SIS Access Log Dataset</a><br><br /><br>该数据集合采用<a href="http://mattmahoney.net/dc/zpaq.html">ZPAQ</a>压缩，有需要的同学安装ZPAQ CLI进行解压即可，文件数据量非常大，如有需要请中止解压过程</p></blockquote><p>数据分析主要采用<code>Python</code>及其数据分析库<code>Pandas</code>实现</p><h3 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h3><p>一般的我们通过<code>pandas</code>库中的<code>read_xxx</code>函数来读取我们的文件即可，我们的文件扩展名为<code>txt</code>，这里通过<code>read_table</code>来读取Web日志。</p><h4 id="获取文件路径"><a href="#获取文件路径" class="headerlink" title="获取文件路径"></a>获取文件路径</h4><pre class="line-numbers language-py" data-language="py"><code class="language-py">import os;&#39;&#39;&#39;  os.path.join: 拼接路径  注意如果所有的参数中存在绝对路径的话，那么之前的参数将会被抛弃  e.g.    os.path.join(&#39;a&#39;, &#39;&#x2F;&#39;, &#39;b&#39;) &#x3D;&#x3D;&#x3D; &#39;&#x2F;b&#39;    os.path.join(&#39;&#x2F;&#39;, &#39;a&#39;, &#39;b&#39;) &#x3D;&#x3D;&#x3D; &#39;&#x2F;a&#x2F;b&#39;&#39;&#39;&#39;# os.sep: 获取当前OS的文件分隔符# os.path.exists: 确认目标文件是否存在# 获取文件地址currentDirectory &#x3D; os.getcwd()logPath &#x3D; os.path.join(currentDirectory, &#39;log&#39;, &#39;sis-log-201805-anonymous.txt&#39;)# 确认文件是否存在os.path.exists(logPath)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 数据分析 </tag>
+            
+            <tag> 毕业设计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="2021/03/21/hello-world/"/>
       <url>2021/03/21/hello-world/</url>
