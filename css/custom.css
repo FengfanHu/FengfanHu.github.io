@@ -184,6 +184,10 @@ li p code {
   font-size: 85%;
 }
 
+code {
+  color: #fa8c16
+}
+
 body.darkmode li p code {
   background-color: rgb(65, 65, 65);
 }
