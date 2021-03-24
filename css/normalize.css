@@ -109,6 +109,10 @@ samp {
   font-size: 1em; /* 2 */
 }
 
+code {
+  color: #fa8c16;
+}
+
 /**
  * Add the correct font size in all browsers.
  */
