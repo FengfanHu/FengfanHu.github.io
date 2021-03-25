@@ -11,36 +11,36 @@
   <meta charset="utf-8">
 
   
-  <title>Posts Related to 数据分析</title>
+  <title>Pandas分块加载</title>
   
-  <link rel="canonical" href="http://136.244.107.20/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">
+  <link rel="canonical" href="http://136.244.107.20/2021/03/25/Pandas%E5%88%86%E5%9D%97%E5%8A%A0%E8%BD%BD/">
   
-  <meta name="description" content="Franks blog">
+  <meta name="description" content="在数据量过大的情况下，一次性加载所有数据可能导致内存不足，引发警告。所以，我们通常需要分块处理这些体积庞大的数据集。# 查看迭代返回对象的方法 dir(chunks_reader)E.g. 读取100W行日志记录，并提取指定字段 chunks_reader = pd.read_table(logPa">
   
   
   <meta name="keywords" content="blog">
   
   <meta name="author" content="Frank">
   
-  <meta property="og:image" content="http://136.244.107.20/images/thumbnail.jpg">
+  <meta property="og:image" content="http://136.244.107.20undefined">
   
   <meta property="og:site_name" content="Spaghetti" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Posts Related to 数据分析" />
+  <meta property="og:title" content="Pandas分块加载" />
   
-  <meta property="og:description" content="Franks blog">
+  <meta property="og:description" content="在数据量过大的情况下，一次性加载所有数据可能导致内存不足，引发警告。所以，我们通常需要分块处理这些体积庞大的数据集。# 查看迭代返回对象的方法 dir(chunks_reader)E.g. 读取100W行日志记录，并提取指定字段 chunks_reader = pd.read_table(logPa">
   
-  <meta property="og:url" content="http://136.244.107.20/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" />
+  <meta property="og:url" content="http://136.244.107.20/2021/03/25/Pandas%E5%88%86%E5%9D%97%E5%8A%A0%E8%BD%BD/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Posts Related to 数据分析">
+  <meta name="twitter:title" content="Pandas分块加载">
   
-  <meta name="twitter:description" content="Franks blog">
+  <meta name="twitter:description" content="在数据量过大的情况下，一次性加载所有数据可能导致内存不足，引发警告。所以，我们通常需要分块处理这些体积庞大的数据集。# 查看迭代返回对象的方法 dir(chunks_reader)E.g. 读取100W行日志记录，并提取指定字段 chunks_reader = pd.read_table(logPa">
   
   
-  <meta name="twitter:image" content="http://136.244.107.20/images/thumbnail.jpg">
+  <meta name="twitter:image" content="http://136.244.107.20undefined">
   
-  <meta name="twitter:url" content="http://136.244.107.20/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" />
+  <meta name="twitter:url" content="http://136.244.107.20/2021/03/25/Pandas%E5%88%86%E5%9D%97%E5%8A%A0%E8%BD%BD/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -207,52 +207,73 @@
 <hr style="margin-bottom: 2.6rem">
 
         <div class="trans">
-          
+            <h2>Pandas分块加载</h2>
 
+  <p>在数据量过大的情况下，一次性加载所有数据可能导致内存不足，引发警告。所以，我们通常需要分块处理这些体积庞大的数据集。<br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 查看迭代返回对象的方法</span>
+<span class="token builtin">dir</span><span class="token punctuation">(</span>chunks_reader<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><br>E.g. 读取100W行日志记录，并提取指定字段</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">chunks_reader <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_table<span class="token punctuation">(</span>logPath<span class="token punctuation">,</span> header<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> iterator<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-   <h3>Posts Related to — 数据分析</h3>
+logs <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+chunksize <span class="token operator">=</span> <span class="token number">5000</span>
 
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>count <span class="token operator">==</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+        chunk <span class="token operator">=</span> chunks_reader<span class="token punctuation">.</span>get_chunk<span class="token punctuation">(</span>chunksize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        log_chunk <span class="token operator">=</span> chunk<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">map</span><span class="token punctuation">(</span>getSpecificField<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>pd<span class="token punctuation">.</span>Series<span class="token punctuation">,</span> index<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'IP'</span><span class="token punctuation">,</span> <span class="token string">'Time'</span><span class="token punctuation">,</span> <span class="token string">'Method'</span><span class="token punctuation">,</span> <span class="token string">'Url'</span><span class="token punctuation">,</span> <span class="token string">'Status'</span><span class="token punctuation">,</span> <span class="token string">'Size'</span><span class="token punctuation">,</span> <span class="token string">'Reference'</span><span class="token punctuation">,</span> <span class="token string">'Proxy'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        logs <span class="token operator">=</span> pd<span class="token punctuation">.</span>concat<span class="token punctuation">(</span><span class="token punctuation">[</span>logs<span class="token punctuation">,</span> log_chunk<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        count<span class="token operator">+=</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>count <span class="token operator">%</span> <span class="token number">10</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">print</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">except</span> StopIteration<span class="token punctuation">:</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上方代码中，我们以每块5000条记录为例，读取200次，一共读取<code>100W</code>条数据。在读取每一个分块后，我们可以先对每一个分块进行处理，再将处理好的分块拼接起来。</p>
 
+  <p>
+    本文由
+    <a href="http://136.244.107.20/2021/03/25/Pandas%E5%88%86%E5%9D%97%E5%8A%A0%E8%BD%BD/">Frank</a>采用
+    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/deed.zh?__cf_chl_captcha_tk__=38df848514690e2d9dc35f174d93f404b2dc17a9-1616641417-0-AcSDyu81x_9yKoS9Tkscc967EBylerhw7ZXx062rI3FTN9IjaKqw2cZ5GiLvpW80nM_q_WYmrM-st0hhHJ6_HxbPNrd1mxX-_bTwGjP7mto90c8bMm2UBOVshXle-9tVCWF9ENZWc0b-MgwIgFFV0smZb1HrBYHsKDXV-LUaQkbPVSDj90E24trDNzbTOJ-SIsnE7e7NTp4kxSX--N7aMlpJZ90Zg_X6lqt9VB8ZBcJY_DCUkSCXBp1JAZPpif2TEsZaRMs_mRpxreW9-mYPr6pdKy1kTYpoaYgspVsJGpaWmdjOLclo-9VThCdcTOPsIDJMaAk_swSsD-fKDEMH1aRy2puX5LLIvXmo6vzCK_aG7nts0YsLLi8NdsoDkG2XYr7UR3sn3D3NFCfMf4a-inD8PyeEVCXzV64VxFFgLfZMYQso7PrHyggAevumlO68HMIeebWRlHegO9NXQtOHBve-81hzY_k1Nl5gv4QKENylQvSRGvtfxqz8MFVA9pmAlsUfaaFR_JbWL4S6XvhA35zt6sBUpjSwoG2Ie5iPKlzll2hXLjNTrXkkVe9yUPiuhxaGzPx4za6GvuEjX9c7amS2priqMr2tPF4lyN98_1n6qac38yy5yhgIO5zRHMGUBg">署名 4.0 国际 (CC BY 4.0)</a>许可
+  </p>
+  <p><a class="classtest-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a> — 2021年3月25日</p>
+  <div class="row" style="justify-content: center; font-weight: lighter;">
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  </div>
 
-  <article>
-    <div class="row">
-      <div class="three columns left lit">
-        <p class="bottom">2021年3月25日</p>
-      </div>
-      <div class="nine columns left mb-3">
-        <a href="/2021/03/25/Pandas%E5%88%86%E5%9D%97%E5%8A%A0%E8%BD%BD/">
-          
-            Pandas分块加载
-          
-        </a>
-      </div>
-    </div>
-  </article>
+  
+  <hr>
+<section id="comments" class="mt-2 mb-3">
 
+  <div id="disqus_thread">
+    <a href="#" class="button button-primary" onclick="loadDisqus();return false;">View / Make Comments</a>
+  </div>
 
+  <script>
+    var disqus_config = function() {
+      this.page.url = 'http://136.244.107.20/2021/03/25/Pandas分块加载/index.html';
+      this.page.identifier = '2021/03/25/Pandas分块加载/index.html';
+      this.page.title = 'Pandas分块加载';
+    };
 
-  <article>
-    <div class="row">
-      <div class="three columns left lit">
-        <p class="bottom">2021年3月24日</p>
-      </div>
-      <div class="nine columns left mb-3">
-        <a href="/2021/03/24/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E6%A0%8F-1%E3%80%91%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD/">
-          
-            【毕设专题-1】数据加载
-          
-        </a>
-      </div>
-    </div>
-  </article>
+    var is_disqus_loaded = false;
 
+    function loadDisqus() {
+      if (!is_disqus_loaded) {
+        is_disqus_loaded = true;
 
-<div class="pagination-bar">
-  <ul class="pagination">
-    
-    
-  </ul>
-</div>
+        var d = document,
+          s = d.createElement('script');
+        s.src = 'https://spaghetti-ink.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+    }
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
 
 
           <div class="row mt-2">
