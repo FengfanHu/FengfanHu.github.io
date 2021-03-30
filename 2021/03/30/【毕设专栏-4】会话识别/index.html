@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>【毕设专栏-4】会话识别</title>
+  
+  <link rel="canonical" href="http://136.244.107.20/2021/03/30/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E6%A0%8F-4%E3%80%91%E4%BC%9A%E8%AF%9D%E8%AF%86%E5%88%AB/">
+  
+  <meta name="description" content="会话识别经过用户识别后，我们可以得到每个用户的访问记录，但是这些访问记录可能是不连续的。即，一个用户可能在上午对网站进行了一系列访问，然后又在下午进行了一系列访问。显然，我们并不想把上午和下午的访问记录视为一次访问会话（从访问开始到访问结束），因此我们需要识别会话。 识别标准一般的，我们将每次访问用">
+  
+  
+  <meta name="keywords" content="blog">
+  
+  <meta name="author" content="Frank">
+  
+  <meta property="og:image" content="http://136.244.107.20undefined">
+  
+  <meta property="og:site_name" content="Spaghetti" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="【毕设专栏-4】会话识别" />
+  
+  <meta property="og:description" content="会话识别经过用户识别后，我们可以得到每个用户的访问记录，但是这些访问记录可能是不连续的。即，一个用户可能在上午对网站进行了一系列访问，然后又在下午进行了一系列访问。显然，我们并不想把上午和下午的访问记录视为一次访问会话（从访问开始到访问结束），因此我们需要识别会话。 识别标准一般的，我们将每次访问用">
+  
+  <meta property="og:url" content="http://136.244.107.20/2021/03/30/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E6%A0%8F-4%E3%80%91%E4%BC%9A%E8%AF%9D%E8%AF%86%E5%88%AB/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="【毕设专栏-4】会话识别">
+  
+  <meta name="twitter:description" content="会话识别经过用户识别后，我们可以得到每个用户的访问记录，但是这些访问记录可能是不连续的。即，一个用户可能在上午对网站进行了一系列访问，然后又在下午进行了一系列访问。显然，我们并不想把上午和下午的访问记录视为一次访问会话（从访问开始到访问结束），因此我们需要识别会话。 识别标准一般的，我们将每次访问用">
+  
+  
+  <meta name="twitter:image" content="http://136.244.107.20undefined">
+  
+  <meta name="twitter:url" content="http://136.244.107.20/2021/03/30/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E6%A0%8F-4%E3%80%91%E4%BC%9A%E8%AF%9D%E8%AF%86%E5%88%AB/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="/fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="https://franksbsbsb.oss-cn-hangzhou.aliyuncs.com/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+  <!-- 不蒜子 Statistics -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row" style="position: relative;">
+
+  <div class="three columns" >
+    <svg t="1616396308608" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3678" width="120" height="120">
+      <title>作者：小啊小二饼(iconfont)</title>
+      <path d="M512 512m-511.982387 0a511.982387 511.982387 0 1 0 1023.964774 0 511.982387 511.982387 0 1 0-1023.964774 0Z" fill="#F9C228" p-id="3679"></path><path d="M917.619539 199.639491C761.536154-3.082215 483.485105-56.554248 265.951152 62.930031a531.620502 531.620502 0 0 0-166.598142 387.161472c0 294.430822 238.686756 533.099966 533.099966 533.099966a535.424837 535.424837 0 0 0 101.219951-9.598899 514.289646 514.289646 0 0 0 90.705195-55.973031C1048.393533 745.138768 1090.223598 423.672515 917.619539 199.639491z" fill="#FCDC22" p-id="3680"></path><path d="M972.042656 550.272308c-111.329618 114.904988-252.600757 198.670795-415.482628 260.033299 0 0 55.867355 156.664603 207.829377 101.53698 250.628139-90.846096 207.653251-361.570279 207.653251-361.570279z" fill="#FC9B88" p-id="3681"></path><path d="M522.690884 570.08655a80.119986 64.145304 90 1 0 128.290609 0 80.119986 64.145304 90 1 0-128.290609 0Z" fill="#282828" p-id="3682"></path><path d="M860.519298 429.449467a80.119986 54.881046 90 1 0 109.762092 0 80.119986 54.881046 90 1 0-109.762092 0Z" fill="#282828" p-id="3683"></path><path d="M953.813553 724.584795a261.319023 261.319023 0 0 0-116.014585-59.988717C754.121225 723.616099 659.699759 771.434469 556.560028 810.305607c0 0 55.867355 156.664603 207.829377 101.53698 110.959752-40.209701 164.361335-115.64472 189.424148-187.257792z" fill="#EA0F1A" p-id="3684"></path>
+    </svg>
+  </div>
+
+  <div style="max-width: 50px; position: absolute; right: 20px; top: 0;">
+    <h1 class="mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>💡</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="nine columns">
+    <div class="row">
+      <h1 class="six columns mt-1 typing">
+        Spaghetti<spn style="color: #0FA0CE">.ink</spn>
+      </h1>
+    </div>
+    <div class="twelve columns">
+      <div class="row">
+        <div class="nine columns left">
+          <a href="/">主页</a>
+          
+            
+            <a href="/tags" class="ml">标签</a>
+            
+          
+            
+            <a href="/about" class="ml">关于</a>
+            
+          
+          
+            
+              <a href="mailto:fengfanhu@outlook.com" target="_blank" class="ml">邮箱</a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="twelve columns mt-half">
+      <p style="margin-bottom: 0; font-weight: lighter; font-style: italic;" >Appreciation, Modesty, Persistence</p>
+    </div>
+  </div>
+</div>
+
+<hr style="margin-bottom: 2.6rem">
+
+        <div class="trans">
+            <h2>【毕设专栏-4】会话识别</h2>
+
+  <h2 id="会话识别"><a href="#会话识别" class="headerlink" title="会话识别"></a>会话识别</h2><p>经过用户识别后，我们可以得到每个用户的访问记录，但是这些访问记录可能是不连续的。即，一个用户可能在上午对网站进行了一系列访问，然后又在下午进行了一系列访问。显然，我们并不想把上午和下午的访问记录视为一次访问会话（从访问开始到访问结束），因此我们需要识别会话。</p>
+<h3 id="识别标准"><a href="#识别标准" class="headerlink" title="识别标准"></a>识别标准</h3><p>一般的，我们将每次访问用一个二元组来表示，一个用户从开始访问服务器到结束访问服务器期间进行的连续访问页面的有限集合就叫做一次会话。</p>
+<script type="math/tex; mode=display">Session = <SID,{(url_1, t_1),...,(url_k, t_k),...,(url_n, t_n)}>, 1\le k \le n</script><p>如果连续的两个请求之间的时间间隔超过25.5分钟，则不视为一次会话（可能出现了中断行为），电商行业将时间间隔设置为30分钟。在处理中，我们也将阈值设置为30分钟</p>
+<h3 id="标识会话ID"><a href="#标识会话ID" class="headerlink" title="标识会话ID"></a>标识会话ID</h3><p>根据识别标准，我们需要把两次访问间隔超时的记录视为两个会话，那么首先我们应该把我们的<code>Time</code>字段转为时间戳便于计算。<br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd<span class="token punctuation">;</span>
+<span class="token keyword">import</span> os<span class="token punctuation">;</span>
+<span class="token keyword">import</span> time<span class="token punctuation">;</span>
+
+logPath <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'log'</span><span class="token punctuation">,</span> <span class="token string">'new_logs_user'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+logs <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_pickle<span class="token punctuation">(</span>logPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment"># 调整 Time 格式</span>
+logs<span class="token punctuation">[</span><span class="token string">'Time'</span><span class="token punctuation">]</span> <span class="token operator">=</span> logs<span class="token punctuation">[</span><span class="token string">'Time'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">str</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">map</span><span class="token punctuation">(</span><span class="token keyword">lambda</span> x<span class="token punctuation">:</span> x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment"># 将 Time 调整为 timestamps</span>
+<span class="token keyword">def</span> <span class="token function">handleTime</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> time<span class="token punctuation">.</span>mktime<span class="token punctuation">(</span>time<span class="token punctuation">.</span>strptime<span class="token punctuation">(</span>val<span class="token punctuation">,</span> <span class="token string">'%d/%B/%Y:%H:%M:%S'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+logs<span class="token punctuation">[</span><span class="token string">'Timestamp'</span><span class="token punctuation">]</span> <span class="token operator">=</span> logs<span class="token punctuation">[</span><span class="token string">'Time'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>handleTime<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>将时间的格式转为时间戳后，我们计算用户分组记录的时间差值，得到我们的时间差，于此同时，我们也可以得到我们的页面停留时间。<br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 用户分组</span>
+user_groups <span class="token operator">=</span> logs<span class="token punctuation">.</span>groupby<span class="token punctuation">(</span><span class="token string">'UserID'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment"># 获取上一个页面的访问时间(用于区分会话)</span>
+<span class="token keyword">def</span> <span class="token function">getDurationP</span><span class="token punctuation">(</span>df<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    df<span class="token punctuation">[</span><span class="token string">'DurationP'</span><span class="token punctuation">]</span> <span class="token operator">=</span> df<span class="token punctuation">[</span><span class="token string">'Timestamp'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>diff<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">abs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> df<span class="token punctuation">;</span>
+
+<span class="token comment"># 获取页面停留时间</span>
+<span class="token keyword">def</span> <span class="token function">getDuration</span><span class="token punctuation">(</span>df<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    df<span class="token punctuation">[</span><span class="token string">'Duration'</span><span class="token punctuation">]</span> <span class="token operator">=</span> df<span class="token punctuation">[</span><span class="token string">'Timestamp'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>diff<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">abs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> df<span class="token punctuation">;</span>
+
+logs <span class="token operator">=</span> user_groups<span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>getDurationP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+logs <span class="token operator">=</span> user_groups<span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>getDuration<span class="token punctuation">)</span><span class="token punctuation">;</span>
+logs<span class="token punctuation">.</span>fillna<span class="token punctuation">(</span><span class="token string">'-'</span><span class="token punctuation">,</span> inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>然后，我们对用户分组数据进行会话识别<br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># Session ID</span>
+sid <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token comment"># 重新获取分组</span>
+user_groups <span class="token operator">=</span> logs<span class="token punctuation">.</span>groupby<span class="token punctuation">(</span><span class="token string">'UserID'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">labelSID_row</span><span class="token punctuation">(</span>row<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">global</span> sid<span class="token punctuation">;</span>
+    duration <span class="token operator">=</span> row<span class="token punctuation">[</span><span class="token string">'DurationP'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>duration <span class="token operator">!=</span> <span class="token string">'-'</span> <span class="token keyword">and</span> duration <span class="token operator">></span> <span class="token number">1800</span><span class="token punctuation">)</span><span class="token punctuation">:</span> sid<span class="token operator">+=</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> sid<span class="token punctuation">;</span>
+
+<span class="token keyword">def</span> <span class="token function">labelSID_group</span><span class="token punctuation">(</span>df<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">global</span> sid<span class="token punctuation">;</span>
+    sid <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> 
+    sids <span class="token operator">=</span> df<span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>labelSID_row<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    df<span class="token punctuation">[</span><span class="token string">'Sid'</span><span class="token punctuation">]</span> <span class="token operator">=</span> sids<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> df<span class="token punctuation">;</span>
+
+<span class="token comment"># 获取标识后的结果</span>
+new_logs <span class="token operator">=</span> user_groups<span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>labelSID_group<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment"># 删除不再需要的字段</span>
+new_logs<span class="token punctuation">.</span>drop<span class="token punctuation">(</span>columns<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'DurationP'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+new_logs<span class="token punctuation">.</span>rename<span class="token punctuation">(</span>columns<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token string">'UserID'</span><span class="token punctuation">:</span> <span class="token string">'Uid'</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+logPath_session <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'log'</span><span class="token punctuation">,</span> <span class="token string">'logs_session'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+new_logs<span class="token punctuation">.</span>to_pickle<span class="token punctuation">(</span>logPath_session<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>让我们来看看处理完后的结果吧！</p>
+<p><img src="group.png" alt="group"></p>
+<h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2><p>最后，我们根据需要，筛选指定字段，得到我们的会话记录<br><pre class="line-numbers language-python" data-language="python"><code class="language-python">session <span class="token operator">=</span> new_logs<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'Sid'</span><span class="token punctuation">,</span> <span class="token string">'Uid'</span><span class="token punctuation">,</span> <span class="token string">'Time'</span><span class="token punctuation">,</span> <span class="token string">'Duration'</span><span class="token punctuation">,</span> <span class="token string">'Url'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+session_path <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>os<span class="token punctuation">.</span>getcwd<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'log'</span><span class="token punctuation">,</span> <span class="token string">'sessions'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+session<span class="token punctuation">.</span>to_pickle<span class="token punctuation">(</span>session_path<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><br><img src="sessions.png" alt="sessions"></p>
+<p>到此，数据预处理工作基本完成，之后，我们将对处理完的数据进行整理再采用数据挖掘算法，挖掘频繁访问序列。</p>
+
+  <p>
+    本文由
+    <a href="http://136.244.107.20/2021/03/30/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E6%A0%8F-4%E3%80%91%E4%BC%9A%E8%AF%9D%E8%AF%86%E5%88%AB/">Frank</a>采用
+    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/deed.zh?__cf_chl_captcha_tk__=38df848514690e2d9dc35f174d93f404b2dc17a9-1616641417-0-AcSDyu81x_9yKoS9Tkscc967EBylerhw7ZXx062rI3FTN9IjaKqw2cZ5GiLvpW80nM_q_WYmrM-st0hhHJ6_HxbPNrd1mxX-_bTwGjP7mto90c8bMm2UBOVshXle-9tVCWF9ENZWc0b-MgwIgFFV0smZb1HrBYHsKDXV-LUaQkbPVSDj90E24trDNzbTOJ-SIsnE7e7NTp4kxSX--N7aMlpJZ90Zg_X6lqt9VB8ZBcJY_DCUkSCXBp1JAZPpif2TEsZaRMs_mRpxreW9-mYPr6pdKy1kTYpoaYgspVsJGpaWmdjOLclo-9VThCdcTOPsIDJMaAk_swSsD-fKDEMH1aRy2puX5LLIvXmo6vzCK_aG7nts0YsLLi8NdsoDkG2XYr7UR3sn3D3NFCfMf4a-inD8PyeEVCXzV64VxFFgLfZMYQso7PrHyggAevumlO68HMIeebWRlHegO9NXQtOHBve-81hzY_k1Nl5gv4QKENylQvSRGvtfxqz8MFVA9pmAlsUfaaFR_JbWL4S6XvhA35zt6sBUpjSwoG2Ie5iPKlzll2hXLjNTrXkkVe9yUPiuhxaGzPx4za6GvuEjX9c7amS2priqMr2tPF4lyN98_1n6qac38yy5yhgIO5zRHMGUBg">署名 4.0 国际 (CC BY 4.0)</a>许可
+  </p>
+  <p><a class="classtest-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a>, <a class="classtest-link" href="/tags/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" rel="tag">毕业设计</a> — 2021年3月30日</p>
+  <div class="row" style="justify-content: center; font-weight: lighter;">
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  </div>
+
+  
+  <hr>
+<section id="comments" class="mt-2 mb-3">
+
+  <div id="disqus_thread">
+    <a href="#" class="button button-primary" onclick="loadDisqus();return false;">View / Make Comments</a>
+  </div>
+
+  <script>
+    var disqus_config = function() {
+      this.page.url = 'http://136.244.107.20/2021/03/30/【毕设专栏-4】会话识别/index.html';
+      this.page.identifier = '2021/03/30/【毕设专栏-4】会话识别/index.html';
+      this.page.title = '【毕设专栏-4】会话识别';
+    };
+
+    var is_disqus_loaded = false;
+
+    function loadDisqus() {
+      if (!is_disqus_loaded) {
+        is_disqus_loaded = true;
+
+        var d = document,
+          s = d.createElement('script');
+        s.src = 'https://spaghetti-ink.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+    }
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://zh.wikipedia.org/wiki/%E6%9D%AD%E5%B7%9E%E5%B8%82" target="_blank" rel="noreferrer">Hangzhou</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/FengfanHu" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://www.linkedin.com/in/%E9%A3%8E%E5%B8%86-%E8%83%A1-569753185/" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://www.zhihu.com/people/hu-feng-fan-52-54" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Zhihu">
+        <svg t="1616332069632" class="zhihu svg-hov" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4542" width="18" height="18"><title>Zhihu</title><path d="M932.571429 54.857143H91.428571c-20.228571 0-36.571429 16.342857-36.571428 36.571428v841.142858c0 20.228571 16.342857 36.571429 36.571428 36.571428h841.142858c20.228571 0 36.571429-16.342857 36.571428-36.571428V91.428571c0-20.228571-16.342857-36.571429-36.571428-36.571428zM420.914286 604.342857l81.142857 92.228572c10.514286 37.714286-3.771429 72.114286-3.771429 72.114285l-109.371428-127.885714v-0.114286c-10.171429 33.142857-22.971429 65.485714-38.057143 96.8-25.828571 52.228571-63.085714 62.514286-102.285714 65.942857-39.314286 3.428571-26.628571-6.057143-26.628572-6.057142 77.714286-63.428571 89.142857-100.342857 110.628572-140.685715 13.6-25.485714 23.314286-73.485714 28.914285-110.628571H228.685714s5.485714-35.657143 21.942857-47.657143h116.114286c0.685714-17.485714-1.485714-117.485714-2.285714-150.171429h-56.457143c-10.514286 51.428571-46.857143 64.8-54.971429 68.685715-8 3.885714-26.971429 8.114286-24.114285 0 2.971429-8.114286 30.857143-52.8 49.371428-126.514286 18.628571-73.828571 73.028571-70.857143 73.028572-70.857143-14.628571 25.714286-25.6 84.114286-25.6 84.114286h182.514285c11.542857 0 12.114286 44.571429 12.114286 44.571428h-103.771428c-0.8 25.942857-3.2 95.771429-5.714286 150.171429H520s13.942857 17.6 13.942857 47.657143h-125.714286l-0.114285 1.714286c-1.714286 23.314286-7.2 50.171429-14.742857 77.257142l27.542857-20.685714z m383.428571 132.571429h-100.114286l-79.428571 53.257143-18.742857-53.257143h-45.828572V294.285714h244.114286v442.628572zM393.371429 625.142857s0-0.114286 0 0z m246.857142 107.771429l64.914286-43.542857h52.114286-0.114286V343.657143H608.8v345.714286h16.114286z" p-id="4543" fill="#1296db"></path></svg>
+        
+      </a>
+      
+
+    </div>
+  
+</div>
+
+<div class="row" style="justify-content: center; font-weight: lighter;">
+  <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+</div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+
+</html>
