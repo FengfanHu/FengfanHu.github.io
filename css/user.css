@@ -3,6 +3,7 @@
     border-right: 2px solid transparent;
     animation: typing 3s steps(15, end), blink-caret .75s step-end infinite;
     overflow: hidden;
+    text-align: left;
 }
 /* 打印效果 */
 @keyframes typing {
