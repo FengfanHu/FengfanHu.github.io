@@ -11,11 +11,11 @@
   <meta charset="utf-8">
 
   
-  <title>Java读书笔记-01</title>
+  <title>JavaSE-Introduction</title>
   
   <link rel="canonical" href="http://136.244.107.20/2021/04/12/Java%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-01/">
   
-  <meta name="description" content="对象创建数据存储 Register: unaccessible for Java programmer Stack: RAM, 存储执行顺序以及生命周期 Heap: RAM, 存储对象 Constant Storage: ROM, 只读memory，存储常量final Non-RAM Storage">
+  <meta name="description" content="JDK, JRE and JVM什么是JVM?❓首先来考虑一个问题，我们编写Java程序以及编译之后是直接交给计算机去运行的吗  🙅不是的，实际上，我们是通过JVM，JVM再将编译后的字节码交给计算机。 所以，我们让Java程序跑起来的步骤实际上是  Java Code —- Compiler —">
   
   
   <meta name="keywords" content="blog">
@@ -26,16 +26,16 @@
   
   <meta property="og:site_name" content="Spaghetti" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Java读书笔记-01" />
+  <meta property="og:title" content="JavaSE-Introduction" />
   
-  <meta property="og:description" content="对象创建数据存储 Register: unaccessible for Java programmer Stack: RAM, 存储执行顺序以及生命周期 Heap: RAM, 存储对象 Constant Storage: ROM, 只读memory，存储常量final Non-RAM Storage">
+  <meta property="og:description" content="JDK, JRE and JVM什么是JVM?❓首先来考虑一个问题，我们编写Java程序以及编译之后是直接交给计算机去运行的吗  🙅不是的，实际上，我们是通过JVM，JVM再将编译后的字节码交给计算机。 所以，我们让Java程序跑起来的步骤实际上是  Java Code —- Compiler —">
   
   <meta property="og:url" content="http://136.244.107.20/2021/04/12/Java%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-01/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Java读书笔记-01">
+  <meta name="twitter:title" content="JavaSE-Introduction">
   
-  <meta name="twitter:description" content="对象创建数据存储 Register: unaccessible for Java programmer Stack: RAM, 存储执行顺序以及生命周期 Heap: RAM, 存储对象 Constant Storage: ROM, 只读memory，存储常量final Non-RAM Storage">
+  <meta name="twitter:description" content="JDK, JRE and JVM什么是JVM?❓首先来考虑一个问题，我们编写Java程序以及编译之后是直接交给计算机去运行的吗  🙅不是的，实际上，我们是通过JVM，JVM再将编译后的字节码交给计算机。 所以，我们让Java程序跑起来的步骤实际上是  Java Code —- Compiler —">
   
   
   <meta name="twitter:image" content="http://136.244.107.20undefined">
@@ -207,192 +207,460 @@
 <hr style="margin-bottom: 2.6rem">
 
         <div class="trans">
-            <h1>Java读书笔记-01</h1>
+            <h1>JavaSE-Introduction</h1>
 
-  <h2 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h2><h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><ol>
-<li>Register: unaccessible for Java programmer</li>
-<li>Stack: <strong>RAM</strong>, 存储执行顺序以及生命周期</li>
-<li>Heap: <strong>RAM</strong>, 存储对象</li>
-<li>Constant Storage: <strong>ROM</strong>, 只读memory，存储常量<code>final</code></li>
-<li>Non-RAM Storage</li>
+  <h2 id="JDK-JRE-and-JVM"><a href="#JDK-JRE-and-JVM" class="headerlink" title="JDK, JRE and JVM"></a>JDK, JRE and JVM</h2><h3 id="什么是JVM"><a href="#什么是JVM" class="headerlink" title="什么是JVM?"></a>什么是JVM?</h3><p>❓首先来考虑一个问题，我们编写Java程序以及编译之后是直接交给计算机去运行的吗</p>
+<blockquote>
+<p>🙅不是的，实际上，我们是通过JVM，JVM再将编译后的字节码交给计算机。</p>
+<p>所以，我们让Java程序跑起来的步骤实际上是</p>
+<ol>
+<li>Java Code —- Compiler —-&gt; Java Bytecode 先由编译器将代码编译为字节码</li>
+<li>Java Bytecode —- JVM —-&gt; Machine code 再由JVM将字节码转换为机器码</li>
 </ol>
-<h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><p>基本数据类型不需要通过<code>new</code>关键字来创建</p>
-<blockquote>
-<p>通过<code>new</code>关键字创建的对象都保存在<code>Heap</code>中，而这些基本类型可以通过使用一个“自动变量，直接存储在<code>Stack</code>中</p>
+<p><strong>总结</strong>：总的来说，我们编写的代码由编译器编译为字节码，JVM在根据不同的操作系统（平台），将字节码转为机器码以保证程序正确运行。所以说，Java是 plate-form independent的。</p>
 </blockquote>
-<p>基本数据类型有</p>
+<p><img src="https://cdn.programiz.com/sites/tutorial2program/files/how-java-program-runs.jpg" alt="how-java-program-runs"></p>
+<h3 id="什么是JRE？"><a href="#什么是JRE？" class="headerlink" title="什么是JRE？"></a>什么是JRE？</h3><p>JRE实际上是JVM的一个超集，因为它出了包含JVM以外，它还提供了一些Java类包以及其他的一些必要模块。<code>如果你只需要运行Java程序，但不想编程Java程序，那么JRE是你最好的选择。</code></p>
+<p><img src="https://cdn.programiz.com/sites/tutorial2program/files/java-realtime-enviornment_0.jpg" alt="java-realtime-enviornment_0"></p>
+<h3 id="什么是JDK？"><a href="#什么是JDK？" class="headerlink" title="什么是JDK？"></a>什么是JDK？</h3><p>JDK(Java Development Kit)是一个整合的开发工具，当你下载了JDK之后，JRE也会同时下载。同时，它还包含（compilers, JavaDoc, Java Debugger, etc）。</p>
+<p><img src="https://cdn.programiz.com/sites/tutorial2program/files/java-realtime-enviornment_0.jpg" alt="image-20210415151505219"></p>
+<h3 id="JDK-JRE-JVM的关系："><a href="#JDK-JRE-JVM的关系：" class="headerlink" title="JDK, JRE, JVM的关系："></a>JDK, JRE, JVM的关系：</h3><p><img src="https://cdn.programiz.com/sites/tutorial2program/files/jdk-jre-jvm.jpg" alt="jdk-jre-jvm"></p>
+<hr>
+<h2 id="Variables-and-Literals"><a href="#Variables-and-Literals" class="headerlink" title="Variables and Literals"></a>Variables and Literals</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>一个变量存储在内存中以维持数据，为了区分保存的位置，每一个变量都有一个唯一的<code>标识（变量名） identifier</code>。</p>
+<p>Identifier的格式：</p>
+<ul>
+<li>Identifiers 不能是一个关键字</li>
+<li>Identifiers 是大小写敏感的</li>
+<li>必须以字母, <code>$</code> 或者 <code>_</code>开头，开头不能是数字</li>
+<li>空格是不被允许的</li>
+<li>不能使用特殊符号 such as <code>@</code>, <code>#</code>, and so on.</li>
+</ul>
 <div class="table-container">
 <table>
 <thead>
 <tr>
-<th>基本类型</th>
-<th>大小</th>
-<th>最小值</th>
-<th>最大值</th>
-<th>包装类型</th>
+<th>关键字</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>abstract</td>
+<td>assert</td>
 <td>boolean</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>Boolean</td>
-</tr>
-<tr>
-<td>char</td>
-<td>16 bits</td>
-<td>Unicode 0</td>
-<td>Unicode 216 -1</td>
-<td>Character</td>
-</tr>
-<tr>
+<td>break</td>
 <td>byte</td>
-<td>8 bits</td>
-<td>-128</td>
-<td>+127</td>
-<td>Byte</td>
 </tr>
 <tr>
-<td>short</td>
-<td>16 bits</td>
-<td>- 215</td>
-<td>+ 215 -1</td>
-<td>Short</td>
+<td>case</td>
+<td>catch</td>
+<td>char</td>
+<td>class</td>
+<td>const</td>
 </tr>
 <tr>
-<td>int</td>
-<td>32 bits</td>
-<td>- 231</td>
-<td>+ 231 -1</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td>long</td>
-<td>64 bits</td>
-<td>- 263</td>
-<td>+ 263 -1</td>
-<td>Long</td>
-</tr>
-<tr>
-<td>float</td>
-<td>32 bits</td>
-<td>IEEE754</td>
-<td>IEEE754</td>
-<td>Float</td>
-</tr>
-<tr>
+<td>continue</td>
+<td>default</td>
+<td>do</td>
 <td>double</td>
-<td>64 bits</td>
-<td>IEEE754</td>
-<td>IEEE754</td>
-<td>Double</td>
+<td>else</td>
 </tr>
 <tr>
+<td>enum</td>
+<td>extends</td>
+<td>final</td>
+<td>finally</td>
+<td>float</td>
+</tr>
+<tr>
+<td>for</td>
+<td>goto</td>
+<td>if</td>
+<td>implements</td>
+<td>import</td>
+</tr>
+<tr>
+<td>instanceof</td>
+<td>int</td>
+<td>interface</td>
+<td>long</td>
+<td>native</td>
+</tr>
+<tr>
+<td>new</td>
+<td>package</td>
+<td>private</td>
+<td>protected</td>
+<td>public</td>
+</tr>
+<tr>
+<td>return</td>
+<td>short</td>
+<td>static</td>
+<td>strictfp</td>
+<td>super</td>
+</tr>
+<tr>
+<td>switch</td>
+<td>synchronized</td>
+<td>this</td>
+<td>throw</td>
+<td>throws</td>
+</tr>
+<tr>
+<td>transient</td>
+<td>try</td>
 <td>void</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>Void</td>
+<td>volatile</td>
+<td>while</td>
 </tr>
 </tbody>
 </table>
 </div>
-<h4 id="自动装箱及自动拆箱"><a href="#自动装箱及自动拆箱" class="headerlink" title="自动装箱及自动拆箱"></a>自动装箱及自动拆箱</h4><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">&#x2F;&#x2F; 自动装箱
-Character ch &#x3D; &#39;x&#39;;
-
-&#x2F;&#x2F; 自动拆箱
-char c &#x3D; ch;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="数组的存储"><a href="#数组的存储" class="headerlink" title="数组的存储"></a>数组的存储</h3><p>Java中的数据不存在C++, C等安全问题，因为Java中，我们可以越界访问且数组使用前需要初始化，引用对象指向<code>null</code></p>
-<h2 id="对象清理"><a href="#对象清理" class="headerlink" title="对象清理"></a>对象清理</h2><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">&#123;
-    String s &#x3D; new String(&quot;a string&quot;);
-&#125; 
-&#x2F;&#x2F; 作用域终点<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>以上代码，在程序运行出作用域之后，这个<code>对象</code>依旧会存在，那么会不会造成内存浪费？ 答案是不会，Java会主动清理掉这些 unaccessible 的对象</p>
-<h2 id="类的创建"><a href="#类的创建" class="headerlink" title="类的创建"></a>类的创建</h2><h3 id="基本类型默认值"><a href="#基本类型默认值" class="headerlink" title="基本类型默认值"></a>基本类型默认值</h3><p>如果<code>类</code>的成员变量是基本类型，那么在类初始化时，会赋默认值</p>
 <blockquote>
-<p>这一条并不适用于 <code>局部变量</code>，如果你定义了一个普通变量，你还是要赋值的</p>
-<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">int a; &#x2F;&#x2F; 此处的 a 并不适用于默认值<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Java是静态类型语言，也就是说所有的变量在赋值前都需要被<code>声明</code></p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">int speedLimit;
+speedLimit &#x3D; 80;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </blockquote>
+<h4 id="Java语言中有四种类型的变量"><a href="#Java语言中有四种类型的变量" class="headerlink" title="Java语言中有四种类型的变量"></a>Java语言中有四种类型的变量</h4><ul>
+<li>实例变量 Instance Variables (Non-Static Fields，对于每个对象值都是唯一的)</li>
+<li>类变量 Class Variables (Static Fields，对于类来说值是共享的<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html">此处容易产生误解</a>)</li>
+<li>局部变量 Local Variables</li>
+<li>参数变量 Patameters</li>
+</ul>
+<h4 id="字面量"><a href="#字面量" class="headerlink" title="字面量"></a>字面量</h4><p>字面量用于标识固定的数值，在代码中他们可以被直接使用</p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">int a &#x3D; 1;
+float b &#x3D; 2.5;
+char c &#x3D; &#39;F&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>这里的<code>1</code>,<code>2.5</code>以及<code>F</code>就是字面量，Java中有以下几种字面量</p>
+<ol>
+<li>Boolean 布尔</li>
+<li>Integer 整型</li>
+<li>Float-point 浮点数</li>
+<li>Character 字符</li>
+<li>String 字符串 - 字符串是一个字符的序列，通过双引号使用</li>
+</ol>
+<hr>
+<h2 id="Data-Types"><a href="#Data-Types" class="headerlink" title="Data Types"></a>Data Types</h2><p>Java有8个<code>原始数据类型</code>，其他的为<code>引用类型</code></p>
+<h3 id="Primitive-Data-Types"><a href="#Primitive-Data-Types" class="headerlink" title="Primitive Data Types"></a>Primitive Data Types</h3><ol>
+<li><code>boolean</code> type：true or false</li>
+<li><code>byte type</code>：from -128 to  127, 8-bit</li>
+<li><p><code>short type</code>：from -32768 to 32767, 16-bit</p>
+</li>
+<li><p><code>int type</code>：from $-2^{31}$ to $2^{31}-1$, 32-bit</p>
+</li>
+<li><p><code>long type</code>：from $-2^{63}$ to $2^{63}-1$, 64-bit</p>
+</li>
+<li><code>double type</code>：64-bit floating-point</li>
+<li><code>float type</code>：32-bit floating-point</li>
+<li><code>char type</code>：16-bit Unicode character from \u0000​ to \uffff</li>
+</ol>
+<blockquote>
+<p>❓既然float和double都是浮点数，那么我们知道字面量是double还是float呢？</p>
+<p>To tell the compiler to treat <code>-42.3</code> as <code>float</code> rather than <code>double</code>, you need to use f or F.</p>
+<p>Notice that, we have used <code>-42.3f</code> instead of <code>-42.3</code>in the above program. It’s because <code>-42.3</code> is a <code>double</code> literal.</p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">class Main &#123;
+  public static void main(String[] args) &#123;
+    	
+    float number &#x3D; -42.3f;
+    System.out.println(number);  &#x2F;&#x2F; prints -42.3
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</blockquote>
+<hr>
+<h2 id="Java-Operators"><a href="#Java-Operators" class="headerlink" title="Java Operators"></a>Java Operators</h2><p>Java的运算操作主要分为5类</p>
+<ul>
+<li>Arithmetic Operators 算数运算操作</li>
+</ul>
 <div class="table-container">
 <table>
 <thead>
 <tr>
-<th>基本类型</th>
-<th>初始值</th>
+<th>Operator</th>
+<th>Operation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>boolean</td>
-<td>false</td>
+<td><code>+</code></td>
+<td>Addition 加法</td>
 </tr>
 <tr>
-<td>char</td>
-<td>\u0000 (null)</td>
+<td><code>-</code></td>
+<td>Subtraction 减法</td>
 </tr>
 <tr>
-<td>byte</td>
-<td>(byte) 0</td>
+<td><code>*</code></td>
+<td>Multiplication 乘法</td>
 </tr>
 <tr>
-<td>short</td>
-<td>(short) 0</td>
+<td><code>/</code></td>
+<td>Division 除法</td>
 </tr>
 <tr>
-<td>int</td>
-<td>0</td>
-</tr>
-<tr>
-<td>long</td>
-<td>0L</td>
-</tr>
-<tr>
-<td>float</td>
-<td>0.0f</td>
-</tr>
-<tr>
-<td>double</td>
-<td>0.0d</td>
+<td><code>%</code></td>
+<td>Modulo Operation (Remainder after division) 求余</td>
 </tr>
 </tbody>
 </table>
 </div>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h4 id="方法的格式"><a href="#方法的格式" class="headerlink" title="方法的格式"></a>方法的格式</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token punctuation">[</span>返回类型<span class="token punctuation">]</span> <span class="token punctuation">[</span>方法名<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token comment">/*参数列表*/</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token comment">// 方法体</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h4 id="方法签名-Signature-of-the-method"><a href="#方法签名-Signature-of-the-method" class="headerlink" title="方法签名 Signature of the method"></a>方法签名 Signature of the method</h4><p><code>方法名+参数列表</code>统称为方法签名，作为方法的唯一标识，为什么不只是方法名呢，为什么要带一个参数列表？</p>
-<p>因为Java中方法可以重载 Overload</p>
-<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><h3 id="字面值常量"><a href="#字面值常量" class="headerlink" title="字面值常量"></a>字面值常量</h3><p>在文本值后添加字符可以让编译器识别该文本值类型</p>
 <blockquote>
-<p><code>L, l</code>: Long型数值</p>
-<p><code>F, f</code>: float浮点数</p>
-<p><code>D, d</code>: double浮点数</p>
+<p>如果我们对两个整数进行除法操作，那么结果为整数（舍去分数）</p>
+<p>如果操作中其中一个是浮点数，那么结果也为浮点数</p>
 </blockquote>
-<p>以及前缀</p>
+<ul>
+<li>Assignment Operators 赋值运算操作</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Operator</th>
+<th style="text-align:left">Example</th>
+<th style="text-align:left">Equivalent to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>=</code></td>
+<td style="text-align:left"><code>a = b;</code></td>
+<td style="text-align:left"><code>a = b;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>+=</code></td>
+<td style="text-align:left"><code>a += b;</code></td>
+<td style="text-align:left"><code>a = a + b;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-=</code></td>
+<td style="text-align:left"><code>a -= b;</code></td>
+<td style="text-align:left"><code>a = a - b;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>*=</code></td>
+<td style="text-align:left"><code>a *= b;</code></td>
+<td style="text-align:left"><code>a = a * b;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>/=</code></td>
+<td style="text-align:left"><code>a /= b;</code></td>
+<td style="text-align:left"><code>a = a / b;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>%=</code></td>
+<td style="text-align:left"><code>a %= b;</code></td>
+<td style="text-align:left"><code>a = a % b;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Relational Operators 关系运算操作</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Operator</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>==</code></td>
+<td style="text-align:left">Is Equal To</td>
+<td style="text-align:left"><code>3 == 5</code> returns <strong>false</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>!=</code></td>
+<td style="text-align:left">Not Equal To</td>
+<td style="text-align:left"><code>3 != 5</code> returns <strong>true</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&gt;</code></td>
+<td style="text-align:left">Greater Than</td>
+<td style="text-align:left"><code>3 &gt; 5</code> returns <strong>false</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&lt;</code></td>
+<td style="text-align:left">Less Than</td>
+<td style="text-align:left"><code>3 &lt; 5</code> returns <strong>true</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&gt;=</code></td>
+<td style="text-align:left">Greater Than or Equal To</td>
+<td style="text-align:left"><code>3 &gt;= 5</code> returns <strong>false</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&lt;=</code></td>
+<td style="text-align:left">Less Than or Equal To</td>
+<td style="text-align:left"><code>3 &lt;= 5</code> returns <strong>false</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Logical Operators 逻辑运算操作</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Operator</th>
+<th style="text-align:left">Example</th>
+<th style="text-align:left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>&amp;&amp;</code> (Logical AND)</td>
+<td style="text-align:left">expression1 <strong>&amp;&amp;</strong> expression2</td>
+<td style="text-align:left"><code>true</code> only if both expression1 and expression2 are <code>true</code></td>
+</tr>
+<tr>
+<td style="text-align:left">`</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">` (Logical OR)</td>
+<td>expression1 **`</td>
+<td></td>
+<td>`** expression2</td>
+<td><code>true</code> if either expression1 or expression2 is <code>true</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>!</code> (Logical NOT)</td>
+<td style="text-align:left"><strong>!</strong>expression</td>
+<td style="text-align:left"><code>true</code> if expression is <code>false</code> and vice versa</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Unary Operators 一元运算符</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Operator</th>
+<th style="text-align:left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>+</code></td>
+<td style="text-align:left"><strong>Unary plus</strong>: not necessary to use since numbers are positive without using it</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-</code></td>
+<td style="text-align:left"><strong>Unary minus</strong>: inverts the sign of an expression</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>++</code></td>
+<td style="text-align:left"><strong>Increment operator</strong>: increments value by 1</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>--</code></td>
+<td style="text-align:left"><strong>Decrement operator</strong>: decrements value by 1</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>!</code></td>
+<td style="text-align:left"><strong>Logical complement operator</strong>: inverts the value of a boolean</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Bitwise Operators 位运算符</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Operator</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>~</code></td>
+<td style="text-align:left">Bitwise Complement</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&lt;&lt;</code></td>
+<td style="text-align:left">Left Shift</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&gt;&gt;</code></td>
+<td style="text-align:left">Right Shift</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&gt;&gt;&gt;</code></td>
+<td style="text-align:left">Unsigned Right Shift</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&amp;</code></td>
+<td style="text-align:left">Bitwise AND</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>^</code></td>
+<td style="text-align:left">Bitwise exclusive OR</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="实例运算"><a href="#实例运算" class="headerlink" title="实例运算"></a>实例运算</h3><p><code>instanceof</code>：<code>str instanceof String</code> 判断str是不是String类的实例</p>
+<h3 id="三元运算"><a href="#三元运算" class="headerlink" title="三元运算"></a>三元运算</h3><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">variable &#x3D; Expression ? expression1 : expression2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<hr>
+<h2 id="Basic-Input-and-Output"><a href="#Basic-Input-and-Output" class="headerlink" title="Basic Input and Output"></a>Basic Input and Output</h2><p>Java的标准输出</p>
+<ul>
+<li>System.out.println()</li>
+<li>System.out.print()</li>
+<li>System.out.printf()</li>
+</ul>
 <blockquote>
-<p>十六进制：<code>0x, 0X</code></p>
-<p>八进制：<code>0</code></p>
-<p>二进制：<code>0b, 0B</code></p>
+<ul>
+<li><code>print()</code> - It prints string inside the quotes.</li>
+<li><code>println()</code> - It prints string inside the quotes similar like <code>print()</code> method. Then the cursor moves to the beginning of the next line.</li>
+<li><code>printf()</code> - It provides string formatting (similar to <a target="_blank" rel="noopener" href="https://www.programiz.com/cpp-programming/library-function/cstdio/printf">printf in C/C++ programming</a>).</li>
+</ul>
 </blockquote>
-<h3 id="截断还是舍入"><a href="#截断还是舍入" class="headerlink" title="截断还是舍入"></a>截断还是舍入</h3><p>Java在做向下的强制转换时，采用的<code>截断</code></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Double</span> a <span class="token operator">=</span> <span class="token number">0.125</span><span class="token punctuation">;</span>
-<span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>a <span class="token operator">==</span> <span class="token number">0</span> <span class="token comment">// True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>如果想要舍入，需要使用<code>Math.round()</code>方法</p>
-<h2 id="控制流"><a href="#控制流" class="headerlink" title="控制流"></a>控制流</h2><h3 id="for-in-syntax"><a href="#for-in-syntax" class="headerlink" title="for-in syntax"></a>for-in syntax</h3><p>Java中可以对<code>数组</code>和<code>集合</code>使用<code>for-in</code>语法遍历【其实可以对任何 <code>iterable</code> 的对象使用】</p>
+<p>Java的标准输入</p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">import java.util.Scanner;
+
+&#x2F;&#x2F; create an object of Scanner
+Scanner input &#x3D; new Scanner(System.in);
+
+&#x2F;&#x2F; take input from the user
+int number &#x3D; input.nextInt();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
-<p>注意，for-in语法只是赋值操作（只读），我们不能修改原<code>数组</code>或<code>集合</code>的值</p>
+<p>由Scanner类创建的 input 对象拥有类似<code>nextInt</code>的方法</p>
+<ul>
+<li>nextLong()</li>
+<li>nextFloat()</li>
+<li>nextDouble()</li>
+</ul>
+<p>同时在结束输入后不能忘记调用<code>close()</code>方法关闭对象</p>
 </blockquote>
-<h3 id="go-to-label"><a href="#go-to-label" class="headerlink" title="go-to(label)"></a>go-to(label)</h3><p>我们可以给循环标注label，以方便于<code>break</code>或<code>continue</code></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">OUT<span class="token operator">:</span> <span class="token comment">// 作为循环可以直接跳出</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
- 	<span class="token keyword">for</span> <span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      	<span class="token keyword">break</span> OUT<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="Java-Package"><a href="#Java-Package" class="headerlink" title="Java Package"></a>Java Package</h2><p>你可以把包看成一个容器，它把各种类型（类、接口、枚举、注解）组合在一起。举一个例子，如果<code>ResultSet</code>接口在<code>java.sql</code>的包中，如果你想要使用这个接口，那么你就需要从包中引入<code>import java.sql.ResultSet</code>。</p>
+<p>❓为什么要引入包的概念呢？</p>
+<blockquote>
+<p>🙋‍♂️：包就像C中的命名空间一样，有了命名空间我们就可以区分两个命名相同的类或者接口。比如，我们有两个<code>Date</code>类型：<code>java.util.Date</code>和<code>java.sql.Data</code>，有了包我们就在避免冲突的前提下，同时使用这两个类。</p>
+</blockquote>
+<h3 id="Built-in-Package"><a href="#Built-in-Package" class="headerlink" title="Built-in Package"></a>Built-in Package</h3><p>我们在下载JDK的时候，同时也下载了一些包：<code>java.lang</code>, <code>java.util</code>, <code>java.io</code>，我们不需要重新去下载这些包，因为他们是(自带的)。e.g. <code>import java.util.ArrayList;</code></p>
+<h3 id="User-defined-Package"><a href="#User-defined-Package" class="headerlink" title="User-defined Package"></a>User-defined Package</h3><p>通过<code>package</code>关键字，我们可以定义一个包</p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">package packageName;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Java使用系统的相对文件路径来定义一个包</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 假设我们的文件结构如下
+└── com
+  └── test
+    └── Test.java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>那么对于<code>Test.java</code>这个类，我们的包就为<code>package com.test</code>，通常我们用域名来创建包，以保证唯一。</p>
+<h3 id="Create-Package"><a href="#Create-Package" class="headerlink" title="Create Package"></a>Create Package</h3><p>我们可以通过<code>IntelliJ IDEA</code>右键生成包来创建包</p>
 
   <p>
     本文由
@@ -418,7 +686,7 @@ char c &#x3D; ch;<span aria-hidden="true" class="line-numbers-rows"><span></span
     var disqus_config = function() {
       this.page.url = 'http://136.244.107.20/2021/04/12/Java读书笔记-01/index.html';
       this.page.identifier = '2021/04/12/Java读书笔记-01/index.html';
-      this.page.title = 'Java读书笔记-01';
+      this.page.title = 'JavaSE-Introduction';
     };
 
     var is_disqus_loaded = false;
