@@ -11,11 +11,11 @@
   <meta charset="utf-8">
 
   
-  <title>Hello World</title>
+  <title>JavaSE-Flow Control&amp;Array</title>
   
-  <link rel="canonical" href="http://136.244.107.20/2021/03/21/hello-world/">
+  <link rel="canonical" href="http://136.244.107.20/2021/04/16/JavaSE-Flow-Control-Array/">
   
-  <meta name="description" content="Welcome to Hexo! This is my very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in tr">
+  <meta name="description" content="for loop vs for-each loop普通的for loop可以获得数组下标，再获取对应的值 for-each loop方便与直接获取值，但是得不到下标  Java的循环可以有标号，用于label一个循环，以跳出多重循环 OUT: &amp;#x2F;&amp;#x2F; 作为循环可以直接跳出 for ">
   
   
   <meta name="keywords" content="blog">
@@ -26,21 +26,21 @@
   
   <meta property="og:site_name" content="Spaghetti" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Hello World" />
+  <meta property="og:title" content="JavaSE-Flow Control&amp;Array" />
   
-  <meta property="og:description" content="Welcome to Hexo! This is my very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in tr">
+  <meta property="og:description" content="for loop vs for-each loop普通的for loop可以获得数组下标，再获取对应的值 for-each loop方便与直接获取值，但是得不到下标  Java的循环可以有标号，用于label一个循环，以跳出多重循环 OUT: &amp;#x2F;&amp;#x2F; 作为循环可以直接跳出 for ">
   
-  <meta property="og:url" content="http://136.244.107.20/2021/03/21/hello-world/" />
+  <meta property="og:url" content="http://136.244.107.20/2021/04/16/JavaSE-Flow-Control-Array/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Hello World">
+  <meta name="twitter:title" content="JavaSE-Flow Control&amp;Array">
   
-  <meta name="twitter:description" content="Welcome to Hexo! This is my very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in tr">
+  <meta name="twitter:description" content="for loop vs for-each loop普通的for loop可以获得数组下标，再获取对应的值 for-each loop方便与直接获取值，但是得不到下标  Java的循环可以有标号，用于label一个循环，以跳出多重循环 OUT: &amp;#x2F;&amp;#x2F; 作为循环可以直接跳出 for ">
   
   
   <meta name="twitter:image" content="http://136.244.107.20undefined">
   
-  <meta name="twitter:url" content="http://136.244.107.20/2021/03/21/hello-world/" />
+  <meta name="twitter:url" content="http://136.244.107.20/2021/04/16/JavaSE-Flow-Control-Array/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -207,20 +207,147 @@
 <hr style="margin-bottom: 2.6rem">
 
         <div class="trans">
-            <h1>Hello World</h1>
+            <h1>JavaSE-Flow Control&Array</h1>
 
-  <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is my very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h3 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h3><p>I’m using <a target="_blank" rel="noopener" href="https://github.com/adisaktijrs/hexo-theme-minima">minima</a> as the hexo theme.</p>
-<p>My blog will be little different from the original one. so, if you like my version, you can fork the code from <a target="_blank" rel="noopener" href="https://github.com/FengfanHu/blog">here</a>.</p>
-<h3 id="Support-Latex"><a href="#Support-Latex" class="headerlink" title="Support Latex"></a>Support Latex</h3><p>$g(Z)=1/(1+e^{-z})$</p>
-<h3 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'hello world!'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+  <h2 id="for-loop-vs-for-each-loop"><a href="#for-loop-vs-for-each-loop" class="headerlink" title="for loop vs for-each loop"></a>for loop vs for-each loop</h2><p>普通的<code>for loop</code>可以获得数组下标，再获取对应的值</p>
+<p><code>for-each loop</code>方便与直接获取值，但是得不到下标</p>
+<blockquote>
+<p>Java的循环可以有标号，用于label一个循环，以跳出多重循环</p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">OUT: &#x2F;&#x2F; 作为循环可以直接跳出
+for (i&#x3D;0; i &lt;10; i++) &#123;
+ 	for (j&#x3D;0; j &lt;10; j++) &#123;
+		if (j &#x3D;&#x3D; 5) &#123;
+      	break OUT;
+    &#125;
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当然除了<code>break</code>你也可以使用<code>continue</code></p>
+</blockquote>
+<h2 id="while-vs-do-while-vs-for"><a href="#while-vs-do-while-vs-for" class="headerlink" title="while vs do-while vs for"></a>while vs do-while vs for</h2><p><strong>While</strong>, <strong>Do while</strong>, <strong>for</strong>：选择哪一个？</p>
+<ul>
+<li>固定次数：使用 <strong>for</strong></li>
+<li>必须执行一次：使用<strong>do while</strong></li>
+<li>其他情况：使用<strong>while</strong></li>
+</ul>
+<hr>
+<h1 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h1><h2 id="Declare"><a href="#Declare" class="headerlink" title="Declare"></a>Declare</h2><p>Java数组的声明由两个部分组成：<code>数据类型</code>以及<code>数组名称</code></p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">dataType[] arrayName;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>dataType可以是<code>原始数据类型 primitive</code>也可以为<code>类</code></li>
+<li>数组名称规则与变量名规则相同</li>
+</ul>
+<h3 id="但是一个数组能放多少元素呢？"><a href="#但是一个数组能放多少元素呢？" class="headerlink" title="但是一个数组能放多少元素呢？"></a>但是一个数组能放多少元素呢？</h3><p>🙋好问题！我们可以通过以下两种方法给数组分配空间</p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">&#x2F;&#x2F; 1. 先声明再分配
+double[] data;
+data &#x3D; new Double[10];
 
+&#x2F;&#x2F; 2. 声明+分配
+double[] data &#x3D; new Double[10];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Initialize"><a href="#Initialize" class="headerlink" title="Initialize"></a>Initialize</h2><p>数组的初始化有两种方法：</p>
+<ol>
+<li><p>在声明的同时初始化</p>
+ <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> age <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>注意，这种 <code>&#123;12, 4, 5, 2, 5&#125;</code>初始化方法只能在声明的同时初始化，因为它在初始化的同时也分配了数组的空间。如果你先分配了空间，那么你得到会是一个<code>数组地址</code>，因此对其进行初始化是不被允许的。</p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">int[] age &#x3D; new int[5];
+&#x2F;&#x2F; age &#x3D; &#123;12, 4, 5, 2, 5&#125; - 不被允许的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</blockquote>
+</li>
+<li><p>对数组空间一一赋值</p>
+ <pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">&#x2F;&#x2F; declare an array
+int[] age &#x3D; new int[5];
+
+&#x2F;&#x2F; initialize array
+age[0] &#x3D; 12;
+age[1] &#x3D; 4;
+age[2] &#x3D; 5;
+..<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
+<h2 id="Loop-with-Array"><a href="#Loop-with-Array" class="headerlink" title="Loop with Array"></a>Loop with Array</h2><p>Java中数组有一个<code>length</code>属性，代表数组的长度，因此可以用于遍历</p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">for (int i &#x3D; 0; i&lt;age.length; i++)
+&#123;
+  System.out.println(age[i]);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Multidimensional-Arrays"><a href="#Multidimensional-Arrays" class="headerlink" title="Multidimensional Arrays"></a>Multidimensional Arrays</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="http://cdn.programiz.com/sites/tutorial2program/files/java-2d-array.jpg" alt="java-2d-array"></p>
+<h3 id="Initialize-2d-array"><a href="#Initialize-2d-array" class="headerlink" title="Initialize 2d array"></a>Initialize 2d array</h3><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">int[][] a &#x3D; &#123;
+      &#123;1, 2, 3&#125;, 
+      &#123;4, 5, 6, 9&#125;, 
+      &#123;7&#125;, 
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>同理的，你可以遍历赋值，但是此时<code>a.length == 3</code>，每一个元素为一行，以此类推</p>
+<h2 id="Copy-Array"><a href="#Copy-Array" class="headerlink" title="Copy Array"></a>Copy Array</h2><h3 id="浅拷贝-shallow-copy"><a href="#浅拷贝-shallow-copy" class="headerlink" title="浅拷贝 shallow copy"></a>浅拷贝 shallow copy</h3><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">class Main &#123;
+    public static void main(String[] args) &#123;
+      
+        int [] numbers &#x3D; &#123;1, 2, 3, 4, 5, 6&#125;;
+        int [] positiveNumbers &#x3D; numbers;    &#x2F;&#x2F; copying arrays
+      
+        &#x2F;&#x2F; change value of first array
+        numbers[0] &#x3D; -1;
+
+        &#x2F;&#x2F; printing the second array
+        for (int number: positiveNumbers) &#123;
+            System.out.print(number + &quot;, &quot;);
+        &#125;
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="深拷贝-deep-copy"><a href="#深拷贝-deep-copy" class="headerlink" title="深拷贝 deep copy"></a>深拷贝 deep copy</h3><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">import java.util.Arrays;
+
+class Main &#123;
+    public static void main(String[] args) &#123;
+      
+        int [] source &#x3D; &#123;1, 2, 3, 4, 5, 6&#125;;
+        int [] destination &#x3D; new int[6];
+
+        &#x2F;&#x2F; iterate and copy elements from source to destination
+        for (int i &#x3D; 0; i &lt; source.length; ++i) &#123;
+            destination[i] &#x3D; source[i];
+        &#125;
+      
+         &#x2F;&#x2F; converting array to string
+        System.out.println(Arrays.toString(destination));
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p><code>浅拷贝vs深拷贝</code>：</p>
+<p>浅拷贝指向的是同一块存储空间，所以是同一个对象</p>
+<p>深拷贝是重新复制出新的一个对象，和原对象一起是两个对象</p>
+</blockquote>
+<h3 id="使用Array-arraycopy"><a href="#使用Array-arraycopy" class="headerlink" title="使用Array.arraycopy()"></a>使用Array.arraycopy()</h3><pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">import java.util.Arrays;
+
+Arrays.arraycopy(Object src, int srcPos,Object dest, int destPos, int length)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>src - source array you want to copy</li>
+<li>srcPos - starting position (index) in the source array</li>
+<li>dest - destination array where elements will be copied from the source</li>
+<li>destPos - starting position (index) in the destination array</li>
+<li>length - number of elements to copy</li>
+</ul>
+<h3 id="Array-copyOfRange"><a href="#Array-copyOfRange" class="headerlink" title="Array.copyOfRange()"></a>Array.copyOfRange()</h3><p><code>copyOfRange()</code>方法与<code>arraycopy()</code>的不同之处在于，它返回的数组切片的一个复制，并没有目标数组地址来指向。我们可以直接生成一个数组。</p>
+<pre class="line-numbers language-Java" data-language="Java"><code class="language-Java">&#x2F;&#x2F; To use toString() and copyOfRange() method
+import java.util.Arrays;
+
+class ArraysCopy &#123;
+    public static void main(String[] args) &#123;
+      
+        int[] source &#x3D; &#123;2, 3, 12, 4, 12, -2&#125;;
+      
+        &#x2F;&#x2F; copying entire source array to destination
+        int[] destination1 &#x3D; Arrays.copyOfRange(source, 0, source.length);      
+        System.out.println(&quot;destination1 &#x3D; &quot; + Arrays.toString(destination1)); 
+      
+        &#x2F;&#x2F; copying from index 2 to 5 (5 is not included) 
+        int[] destination2 &#x3D; Arrays.copyOfRange(source, 2, 5); 
+        System.out.println(&quot;destination2 &#x3D; &quot; + Arrays.toString(destination2));   
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
   <p>
     本文由
-    <a href="http://136.244.107.20/2021/03/21/hello-world/">Frank</a>采用
+    <a href="http://136.244.107.20/2021/04/16/JavaSE-Flow-Control-Array/">Frank</a>采用
     <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/deed.zh?__cf_chl_captcha_tk__=38df848514690e2d9dc35f174d93f404b2dc17a9-1616641417-0-AcSDyu81x_9yKoS9Tkscc967EBylerhw7ZXx062rI3FTN9IjaKqw2cZ5GiLvpW80nM_q_WYmrM-st0hhHJ6_HxbPNrd1mxX-_bTwGjP7mto90c8bMm2UBOVshXle-9tVCWF9ENZWc0b-MgwIgFFV0smZb1HrBYHsKDXV-LUaQkbPVSDj90E24trDNzbTOJ-SIsnE7e7NTp4kxSX--N7aMlpJZ90Zg_X6lqt9VB8ZBcJY_DCUkSCXBp1JAZPpif2TEsZaRMs_mRpxreW9-mYPr6pdKy1kTYpoaYgspVsJGpaWmdjOLclo-9VThCdcTOPsIDJMaAk_swSsD-fKDEMH1aRy2puX5LLIvXmo6vzCK_aG7nts0YsLLi8NdsoDkG2XYr7UR3sn3D3NFCfMf4a-inD8PyeEVCXzV64VxFFgLfZMYQso7PrHyggAevumlO68HMIeebWRlHegO9NXQtOHBve-81hzY_k1Nl5gv4QKENylQvSRGvtfxqz8MFVA9pmAlsUfaaFR_JbWL4S6XvhA35zt6sBUpjSwoG2Ie5iPKlzll2hXLjNTrXkkVe9yUPiuhxaGzPx4za6GvuEjX9c7amS2priqMr2tPF4lyN98_1n6qac38yy5yhgIO5zRHMGUBg">署名 4.0 国际 (CC BY 4.0)</a>许可
   </p>
-  <p><a class="classtest-link" href="/tags/%E6%9D%82%E6%96%87/" rel="tag">杂文</a> — 2021年3月21日</p>
+  <p><a class="classtest-link" href="/tags/Java/" rel="tag">Java</a> — 2021年4月16日</p>
   <div class="row" style="justify-content: center; font-weight: lighter;">
     <span id="busuanzi_container_page_pv">
       本文总阅读量<span id="busuanzi_value_page_pv"></span>次
@@ -237,9 +364,9 @@
 
   <script>
     var disqus_config = function() {
-      this.page.url = 'http://136.244.107.20/2021/03/21/hello-world/index.html';
-      this.page.identifier = '2021/03/21/hello-world/index.html';
-      this.page.title = 'Hello World';
+      this.page.url = 'http://136.244.107.20/2021/04/16/JavaSE-Flow-Control-Array/index.html';
+      this.page.identifier = '2021/04/16/JavaSE-Flow-Control-Array/index.html';
+      this.page.title = 'JavaSE-Flow Control&amp;Array';
     };
 
     var is_disqus_loaded = false;
