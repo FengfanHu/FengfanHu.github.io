@@ -11,36 +11,36 @@
   <meta charset="utf-8">
 
   
-  <title>All Posts - Frank</title>
+  <title>ML-Cost Function</title>
   
-  <link rel="canonical" href="http://136.244.107.20/archives/">
+  <link rel="canonical" href="http://136.244.107.20/2021/04/20/ML-Cost-Function/">
   
-  <meta name="description" content="Franks blog">
+  <meta name="description" content="什么是Cost Function顾名思义，Cost Function叫做损失函数，是用来衡量hypothesis（预测值）正确程度的函数。通常，损失函数会采用根据输入X所得的Hypothesis与真实目标值y的平均差值。  “Squared error function” or “Mean squa">
   
   
   <meta name="keywords" content="blog">
   
   <meta name="author" content="Frank">
   
-  <meta property="og:image" content="http://136.244.107.20/images/thumbnail.jpg">
+  <meta property="og:image" content="http://136.244.107.20undefined">
   
   <meta property="og:site_name" content="Spaghetti" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="All Posts - Frank" />
+  <meta property="og:title" content="ML-Cost Function" />
   
-  <meta property="og:description" content="Franks blog">
+  <meta property="og:description" content="什么是Cost Function顾名思义，Cost Function叫做损失函数，是用来衡量hypothesis（预测值）正确程度的函数。通常，损失函数会采用根据输入X所得的Hypothesis与真实目标值y的平均差值。  “Squared error function” or “Mean squa">
   
-  <meta property="og:url" content="http://136.244.107.20/archives/" />
+  <meta property="og:url" content="http://136.244.107.20/2021/04/20/ML-Cost-Function/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="All Posts - Frank">
+  <meta name="twitter:title" content="ML-Cost Function">
   
-  <meta name="twitter:description" content="Franks blog">
+  <meta name="twitter:description" content="什么是Cost Function顾名思义，Cost Function叫做损失函数，是用来衡量hypothesis（预测值）正确程度的函数。通常，损失函数会采用根据输入X所得的Hypothesis与真实目标值y的平均差值。  “Squared error function” or “Mean squa">
   
   
-  <meta name="twitter:image" content="http://136.244.107.20/images/thumbnail.jpg">
+  <meta name="twitter:image" content="http://136.244.107.20undefined">
   
-  <meta name="twitter:url" content="http://136.244.107.20/archives/" />
+  <meta name="twitter:url" content="http://136.244.107.20/2021/04/20/ML-Cost-Function/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -207,186 +207,76 @@
 <hr style="margin-bottom: 2.6rem">
 
         <div class="trans">
-          
-<h2>All Posts</h2>
+            <h1>ML-Cost Function</h1>
 
+  <h2 id="什么是Cost-Function"><a href="#什么是Cost-Function" class="headerlink" title="什么是Cost Function"></a>什么是Cost Function</h2><p>顾名思义，Cost Function叫做损失函数，是用来衡量hypothesis（预测值）正确程度的函数。通常，损失函数会采用根据输入X所得的Hypothesis与真实目标值y的平均差值。</p>
+<hr>
+<h2 id="“Squared-error-function”-or-“Mean-square-error”"><a href="#“Squared-error-function”-or-“Mean-square-error”" class="headerlink" title="“Squared error function” or “Mean square error”"></a>“Squared error function” or “Mean square error”</h2><p>常见的损失函数:均方误差：$J(\theta_0,\theta_1)=\frac{1}{2m}\Sigma_{i=1}^m(h_\theta(x^i)-y^i)^2$</p>
+<p>(此处只代表只存在一个特征的情况，所以参数为 $\theta_0$ , $\theta_1$)</p>
+<p>你可能想知道为什么还有一个1/2，均值不应该是直接除以样本的数量m就好了吗。这里，1/2是为了方便计算和梯度下降。</p>
+<hr>
+<h2 id="怎么使用损失函数："><a href="#怎么使用损失函数：" class="headerlink" title="怎么使用损失函数："></a>怎么使用损失函数：</h2><p>我们的目标就是为了让预测值尽可能接近真实值。所以相应的，当预测值hypothesis越接近真实值y，则误差越小，学习的效果越好。我们要做的是就是要让损失函数最小化。</p>
+<script type="math/tex; mode=display">Minimize \theta_0\theta_1:\frac{1}{2m}\Sigma_{i}^m(h_\theta(x^i)-y^i)^2</script><p>其中 hypothesis 即 $h_\theta(x^i)=\theta^TX^i=\theta_0+\theta_1x^i_1+…+\theta_nx_n^i$</p>
+<hr>
+<h2 id="Crousera例子"><a href="#Crousera例子" class="headerlink" title="Crousera例子"></a>Crousera例子</h2><p>下方的两个图分别是 $\theta_1=1$, $\theta_1=0.5$的情况,此处我们姑且让$\theta_0$为0，方便讨论。</p>
+<p><code>PS</code>: $\theta_0$ or bias为直线与y轴的截距，通过hypothesis function可知 $h_\theta(x) = \theta_0+\theta_1x$</p>
+<p><img src="https://pic2.zhimg.com/v2-0b3f3d45f9232a6b376ca935420d8f1d_b.png" alt="image_0"><br><img src="https://pic4.zhimg.com/v2-e56193ec9e1ad6505afdb1ee90cce80f_b.png" alt="image_1"></p>
+<p>普遍的，当我们取遍所有 $\theta$ ，得到Cost Function</p>
+<p><img src="https://pic1.zhimg.com/v2-9b0fd2dba5c370b66f1367b9ef26f864_b.png" alt="image_2"></p>
+<p>显然的，我们看到当 $\theta_1$ = 1时，得到一个全局最小值，他就是我们要的最优解。</p>
+<hr>
+<h2 id="例子2："><a href="#例子2：" class="headerlink" title="例子2："></a>例子2：</h2><p>上面的例子只考虑到了 $\theta_1$ ，下面的例子将同时考虑 $\theta_0,\theta_1$ </p>
+<p><img src="https://pic4.zhimg.com/v2-f015a9570c81bd082716570685a282a3_b.png" alt="image_3"></p>
+<p>当同时考虑 $\theta_0,\theta_1$ 时，使用等高线图能更好的表示Cost Function。</p>
+<p>同样的，我们的目标为使得J最小，从图中可以看出为椭圆的中心。</p>
+<hr>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>显然，要是我们一一列举 $\theta$，太麻烦了，而且不太现实。那么怎么才能以高效的方式得到最优解呢？梯度下降是一种方法。</p>
 
-    <article>
-      <div class="row">
+  <p>
+    本文由
+    <a href="http://136.244.107.20/2021/04/20/ML-Cost-Function/">Frank</a>采用
+    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/deed.zh?__cf_chl_captcha_tk__=38df848514690e2d9dc35f174d93f404b2dc17a9-1616641417-0-AcSDyu81x_9yKoS9Tkscc967EBylerhw7ZXx062rI3FTN9IjaKqw2cZ5GiLvpW80nM_q_WYmrM-st0hhHJ6_HxbPNrd1mxX-_bTwGjP7mto90c8bMm2UBOVshXle-9tVCWF9ENZWc0b-MgwIgFFV0smZb1HrBYHsKDXV-LUaQkbPVSDj90E24trDNzbTOJ-SIsnE7e7NTp4kxSX--N7aMlpJZ90Zg_X6lqt9VB8ZBcJY_DCUkSCXBp1JAZPpif2TEsZaRMs_mRpxreW9-mYPr6pdKy1kTYpoaYgspVsJGpaWmdjOLclo-9VThCdcTOPsIDJMaAk_swSsD-fKDEMH1aRy2puX5LLIvXmo6vzCK_aG7nts0YsLLi8NdsoDkG2XYr7UR3sn3D3NFCfMf4a-inD8PyeEVCXzV64VxFFgLfZMYQso7PrHyggAevumlO68HMIeebWRlHegO9NXQtOHBve-81hzY_k1Nl5gv4QKENylQvSRGvtfxqz8MFVA9pmAlsUfaaFR_JbWL4S6XvhA35zt6sBUpjSwoG2Ie5iPKlzll2hXLjNTrXkkVe9yUPiuhxaGzPx4za6GvuEjX9c7amS2priqMr2tPF4lyN98_1n6qac38yy5yhgIO5zRHMGUBg">署名 4.0 国际 (CC BY 4.0)</a>许可
+  </p>
+  <p><a class="classtest-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a> — 2021年4月20日</p>
+  <div class="row" style="justify-content: center; font-weight: lighter;">
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  </div>
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Logistic-Regression/" class="">
-            
-              ML-Logistic Regression
-            
-          </a>
-        </div>
-      </div>
-    </article>
+  
+  <hr>
+<section id="comments" class="mt-2 mb-3">
 
-    <article>
-      <div class="row">
+  <div id="disqus_thread">
+    <a href="#" class="button button-primary" onclick="loadDisqus();return false;">View / Make Comments</a>
+  </div>
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Classification/" class="">
-            
-              ML-Classification
-            
-          </a>
-        </div>
-      </div>
-    </article>
+  <script>
+    var disqus_config = function() {
+      this.page.url = 'http://136.244.107.20/2021/04/20/ML-Cost-Function/index.html';
+      this.page.identifier = '2021/04/20/ML-Cost-Function/index.html';
+      this.page.title = 'ML-Cost Function';
+    };
 
-    <article>
-      <div class="row">
+    var is_disqus_loaded = false;
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Normal-Equation/" class="">
-            
-              ML-Normal Equation
-            
-          </a>
-        </div>
-      </div>
-    </article>
+    function loadDisqus() {
+      if (!is_disqus_loaded) {
+        is_disqus_loaded = true;
 
-    <article>
-      <div class="row">
+        var d = document,
+          s = d.createElement('script');
+        s.src = 'https://spaghetti-ink.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+    }
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Multivariate-Linear-Regression/" class="">
-            
-              ML-Multivariate Linear Regression
-            
-          </a>
-        </div>
-      </div>
-    </article>
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
 
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Gradient-Descent/" class="">
-            
-              ML-Gradient Descent
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Cost-Function/" class="">
-            
-              ML-Cost Function
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Introduction/" class="">
-            
-              ML-Introduction
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月19日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/19/JavaSE-OOP-01/" class="">
-            
-              JavaSE-OOP(01)
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月16日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/16/JavaSE-Flow-Control-Array/" class="">
-            
-              JavaSE-Flow Control&Array
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月16日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/16/Control/" class="">
-            
-              Control
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-<div class="pagination-bar">
-  <ul class="pagination">
-    
-    
-
-    <a class="" href="/archives/page/2/">
-      <span>Older</span>
-      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z" />
-      </svg>
-    </a>
-
-    
-  </ul>
-</div>
 
 
           <div class="row mt-2">

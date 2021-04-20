@@ -4,6 +4,139 @@
   
     
     <entry>
+      <title>ML-Logistic Regression</title>
+      <link href="2021/04/20/ML-Logistic-Regression/"/>
+      <url>2021/04/20/ML-Logistic-Regression/</url>
+      
+        <content type="html"><![CDATA[<p>之前提到为什么我们不可以把Square error作为损失函数，那是因为，当使用Square error的时候，我们得到的损失函数会是起起伏伏的，因此，会产生许多局部最优解。换句话来讲，就是我们的Cost function此时不是Convex函数（凸函数）。</p><p><img src="https://pic2.zhimg.com/v2-b3f9b3e805da7abf2bf0ab77efa9c13d_b.png" alt="image_0"></p><hr><p>Coursera里，Andrew直接给出了Cost Function，并没有过多的解释为什么会要选择这个函数。然而，在Stanford CS229的笔记里做了详细的阐述，不过它提出的概念与损失函数有些不同，不过大相径庭。在学习的时候，我也针对不同写了小记</p><p>下面，我们来推导一下，新的Cost Function是怎么产生的：</p><p>首先让我们从概率的角度来构造这个分类模型，假定</p><p><img src="https://pic3.zhimg.com/v2-9aab497ae093a58b4ed053d3fb81a922_b.png" alt="image_1"></p><p>我们可以把两个方程结合成一个方程：</p><p><img src="https://pic2.zhimg.com/v2-9d9bd4b605776ffc619b097df09a012d_b.png" alt="image_2"></p><p>假定我们有n个训练样本而且我们的训练样本彼此之间都是相互独立的$P(A\cap B)=P(A)P(B)$。因此我们可以得到似然函数：</p><p><img src="https://pic3.zhimg.com/v2-d7d3a53797408d96ec3af5c7c97a3d2a_b.png" alt="image_3"></p><p>得到了似然函数，那我们的目的是什么呢？当然是希望每个样本的预测值尽可能与真实值相同不是吗，也就是我们希望似然函数达到最大，Let’s maximize likelihood.</p><p>我们可以看到以乘积的形式让值最大化有些困难，那么我们使得Log likelihood最大化，以加法的形式就很容易了：</p><p><img src="https://pic1.zhimg.com/v2-fd1d2c5e40ded59b46a99f3d92c61200_b.png" alt="image_4"></p><p>我们来看看Cousera里给出的Cost Function是什么样的：</p><p><img src="https://pic1.zhimg.com/v2-7c522cdc0137a44d958fd606018310b0_b.png" alt="image_5"></p><p>形式几乎和似然函数一样不是吗，它们的区别无非就是：当我们使用似然函数的时候，我们的目的就是为了让概率最大化，即最大化似然函数。当我们使用损失函数的时候，我们的目的就是为了让损失最小化，即最小化损失函数。</p><p><img src="https://pic1.zhimg.com/v2-6ef43bb61c6cff48ae9c38d63a173450_b.png" alt="image_6"></p><p><img src="https://pic4.zhimg.com/v2-c4784ff9027daeb517418f84ec00d6ff_b.png" alt="image_7"></p><hr><h3 id="Gradient-Descent-for-Cost-Function"><a href="#Gradient-Descent-for-Cost-Function" class="headerlink" title="Gradient Descent for Cost Function"></a>Gradient Descent for Cost Function</h3><p>$\frac{\partial}{\partial \theta_j}J(\theta)=(h_\theta(x^i)-y^i)x_j$</p><p>$\theta_j:=\theta_j-\frac{\alpha}{m}\Sigma_{i=1}^{m}(h_\theta(x^i)-y^i)x_j$</p><h3 id="Gradient-Ascent-for-log-likelihood"><a href="#Gradient-Ascent-for-log-likelihood" class="headerlink" title="Gradient Ascent for log likelihood"></a>Gradient Ascent for log likelihood</h3><p><img src="https://pic2.zhimg.com/v2-a602f5d242db282e6766c3ee3ee23f55_b.png" alt="image_8"></p><p>$\theta_j:=\theta_j+\alpha\Sigma_{i=1}^m(y^i-h_\theta(x^i))x_j^i$</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ML-Classification</title>
+      <link href="2021/04/20/ML-Classification/"/>
+      <url>2021/04/20/ML-Classification/</url>
+      
+        <content type="html"><![CDATA[<p>一种分类的方法是，结合之前的线性回归，然后让所有预测值比0.5大的值作为Positive，将小于0.5预测值的样本作为Negative（二分类)。然而，这种方法通常不是很好，因为我们的分类不一定是线性的。</p><p>为了解决这个问题，我们将引入新的Hypothesis function以满足 [公式] 。我们通过把 [公式] 带入到Logistic Function来满足这个需求。同时，我们还将引入Sigmoid Function。具体的表示形式为：</p><p><img src="https://pic4.zhimg.com/80/v2-171adc9e2e245c4b78c8888ae3bce573_1440w.jpg" alt="image_0"></p><p><img src="https://pic1.zhimg.com/80/v2-45a583f9c1b2e36166ded5b66eedccd0_1440w.png" alt="image_1"></p><p>我们可以看到Sigmoid Function有很好的性质，它不仅使得所有的值落在0到1之间，而且，以0.5为分界线，把 [公式]分为大于0和小于0。</p><p>接下来我们详细讨论这个性质可以拿来做什么。为了让所有的预测值都为了离散的0或1值（暂时讨论二分类），我们可以通过如下方式转换Hypothesis function的输出</p><p><img src="https://pic3.zhimg.com/v2-84746b398ab80d37131c1ed2b042548e_b.png" alt="image_2"></p><p>根据我们之前给出的Hypothesis function的表示形式，我们可以推出如下结论：</p><p>如果$z=\theta^Tx\ge0$那么$g(z)\ge0.5$于是y=1</p><p>反之如果$z=\theta^Tx&lt;0$那么$g(z)&lt;0.5$于是有y=0</p><p>那么我们可以很容易的推断出，二分类的Decision Boundary(决策边界，用于划分Positive和Negative)就是$\theta^Tx=0$</p><hr><p><strong>结束语</strong>：知道了Hypothesis Function，那么对于分类问题的Cost Function是啥呢？你可能会问，啥？为什么还要用新的Cost Function呢，直接用Linear regression的Square error function不好吗？有问题才要去解决不是吗，不然为什么要凭空再来一个Cost Function。是的接下来我们来研究为什么不使用Square error。</p><p><strong>题外话</strong>：非常喜欢Andrew的授课方式，以问题带入，直到解决问题。我们人类不会凭空想象，一切基于需求。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ML-Normal Equation</title>
+      <link href="2021/04/20/ML-Normal-Equation/"/>
+      <url>2021/04/20/ML-Normal-Equation/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>What is normal equation, why shall we use it and how to use it?</p></blockquote><h2 id="What"><a href="#What" class="headerlink" title="What"></a>What</h2><p>之前我们提到使用梯度下降的方法来让损失函数达到最小值。这次，我们将不实用梯度下降的方法，我们将直接令Cost Function对$\theta$求导，使其为0来获得我们想要的最优的$\theta$。</p><h2 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h2><p>首先，我们解释一下为什么要使用Normal equation，使用梯度下降不是很爽吗？首先，我们来对比一下Gradient Descent 与 Normal equation。</p><p><img src="https://pic2.zhimg.com/v2-279fcc637f5b4f041aae5a9fe72b9891_b.png" alt="image_0"></p><p>显然，让当我们使用Gradient Descent时，我们需要人为的确定Learning rate、Iterations，然后有时候人为决定的值并不会有很高的效率（比如，我们对学习率与迭代次数到底要取多少根本不能准确的给出一个答案）。相对的，使用Normal Equation我们就避免了这个问题。但是我们可以看到，使用它也面临另外一个问题，那就是当我们的Features很多的时候，使用Normal Equation进行计算的效率会大打折扣，然而现实生活中的应用的Features可以是成千上万的，所以我们一般不会去用它。</p><h2 id="How"><a href="#How" class="headerlink" title="How"></a>How</h2><p>怎么使用Normal Equation呢？就像我们一开始提到的，我们将直接让Cost Function对$\theta$求导，使其为0，求$\theta$即$\frac{\partial J(\theta)}{\partial\theta}=0$</p><h3 id="例子🌰：以之前的Least-squares为例"><a href="#例子🌰：以之前的Least-squares为例" class="headerlink" title="例子🌰：以之前的Least squares为例"></a>例子🌰：以之前的Least squares为例</h3><ul><li>$X : Matrix m by n+1 (include x_o which equals to 1)$</li><li>$\vec y : Vector m by 1$</li><li>$\theta: Vector n+1 by 1$</li></ul><p>$J(\theta)=\frac{1}{2}\Sigma_{i=1}^{m}(h_\theta(x^i)-y^i)^2=\frac{1}{2}(X\theta-\vec y)^T(X\theta-\vec y)$</p><p><img src="https://pic4.zhimg.com/v2-0e93c7974be438c87ca52a3fb772e59f_b.png" alt="image_1"></p><p><img src="https://pic4.zhimg.com/v2-43700c9279fa978904acd55ddcf28357_b.jpg" alt="image_2"></p><p>最后整理一下我们得到</p><p>$X^TX\theta=X^T\vec{y}$</p><p>$\theta=(X^TX)^{-1}X^T\vec y$</p><p>这东西就很好玩了，大家如果对线性代数有些了解，可能会想到投影矩阵$P=\frac{aa^T}{a^Ta}$</p><p>说的通俗一点就是可以通过投影矩阵把一个向量投影到X所在的空间，得到的就是最优解。</p><p>题外话：感兴趣的同学可以去回顾一下线性代数，说实话自己的线性代数也不大行，这里推荐MIT Strang的Linear algebra，可以在Youtube，B站，网易公开课找资料，个人建议不要开中文字幕，熬一熬适应了。当然，知乎上也有许多博主整理了自己的学习笔记，边看边学是不错的选择。</p><hr><p>最后，使用Normal Equation求$\theta$时，可能会碰到$X^TX$不可逆的情况，这个时候可以用Pseudo Inverse。在Matlab, Octave, Numpy中可以使用<code>pinv</code>求解。</p><p><strong>结束语</strong>：说实话这一节有点硬，实在不理解也不影响后续学习</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ML-Multivariate Linear Regression</title>
+      <link href="2021/04/20/ML-Multivariate-Linear-Regression/"/>
+      <url>2021/04/20/ML-Multivariate-Linear-Regression/</url>
+      
+        <content type="html"><![CDATA[<p>对于多变量的线性回归</p><script type="math/tex; mode=display">h_\theta(x)=\theta_0+\theta_1x_1+\theta_2x_2+...+\theta_nx_n</script><p>通常多变量属于超平面，不能通过图像表示。一般的，我们令 $x_o^i=1,for(i\in1,…,m)$ 与 $\theta$ 的 $\theta_0$ 相对应。于是，对于一个X，它的维度为n+1，其中n为X的特征数量。</p><h2 id="Gradient-Descent-for-Multiple-Variables"><a href="#Gradient-Descent-for-Multiple-Variables" class="headerlink" title="Gradient Descent for Multiple Variables"></a>Gradient Descent for Multiple Variables</h2><p>过去我们只讨论了n=1的情况，在这个情况下，我们分别迭代 \theta_0,\theta_1 ，即：</p><p>Repeat {</p><script type="math/tex; mode=display">\theta_0:=\theta_0-\alpha\frac{1}{m}\Sigma_{i=1}^{m}(h_\theta(x^i)-y^i)</script><script type="math/tex; mode=display">\theta_1:=\theta_1-\alpha\frac{1}{m}\Sigma_{i=1}^{m}(h_\theta(x^i)-y^i)x^i</script><script type="math/tex; mode=display">(此处因为x只有一个变量，所以是一个值，相当于下面的 $x_j^i,j=1$)</script><p>}</p><p>现在当变量很多时，显然像之前那样一一列举迭代 \theta 会很麻烦，于是我们使用向量的视角来看问题，即：</p><p>Repeat {</p><script type="math/tex; mode=display">\theta_j:=\theta_j-\alpha\frac{1}{m}\Sigma_{i=1}^{m}(h_\theta(x^i)-y^i)x_j^i</script><p>}</p><hr><h2 id="Feature-Scaling"><a href="#Feature-Scaling" class="headerlink" title="Feature Scaling"></a>Feature Scaling</h2><p>什么是Feature Scaling，为什么要使用它？</p><blockquote><p>Feature Scaling: Make sure features are on a similar scale. </p></blockquote><p>通过使得每个特征的取值范围变的一样，我们可以加速梯度下降。因为，$\theta$ 在小取值范围内能快速下降，在大取值范围内则下降的很慢。为了方便直观理解，使用Andrew课上的图，如下</p><p><img src="https://pic3.zhimg.com/v2-a848f8af0a101aed43edc1c27d7332be_b.png" alt="image_0"></p><h3 id="Standardization-Normal-distribution-符合常态分布"><a href="#Standardization-Normal-distribution-符合常态分布" class="headerlink" title="Standardization: (Normal distribution 符合常态分布)"></a>Standardization: (Normal distribution 符合常态分布)</h3><p>$x_i =\frac{x_i-\mu_i}{s_i}$</p><ul><li>$\mu_i$ 为均值</li><li>$s_i$ 为标准差</li></ul><h3 id="Feature-scaling"><a href="#Feature-scaling" class="headerlink" title="Feature scaling:"></a>Feature scaling:</h3><p>$x_i=\frac{x_i- \underset{min}{x}}{\underset{max}{x}-\underset{min}{x}}$</p><hr><h2 id="Polynomial-Regression"><a href="#Polynomial-Regression" class="headerlink" title="Polynomial Regression"></a>Polynomial Regression</h2><p>显然有时候线性的预测并不能满足我们的预期（与数据的拟合程度不高）。因为我们通过使Hypothesis function弯曲，使线性变为quadratic（二次）, cubic（三次） 或者 square root（二次根号）。</p><p>E.g. If our hypothesis function is $h_\theta(x)=\theta_0+\theta_1x_1$<br>     Then, we can create additional features based on $x_1$ like $h_\theta(x)=\theta_0+\theta_1x_1+\theta_2x_1^2$</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ML-Gradient Descent</title>
+      <link href="2021/04/20/ML-Gradient-Descent/"/>
+      <url>2021/04/20/ML-Gradient-Descent/</url>
+      
+        <content type="html"><![CDATA[<h2 id="什么是梯度下降？"><a href="#什么是梯度下降？" class="headerlink" title="什么是梯度下降？"></a>什么是梯度下降？</h2><p><img src="https://pic4.zhimg.com/v2-ccdbfea64db2fcf1f65075a1281e603f_b.png" alt="image_0"></p><p>Gradient Descent，gradient是梯度，沿着梯度方向下降，就叫梯度下降。梯度即在某一点处切线的斜率（函数方向导数最大的方向，或函数变化最快的方向; $\frac{\partial f}{\partial l}=gradf.\vec l$, $\vec l$ 为单位向量）。如上图所示，求出某点处的导数( $\partial\theta_0$,$\partial\theta_1$ )，我们就得到了梯度的方向，就像下山一样，我们环顾四周，选一个最陡的方向往下走肯定是当前下山最快的方法。此处，我们还应该注意到，影响下山效率的，除了下山的方向之外，还有我们迈出的步长不是吗，那么我们应该迈出多大一步呢，此处便有了定义 $\alpha$，Learning rate，学习率。</p><p>知道了下山的方向和步长，那么怎么算到了山底，作为我们结束下山之旅的标志呢。显然的，当我们到达山底时，四周都是平坦的，我们的梯度为0，我们遍停下来，把该点算作自己的目的地（最优解）。</p><p>图中红色箭头指的两个点，分别是俩个局部最小点（局部最优解）。那为什么不是全局的最优解呢？因为，在有些情况下，我们的Cost Function可能是起起伏伏的，并不是Convex的,就导致了有许多点处的导数都为0的情况。根据起始点的不同，我们可能会到达不同的山底（局部最优解）。</p><hr><h2 id="梯度下降算法"><a href="#梯度下降算法" class="headerlink" title="梯度下降算法"></a>梯度下降算法</h2><p>Repeat until convergence {<br>$\theta_j:=\theta_j-{\alpha}\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1)$<br>}</p><p>这里要注意，更新迭代是同时的，既每次迭代的时候都要一起迭代 $\theta_0,\theta_1$ </p><p><img src="https://pic1.zhimg.com/v2-84823d8dddb4894f657bf715af7dded4_b.png" alt="image_1"></p><hr><h2 id="例子🌰"><a href="#例子🌰" class="headerlink" title="例子🌰"></a>例子🌰</h2><p><img src="https://pic4.zhimg.com/v2-3371ed5289f53871e4159c84466b87fb_b.png" alt="image_2"></p><p>为了方便理解此处我们只考虑 $\theta_1$（不然会是等高线图，下面会提到）。从上方的图可以看出，当我们的起始点在右侧时，我们的梯度为正值，所以 $\theta_1-{\alpha}*\frac{\partial}{\partial\theta_1}J(\theta_1)$ 会使得 $\theta_1$ 逐渐向着局部最优解移动。同理的，我们可以推导一下起始点在左侧的情况。</p><hr><p>接下来我们来讨论一下Learning rate:</p><p><img src="https://pic2.zhimg.com/v2-26b1cd4b3e612679ed4445f6b1f355f9_b.png" alt="image_3"></p><p>从上图可以明显的看出，当学习率小的时候，我们可以顺利的达到最优解，但是我们要迈出好多步，Andrew叫他Baby step。相反的，当我们的学习率取得较大的时候，可能会出现不能收敛的情况。当然，如果你取得 $\alpha$ 足够好，那么你讲以最快的速度达到山底（达到局部最优解）。一般的，我们通过不断尝试不同的learning rate，取最大的可以使得Cost Function收敛的值即可。</p><hr><p>同时考虑 $\theta_0,\theta_1$ 的情况，沿梯度方向达到最优解。</p><p><img src="https://pic3.zhimg.com/v2-507f2fb5cd30a5e52a934621d2bae33a_b.png" alt="image_4"></p><h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>目前考虑的是只有 $\theta_0,\theta_1$ 的情况，那么当特征多的时候又会是什么情况呢？我们能不能也通过简单的可视化来理解呢？</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ML-Cost Function</title>
+      <link href="2021/04/20/ML-Cost-Function/"/>
+      <url>2021/04/20/ML-Cost-Function/</url>
+      
+        <content type="html"><![CDATA[<h2 id="什么是Cost-Function"><a href="#什么是Cost-Function" class="headerlink" title="什么是Cost Function"></a>什么是Cost Function</h2><p>顾名思义，Cost Function叫做损失函数，是用来衡量hypothesis（预测值）正确程度的函数。通常，损失函数会采用根据输入X所得的Hypothesis与真实目标值y的平均差值。</p><hr><h2 id="“Squared-error-function”-or-“Mean-square-error”"><a href="#“Squared-error-function”-or-“Mean-square-error”" class="headerlink" title="“Squared error function” or “Mean square error”"></a>“Squared error function” or “Mean square error”</h2><p>常见的损失函数:均方误差：$J(\theta_0,\theta_1)=\frac{1}{2m}\Sigma_{i=1}^m(h_\theta(x^i)-y^i)^2$</p><p>(此处只代表只存在一个特征的情况，所以参数为 $\theta_0$ , $\theta_1$)</p><p>你可能想知道为什么还有一个1/2，均值不应该是直接除以样本的数量m就好了吗。这里，1/2是为了方便计算和梯度下降。</p><hr><h2 id="怎么使用损失函数："><a href="#怎么使用损失函数：" class="headerlink" title="怎么使用损失函数："></a>怎么使用损失函数：</h2><p>我们的目标就是为了让预测值尽可能接近真实值。所以相应的，当预测值hypothesis越接近真实值y，则误差越小，学习的效果越好。我们要做的是就是要让损失函数最小化。</p><script type="math/tex; mode=display">Minimize \theta_0\theta_1:\frac{1}{2m}\Sigma_{i}^m(h_\theta(x^i)-y^i)^2</script><p>其中 hypothesis 即 $h_\theta(x^i)=\theta^TX^i=\theta_0+\theta_1x^i_1+…+\theta_nx_n^i$</p><hr><h2 id="Crousera例子"><a href="#Crousera例子" class="headerlink" title="Crousera例子"></a>Crousera例子</h2><p>下方的两个图分别是 $\theta_1=1$, $\theta_1=0.5$的情况,此处我们姑且让$\theta_0$为0，方便讨论。</p><p><code>PS</code>: $\theta_0$ or bias为直线与y轴的截距，通过hypothesis function可知 $h_\theta(x) = \theta_0+\theta_1x$</p><p><img src="https://pic2.zhimg.com/v2-0b3f3d45f9232a6b376ca935420d8f1d_b.png" alt="image_0"><br><img src="https://pic4.zhimg.com/v2-e56193ec9e1ad6505afdb1ee90cce80f_b.png" alt="image_1"></p><p>普遍的，当我们取遍所有 $\theta$ ，得到Cost Function</p><p><img src="https://pic1.zhimg.com/v2-9b0fd2dba5c370b66f1367b9ef26f864_b.png" alt="image_2"></p><p>显然的，我们看到当 $\theta_1$ = 1时，得到一个全局最小值，他就是我们要的最优解。</p><hr><h2 id="例子2："><a href="#例子2：" class="headerlink" title="例子2："></a>例子2：</h2><p>上面的例子只考虑到了 $\theta_1$ ，下面的例子将同时考虑 $\theta_0,\theta_1$ </p><p><img src="https://pic4.zhimg.com/v2-f015a9570c81bd082716570685a282a3_b.png" alt="image_3"></p><p>当同时考虑 $\theta_0,\theta_1$ 时，使用等高线图能更好的表示Cost Function。</p><p>同样的，我们的目标为使得J最小，从图中可以看出为椭圆的中心。</p><hr><h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>显然，要是我们一一列举 $\theta$，太麻烦了，而且不太现实。那么怎么才能以高效的方式得到最优解呢？梯度下降是一种方法。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ML-Introduction</title>
+      <link href="2021/04/20/ML-Introduction/"/>
+      <url>2021/04/20/ML-Introduction/</url>
+      
+        <content type="html"><![CDATA[<h2 id="什么是机器学习？"><a href="#什么是机器学习？" class="headerlink" title="什么是机器学习？"></a>什么是机器学习？</h2><blockquote><p>Tom Mitchell:”Learn experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.” </p></blockquote><p>针对某一个任务，通过一些过往的经历和表现来提升我们的在该任务上的表现。<br>（与人类的认知过程相似，这也是为什么我们人类要通过学习历史来改善或者避免一些任务）</p><p>E.g. : 下棋<br>Experience：与其他棋手下棋的经历<br>Task:下棋的任务<br>Performance：下棋的表现（下次和其他人下棋输赢的概率）</p><hr><h2 id="机器学习的算法："><a href="#机器学习的算法：" class="headerlink" title="机器学习的算法："></a>机器学习的算法：</h2><ul><li>Supervised learning 监督学习</li><li>Unsupervised learning 无监督学习</li><li>Reinforcement learning 强化学习</li><li>Recommender systems 推荐算法</li></ul><h3 id="Supervised-learning"><a href="#Supervised-learning" class="headerlink" title="Supervised learning:"></a>Supervised learning:</h3><p>有具有标签（正确结果）的训练样本</p><ul><li>Regression 回归问题</li><li>Classification 分类问题</li></ul><h3 id="Unsupervised-learning"><a href="#Unsupervised-learning" class="headerlink" title="Unsupervised learning:"></a>Unsupervised learning:</h3><p>没有标签的样本</p><ul><li>Clustering 聚类问题</li><li>Non-clustering 非聚类问题</li></ul><hr><h2 id="模型表示"><a href="#模型表示" class="headerlink" title="模型表示"></a>模型表示</h2><ul><li>$x^{(i)}$ 表示输入的变量，通常叫做特征 $feature$ </li><li>$y^{(i)}$ 表示输出的变量，通常叫做目标 $target$</li><li>$(x^i,y^i)$ 表示一个训练样本</li><li>训练样本的集合 $\{(x^i,y^i);i=1,…,n\}$ 叫做训练集</li><li>$X$ 表示输入变量的空间而 $Y$ 表示输出变量的空间</li><li>$hypothesis$ （预测）可以看作一种函数<br>其中上标”(i)”表示的是训练集的索引（index）</li></ul><h3 id="以监督学习为例"><a href="#以监督学习为例" class="headerlink" title="以监督学习为例"></a>以监督学习为例</h3><p>机器学习的目标是要学习得到一个预测函数hypothesis function，通过输入X到该函数获得一个预测结果hypothesis（预测值），使得所有的预测值尽可能的与我们的预期值（label）y相同。</p><h4 id="Regression-problem-回归问题"><a href="#Regression-problem-回归问题" class="headerlink" title="Regression problem 回归问题"></a>Regression problem 回归问题</h4><p>我们要得到的预测值是一个连续型的值（continuous）<br>e.g. 预测一个地区的房价等</p><h4 id="Classification-problem-分类问题"><a href="#Classification-problem-分类问题" class="headerlink" title="Classification problem 分类问题"></a>Classification problem 分类问题</h4><p>我们要得到的预测值是一个离散型的值（discrete）<br>e.g. 预测一个产品是否合格 或者 学生是否会被目标学校录取等</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>JavaSE-OOP(01)</title>
       <link href="2021/04/19/JavaSE-OOP-01/"/>
       <url>2021/04/19/JavaSE-OOP-01/</url>

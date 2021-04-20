@@ -11,36 +11,36 @@
   <meta charset="utf-8">
 
   
-  <title>All Posts - Frank</title>
+  <title>ML-Normal Equation</title>
   
-  <link rel="canonical" href="http://136.244.107.20/archives/">
+  <link rel="canonical" href="http://136.244.107.20/2021/04/20/ML-Normal-Equation/">
   
-  <meta name="description" content="Franks blog">
+  <meta name="description" content="What is normal equation, why shall we use it and how to use it?  What之前我们提到使用梯度下降的方法来让损失函数达到最小值。这次，我们将不实用梯度下降的方法，我们将直接令Cost Function对$\theta$求导，使其为0来获">
   
   
   <meta name="keywords" content="blog">
   
   <meta name="author" content="Frank">
   
-  <meta property="og:image" content="http://136.244.107.20/images/thumbnail.jpg">
+  <meta property="og:image" content="http://136.244.107.20undefined">
   
   <meta property="og:site_name" content="Spaghetti" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="All Posts - Frank" />
+  <meta property="og:title" content="ML-Normal Equation" />
   
-  <meta property="og:description" content="Franks blog">
+  <meta property="og:description" content="What is normal equation, why shall we use it and how to use it?  What之前我们提到使用梯度下降的方法来让损失函数达到最小值。这次，我们将不实用梯度下降的方法，我们将直接令Cost Function对$\theta$求导，使其为0来获">
   
-  <meta property="og:url" content="http://136.244.107.20/archives/" />
+  <meta property="og:url" content="http://136.244.107.20/2021/04/20/ML-Normal-Equation/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="All Posts - Frank">
+  <meta name="twitter:title" content="ML-Normal Equation">
   
-  <meta name="twitter:description" content="Franks blog">
+  <meta name="twitter:description" content="What is normal equation, why shall we use it and how to use it?  What之前我们提到使用梯度下降的方法来让损失函数达到最小值。这次，我们将不实用梯度下降的方法，我们将直接令Cost Function对$\theta$求导，使其为0来获">
   
   
-  <meta name="twitter:image" content="http://136.244.107.20/images/thumbnail.jpg">
+  <meta name="twitter:image" content="http://136.244.107.20undefined">
   
-  <meta name="twitter:url" content="http://136.244.107.20/archives/" />
+  <meta name="twitter:url" content="http://136.244.107.20/2021/04/20/ML-Normal-Equation/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -207,186 +207,79 @@
 <hr style="margin-bottom: 2.6rem">
 
         <div class="trans">
-          
-<h2>All Posts</h2>
+            <h1>ML-Normal Equation</h1>
 
+  <blockquote>
+<p>What is normal equation, why shall we use it and how to use it?</p>
+</blockquote>
+<h2 id="What"><a href="#What" class="headerlink" title="What"></a>What</h2><p>之前我们提到使用梯度下降的方法来让损失函数达到最小值。这次，我们将不实用梯度下降的方法，我们将直接令Cost Function对$\theta$求导，使其为0来获得我们想要的最优的$\theta$。</p>
+<h2 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h2><p>首先，我们解释一下为什么要使用Normal equation，使用梯度下降不是很爽吗？首先，我们来对比一下Gradient Descent 与 Normal equation。</p>
+<p><img src="https://pic2.zhimg.com/v2-279fcc637f5b4f041aae5a9fe72b9891_b.png" alt="image_0"></p>
+<p>显然，让当我们使用Gradient Descent时，我们需要人为的确定Learning rate、Iterations，然后有时候人为决定的值并不会有很高的效率（比如，我们对学习率与迭代次数到底要取多少根本不能准确的给出一个答案）。相对的，使用Normal Equation我们就避免了这个问题。但是我们可以看到，使用它也面临另外一个问题，那就是当我们的Features很多的时候，使用Normal Equation进行计算的效率会大打折扣，然而现实生活中的应用的Features可以是成千上万的，所以我们一般不会去用它。</p>
+<h2 id="How"><a href="#How" class="headerlink" title="How"></a>How</h2><p>怎么使用Normal Equation呢？就像我们一开始提到的，我们将直接让Cost Function对$\theta$求导，使其为0，求$\theta$即$\frac{\partial J(\theta)}{\partial\theta}=0$</p>
+<h3 id="例子🌰：以之前的Least-squares为例"><a href="#例子🌰：以之前的Least-squares为例" class="headerlink" title="例子🌰：以之前的Least squares为例"></a>例子🌰：以之前的Least squares为例</h3><ul>
+<li>$X : Matrix m by n+1 (include x_o which equals to 1)$</li>
+<li>$\vec y : Vector m by 1$</li>
+<li>$\theta: Vector n+1 by 1$</li>
+</ul>
+<p>$J(\theta)=\frac{1}{2}\Sigma_{i=1}^{m}(h_\theta(x^i)-y^i)^2=\frac{1}{2}(X\theta-\vec y)^T(X\theta-\vec y)$</p>
+<p><img src="https://pic4.zhimg.com/v2-0e93c7974be438c87ca52a3fb772e59f_b.png" alt="image_1"></p>
+<p><img src="https://pic4.zhimg.com/v2-43700c9279fa978904acd55ddcf28357_b.jpg" alt="image_2"></p>
+<p>最后整理一下我们得到</p>
+<p>$X^TX\theta=X^T\vec{y}$</p>
+<p>$\theta=(X^TX)^{-1}X^T\vec y$</p>
+<p>这东西就很好玩了，大家如果对线性代数有些了解，可能会想到投影矩阵$P=\frac{aa^T}{a^Ta}$</p>
+<p>说的通俗一点就是可以通过投影矩阵把一个向量投影到X所在的空间，得到的就是最优解。</p>
+<p>题外话：感兴趣的同学可以去回顾一下线性代数，说实话自己的线性代数也不大行，这里推荐MIT Strang的Linear algebra，可以在Youtube，B站，网易公开课找资料，个人建议不要开中文字幕，熬一熬适应了。当然，知乎上也有许多博主整理了自己的学习笔记，边看边学是不错的选择。</p>
+<hr>
+<p>最后，使用Normal Equation求$\theta$时，可能会碰到$X^TX$不可逆的情况，这个时候可以用Pseudo Inverse。在Matlab, Octave, Numpy中可以使用<code>pinv</code>求解。</p>
+<p><strong>结束语</strong>：说实话这一节有点硬，实在不理解也不影响后续学习</p>
 
-    <article>
-      <div class="row">
+  <p>
+    本文由
+    <a href="http://136.244.107.20/2021/04/20/ML-Normal-Equation/">Frank</a>采用
+    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/deed.zh?__cf_chl_captcha_tk__=38df848514690e2d9dc35f174d93f404b2dc17a9-1616641417-0-AcSDyu81x_9yKoS9Tkscc967EBylerhw7ZXx062rI3FTN9IjaKqw2cZ5GiLvpW80nM_q_WYmrM-st0hhHJ6_HxbPNrd1mxX-_bTwGjP7mto90c8bMm2UBOVshXle-9tVCWF9ENZWc0b-MgwIgFFV0smZb1HrBYHsKDXV-LUaQkbPVSDj90E24trDNzbTOJ-SIsnE7e7NTp4kxSX--N7aMlpJZ90Zg_X6lqt9VB8ZBcJY_DCUkSCXBp1JAZPpif2TEsZaRMs_mRpxreW9-mYPr6pdKy1kTYpoaYgspVsJGpaWmdjOLclo-9VThCdcTOPsIDJMaAk_swSsD-fKDEMH1aRy2puX5LLIvXmo6vzCK_aG7nts0YsLLi8NdsoDkG2XYr7UR3sn3D3NFCfMf4a-inD8PyeEVCXzV64VxFFgLfZMYQso7PrHyggAevumlO68HMIeebWRlHegO9NXQtOHBve-81hzY_k1Nl5gv4QKENylQvSRGvtfxqz8MFVA9pmAlsUfaaFR_JbWL4S6XvhA35zt6sBUpjSwoG2Ie5iPKlzll2hXLjNTrXkkVe9yUPiuhxaGzPx4za6GvuEjX9c7amS2priqMr2tPF4lyN98_1n6qac38yy5yhgIO5zRHMGUBg">署名 4.0 国际 (CC BY 4.0)</a>许可
+  </p>
+  <p><a class="classtest-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a> — 2021年4月20日</p>
+  <div class="row" style="justify-content: center; font-weight: lighter;">
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  </div>
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Logistic-Regression/" class="">
-            
-              ML-Logistic Regression
-            
-          </a>
-        </div>
-      </div>
-    </article>
+  
+  <hr>
+<section id="comments" class="mt-2 mb-3">
 
-    <article>
-      <div class="row">
+  <div id="disqus_thread">
+    <a href="#" class="button button-primary" onclick="loadDisqus();return false;">View / Make Comments</a>
+  </div>
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Classification/" class="">
-            
-              ML-Classification
-            
-          </a>
-        </div>
-      </div>
-    </article>
+  <script>
+    var disqus_config = function() {
+      this.page.url = 'http://136.244.107.20/2021/04/20/ML-Normal-Equation/index.html';
+      this.page.identifier = '2021/04/20/ML-Normal-Equation/index.html';
+      this.page.title = 'ML-Normal Equation';
+    };
 
-    <article>
-      <div class="row">
+    var is_disqus_loaded = false;
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Normal-Equation/" class="">
-            
-              ML-Normal Equation
-            
-          </a>
-        </div>
-      </div>
-    </article>
+    function loadDisqus() {
+      if (!is_disqus_loaded) {
+        is_disqus_loaded = true;
 
-    <article>
-      <div class="row">
+        var d = document,
+          s = d.createElement('script');
+        s.src = 'https://spaghetti-ink.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+    }
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Multivariate-Linear-Regression/" class="">
-            
-              ML-Multivariate Linear Regression
-            
-          </a>
-        </div>
-      </div>
-    </article>
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
 
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Gradient-Descent/" class="">
-            
-              ML-Gradient Descent
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Cost-Function/" class="">
-            
-              ML-Cost Function
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Introduction/" class="">
-            
-              ML-Introduction
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月19日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/19/JavaSE-OOP-01/" class="">
-            
-              JavaSE-OOP(01)
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月16日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/16/JavaSE-Flow-Control-Array/" class="">
-            
-              JavaSE-Flow Control&Array
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月16日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/16/Control/" class="">
-            
-              Control
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-<div class="pagination-bar">
-  <ul class="pagination">
-    
-    
-
-    <a class="" href="/archives/page/2/">
-      <span>Older</span>
-      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z" />
-      </svg>
-    </a>
-
-    
-  </ul>
-</div>
 
 
           <div class="row mt-2">

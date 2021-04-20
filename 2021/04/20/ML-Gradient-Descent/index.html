@@ -11,36 +11,36 @@
   <meta charset="utf-8">
 
   
-  <title>All Posts - Frank</title>
+  <title>ML-Gradient Descent</title>
   
-  <link rel="canonical" href="http://136.244.107.20/archives/">
+  <link rel="canonical" href="http://136.244.107.20/2021/04/20/ML-Gradient-Descent/">
   
-  <meta name="description" content="Franks blog">
+  <meta name="description" content="什么是梯度下降？ Gradient Descent，gradient是梯度，沿着梯度方向下降，就叫梯度下降。梯度即在某一点处切线的斜率（函数方向导数最大的方向，或函数变化最快的方向; $\frac{\partial f}{\partial l}=gradf.\vec l$, $\vec l$ 为单位">
   
   
   <meta name="keywords" content="blog">
   
   <meta name="author" content="Frank">
   
-  <meta property="og:image" content="http://136.244.107.20/images/thumbnail.jpg">
+  <meta property="og:image" content="http://136.244.107.20undefined">
   
   <meta property="og:site_name" content="Spaghetti" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="All Posts - Frank" />
+  <meta property="og:title" content="ML-Gradient Descent" />
   
-  <meta property="og:description" content="Franks blog">
+  <meta property="og:description" content="什么是梯度下降？ Gradient Descent，gradient是梯度，沿着梯度方向下降，就叫梯度下降。梯度即在某一点处切线的斜率（函数方向导数最大的方向，或函数变化最快的方向; $\frac{\partial f}{\partial l}=gradf.\vec l$, $\vec l$ 为单位">
   
-  <meta property="og:url" content="http://136.244.107.20/archives/" />
+  <meta property="og:url" content="http://136.244.107.20/2021/04/20/ML-Gradient-Descent/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="All Posts - Frank">
+  <meta name="twitter:title" content="ML-Gradient Descent">
   
-  <meta name="twitter:description" content="Franks blog">
+  <meta name="twitter:description" content="什么是梯度下降？ Gradient Descent，gradient是梯度，沿着梯度方向下降，就叫梯度下降。梯度即在某一点处切线的斜率（函数方向导数最大的方向，或函数变化最快的方向; $\frac{\partial f}{\partial l}=gradf.\vec l$, $\vec l$ 为单位">
   
   
-  <meta name="twitter:image" content="http://136.244.107.20/images/thumbnail.jpg">
+  <meta name="twitter:image" content="http://136.244.107.20undefined">
   
-  <meta name="twitter:url" content="http://136.244.107.20/archives/" />
+  <meta name="twitter:url" content="http://136.244.107.20/2021/04/20/ML-Gradient-Descent/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -207,186 +207,73 @@
 <hr style="margin-bottom: 2.6rem">
 
         <div class="trans">
-          
-<h2>All Posts</h2>
+            <h1>ML-Gradient Descent</h1>
 
+  <h2 id="什么是梯度下降？"><a href="#什么是梯度下降？" class="headerlink" title="什么是梯度下降？"></a>什么是梯度下降？</h2><p><img src="https://pic4.zhimg.com/v2-ccdbfea64db2fcf1f65075a1281e603f_b.png" alt="image_0"></p>
+<p>Gradient Descent，gradient是梯度，沿着梯度方向下降，就叫梯度下降。梯度即在某一点处切线的斜率（函数方向导数最大的方向，或函数变化最快的方向; $\frac{\partial f}{\partial l}=gradf.\vec l$, $\vec l$ 为单位向量）。如上图所示，求出某点处的导数( $\partial\theta_0$,$\partial\theta_1$ )，我们就得到了梯度的方向，就像下山一样，我们环顾四周，选一个最陡的方向往下走肯定是当前下山最快的方法。此处，我们还应该注意到，影响下山效率的，除了下山的方向之外，还有我们迈出的步长不是吗，那么我们应该迈出多大一步呢，此处便有了定义 $\alpha$，Learning rate，学习率。</p>
+<p>知道了下山的方向和步长，那么怎么算到了山底，作为我们结束下山之旅的标志呢。显然的，当我们到达山底时，四周都是平坦的，我们的梯度为0，我们遍停下来，把该点算作自己的目的地（最优解）。</p>
+<p>图中红色箭头指的两个点，分别是俩个局部最小点（局部最优解）。那为什么不是全局的最优解呢？因为，在有些情况下，我们的Cost Function可能是起起伏伏的，并不是Convex的,就导致了有许多点处的导数都为0的情况。根据起始点的不同，我们可能会到达不同的山底（局部最优解）。</p>
+<hr>
+<h2 id="梯度下降算法"><a href="#梯度下降算法" class="headerlink" title="梯度下降算法"></a>梯度下降算法</h2><p>Repeat until convergence {<br>$\theta_j:=\theta_j-{\alpha}\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1)$<br>}</p>
+<p>这里要注意，更新迭代是同时的，既每次迭代的时候都要一起迭代 $\theta_0,\theta_1$ </p>
+<p><img src="https://pic1.zhimg.com/v2-84823d8dddb4894f657bf715af7dded4_b.png" alt="image_1"></p>
+<hr>
+<h2 id="例子🌰"><a href="#例子🌰" class="headerlink" title="例子🌰"></a>例子🌰</h2><p><img src="https://pic4.zhimg.com/v2-3371ed5289f53871e4159c84466b87fb_b.png" alt="image_2"></p>
+<p>为了方便理解此处我们只考虑 $\theta_1$（不然会是等高线图，下面会提到）。从上方的图可以看出，当我们的起始点在右侧时，我们的梯度为正值，所以 $\theta_1-{\alpha}*\frac{\partial}{\partial\theta_1}J(\theta_1)$ 会使得 $\theta_1$ 逐渐向着局部最优解移动。同理的，我们可以推导一下起始点在左侧的情况。</p>
+<hr>
+<p>接下来我们来讨论一下Learning rate:</p>
+<p><img src="https://pic2.zhimg.com/v2-26b1cd4b3e612679ed4445f6b1f355f9_b.png" alt="image_3"></p>
+<p>从上图可以明显的看出，当学习率小的时候，我们可以顺利的达到最优解，但是我们要迈出好多步，Andrew叫他Baby step。相反的，当我们的学习率取得较大的时候，可能会出现不能收敛的情况。当然，如果你取得 $\alpha$ 足够好，那么你讲以最快的速度达到山底（达到局部最优解）。一般的，我们通过不断尝试不同的learning rate，取最大的可以使得Cost Function收敛的值即可。</p>
+<hr>
+<p>同时考虑 $\theta_0,\theta_1$ 的情况，沿梯度方向达到最优解。</p>
+<p><img src="https://pic3.zhimg.com/v2-507f2fb5cd30a5e52a934621d2bae33a_b.png" alt="image_4"></p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>目前考虑的是只有 $\theta_0,\theta_1$ 的情况，那么当特征多的时候又会是什么情况呢？我们能不能也通过简单的可视化来理解呢？</p>
 
-    <article>
-      <div class="row">
+  <p>
+    本文由
+    <a href="http://136.244.107.20/2021/04/20/ML-Gradient-Descent/">Frank</a>采用
+    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/deed.zh?__cf_chl_captcha_tk__=38df848514690e2d9dc35f174d93f404b2dc17a9-1616641417-0-AcSDyu81x_9yKoS9Tkscc967EBylerhw7ZXx062rI3FTN9IjaKqw2cZ5GiLvpW80nM_q_WYmrM-st0hhHJ6_HxbPNrd1mxX-_bTwGjP7mto90c8bMm2UBOVshXle-9tVCWF9ENZWc0b-MgwIgFFV0smZb1HrBYHsKDXV-LUaQkbPVSDj90E24trDNzbTOJ-SIsnE7e7NTp4kxSX--N7aMlpJZ90Zg_X6lqt9VB8ZBcJY_DCUkSCXBp1JAZPpif2TEsZaRMs_mRpxreW9-mYPr6pdKy1kTYpoaYgspVsJGpaWmdjOLclo-9VThCdcTOPsIDJMaAk_swSsD-fKDEMH1aRy2puX5LLIvXmo6vzCK_aG7nts0YsLLi8NdsoDkG2XYr7UR3sn3D3NFCfMf4a-inD8PyeEVCXzV64VxFFgLfZMYQso7PrHyggAevumlO68HMIeebWRlHegO9NXQtOHBve-81hzY_k1Nl5gv4QKENylQvSRGvtfxqz8MFVA9pmAlsUfaaFR_JbWL4S6XvhA35zt6sBUpjSwoG2Ie5iPKlzll2hXLjNTrXkkVe9yUPiuhxaGzPx4za6GvuEjX9c7amS2priqMr2tPF4lyN98_1n6qac38yy5yhgIO5zRHMGUBg">署名 4.0 国际 (CC BY 4.0)</a>许可
+  </p>
+  <p><a class="classtest-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a> — 2021年4月20日</p>
+  <div class="row" style="justify-content: center; font-weight: lighter;">
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  </div>
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Logistic-Regression/" class="">
-            
-              ML-Logistic Regression
-            
-          </a>
-        </div>
-      </div>
-    </article>
+  
+  <hr>
+<section id="comments" class="mt-2 mb-3">
 
-    <article>
-      <div class="row">
+  <div id="disqus_thread">
+    <a href="#" class="button button-primary" onclick="loadDisqus();return false;">View / Make Comments</a>
+  </div>
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Classification/" class="">
-            
-              ML-Classification
-            
-          </a>
-        </div>
-      </div>
-    </article>
+  <script>
+    var disqus_config = function() {
+      this.page.url = 'http://136.244.107.20/2021/04/20/ML-Gradient-Descent/index.html';
+      this.page.identifier = '2021/04/20/ML-Gradient-Descent/index.html';
+      this.page.title = 'ML-Gradient Descent';
+    };
 
-    <article>
-      <div class="row">
+    var is_disqus_loaded = false;
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Normal-Equation/" class="">
-            
-              ML-Normal Equation
-            
-          </a>
-        </div>
-      </div>
-    </article>
+    function loadDisqus() {
+      if (!is_disqus_loaded) {
+        is_disqus_loaded = true;
 
-    <article>
-      <div class="row">
+        var d = document,
+          s = d.createElement('script');
+        s.src = 'https://spaghetti-ink.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+    }
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Multivariate-Linear-Regression/" class="">
-            
-              ML-Multivariate Linear Regression
-            
-          </a>
-        </div>
-      </div>
-    </article>
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
 
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Gradient-Descent/" class="">
-            
-              ML-Gradient Descent
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Cost-Function/" class="">
-            
-              ML-Cost Function
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Introduction/" class="">
-            
-              ML-Introduction
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月19日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/19/JavaSE-OOP-01/" class="">
-            
-              JavaSE-OOP(01)
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月16日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/16/JavaSE-Flow-Control-Array/" class="">
-            
-              JavaSE-Flow Control&Array
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月16日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/16/Control/" class="">
-            
-              Control
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-<div class="pagination-bar">
-  <ul class="pagination">
-    
-    
-
-    <a class="" href="/archives/page/2/">
-      <span>Older</span>
-      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z" />
-      </svg>
-    </a>
-
-    
-  </ul>
-</div>
 
 
           <div class="row mt-2">

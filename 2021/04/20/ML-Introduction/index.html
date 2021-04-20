@@ -11,36 +11,36 @@
   <meta charset="utf-8">
 
   
-  <title>All Posts - Frank</title>
+  <title>ML-Introduction</title>
   
-  <link rel="canonical" href="http://136.244.107.20/archives/">
+  <link rel="canonical" href="http://136.244.107.20/2021/04/20/ML-Introduction/">
   
-  <meta name="description" content="Franks blog">
+  <meta name="description" content="什么是机器学习？ Tom Mitchell:”Learn experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, impro">
   
   
   <meta name="keywords" content="blog">
   
   <meta name="author" content="Frank">
   
-  <meta property="og:image" content="http://136.244.107.20/images/thumbnail.jpg">
+  <meta property="og:image" content="http://136.244.107.20undefined">
   
   <meta property="og:site_name" content="Spaghetti" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="All Posts - Frank" />
+  <meta property="og:title" content="ML-Introduction" />
   
-  <meta property="og:description" content="Franks blog">
+  <meta property="og:description" content="什么是机器学习？ Tom Mitchell:”Learn experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, impro">
   
-  <meta property="og:url" content="http://136.244.107.20/archives/" />
+  <meta property="og:url" content="http://136.244.107.20/2021/04/20/ML-Introduction/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="All Posts - Frank">
+  <meta name="twitter:title" content="ML-Introduction">
   
-  <meta name="twitter:description" content="Franks blog">
+  <meta name="twitter:description" content="什么是机器学习？ Tom Mitchell:”Learn experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, impro">
   
   
-  <meta name="twitter:image" content="http://136.244.107.20/images/thumbnail.jpg">
+  <meta name="twitter:image" content="http://136.244.107.20undefined">
   
-  <meta name="twitter:url" content="http://136.244.107.20/archives/" />
+  <meta name="twitter:url" content="http://136.244.107.20/2021/04/20/ML-Introduction/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -207,186 +207,88 @@
 <hr style="margin-bottom: 2.6rem">
 
         <div class="trans">
-          
-<h2>All Posts</h2>
+            <h1>ML-Introduction</h1>
 
+  <h2 id="什么是机器学习？"><a href="#什么是机器学习？" class="headerlink" title="什么是机器学习？"></a>什么是机器学习？</h2><blockquote>
+<p>Tom Mitchell:”Learn experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.” </p>
+</blockquote>
+<p>针对某一个任务，通过一些过往的经历和表现来提升我们的在该任务上的表现。<br>（与人类的认知过程相似，这也是为什么我们人类要通过学习历史来改善或者避免一些任务）</p>
+<p>E.g. : 下棋<br>Experience：与其他棋手下棋的经历<br>Task:下棋的任务<br>Performance：下棋的表现（下次和其他人下棋输赢的概率）</p>
+<hr>
+<h2 id="机器学习的算法："><a href="#机器学习的算法：" class="headerlink" title="机器学习的算法："></a>机器学习的算法：</h2><ul>
+<li>Supervised learning 监督学习</li>
+<li>Unsupervised learning 无监督学习</li>
+<li>Reinforcement learning 强化学习</li>
+<li>Recommender systems 推荐算法</li>
+</ul>
+<h3 id="Supervised-learning"><a href="#Supervised-learning" class="headerlink" title="Supervised learning:"></a>Supervised learning:</h3><p>有具有标签（正确结果）的训练样本</p>
+<ul>
+<li>Regression 回归问题</li>
+<li>Classification 分类问题</li>
+</ul>
+<h3 id="Unsupervised-learning"><a href="#Unsupervised-learning" class="headerlink" title="Unsupervised learning:"></a>Unsupervised learning:</h3><p>没有标签的样本</p>
+<ul>
+<li>Clustering 聚类问题</li>
+<li>Non-clustering 非聚类问题</li>
+</ul>
+<hr>
+<h2 id="模型表示"><a href="#模型表示" class="headerlink" title="模型表示"></a>模型表示</h2><ul>
+<li>$x^{(i)}$ 表示输入的变量，通常叫做特征 $feature$ </li>
+<li>$y^{(i)}$ 表示输出的变量，通常叫做目标 $target$</li>
+<li>$(x^i,y^i)$ 表示一个训练样本</li>
+<li>训练样本的集合 $\{(x^i,y^i);i=1,…,n\}$ 叫做训练集</li>
+<li>$X$ 表示输入变量的空间而 $Y$ 表示输出变量的空间</li>
+<li>$hypothesis$ （预测）可以看作一种函数<br>其中上标”(i)”表示的是训练集的索引（index）</li>
+</ul>
+<h3 id="以监督学习为例"><a href="#以监督学习为例" class="headerlink" title="以监督学习为例"></a>以监督学习为例</h3><p>机器学习的目标是要学习得到一个预测函数hypothesis function，通过输入X到该函数获得一个预测结果hypothesis（预测值），使得所有的预测值尽可能的与我们的预期值（label）y相同。</p>
+<h4 id="Regression-problem-回归问题"><a href="#Regression-problem-回归问题" class="headerlink" title="Regression problem 回归问题"></a>Regression problem 回归问题</h4><p>我们要得到的预测值是一个连续型的值（continuous）<br>e.g. 预测一个地区的房价等</p>
+<h4 id="Classification-problem-分类问题"><a href="#Classification-problem-分类问题" class="headerlink" title="Classification problem 分类问题"></a>Classification problem 分类问题</h4><p>我们要得到的预测值是一个离散型的值（discrete）<br>e.g. 预测一个产品是否合格 或者 学生是否会被目标学校录取等</p>
 
-    <article>
-      <div class="row">
+  <p>
+    本文由
+    <a href="http://136.244.107.20/2021/04/20/ML-Introduction/">Frank</a>采用
+    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/deed.zh?__cf_chl_captcha_tk__=38df848514690e2d9dc35f174d93f404b2dc17a9-1616641417-0-AcSDyu81x_9yKoS9Tkscc967EBylerhw7ZXx062rI3FTN9IjaKqw2cZ5GiLvpW80nM_q_WYmrM-st0hhHJ6_HxbPNrd1mxX-_bTwGjP7mto90c8bMm2UBOVshXle-9tVCWF9ENZWc0b-MgwIgFFV0smZb1HrBYHsKDXV-LUaQkbPVSDj90E24trDNzbTOJ-SIsnE7e7NTp4kxSX--N7aMlpJZ90Zg_X6lqt9VB8ZBcJY_DCUkSCXBp1JAZPpif2TEsZaRMs_mRpxreW9-mYPr6pdKy1kTYpoaYgspVsJGpaWmdjOLclo-9VThCdcTOPsIDJMaAk_swSsD-fKDEMH1aRy2puX5LLIvXmo6vzCK_aG7nts0YsLLi8NdsoDkG2XYr7UR3sn3D3NFCfMf4a-inD8PyeEVCXzV64VxFFgLfZMYQso7PrHyggAevumlO68HMIeebWRlHegO9NXQtOHBve-81hzY_k1Nl5gv4QKENylQvSRGvtfxqz8MFVA9pmAlsUfaaFR_JbWL4S6XvhA35zt6sBUpjSwoG2Ie5iPKlzll2hXLjNTrXkkVe9yUPiuhxaGzPx4za6GvuEjX9c7amS2priqMr2tPF4lyN98_1n6qac38yy5yhgIO5zRHMGUBg">署名 4.0 国际 (CC BY 4.0)</a>许可
+  </p>
+  <p><a class="classtest-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a> — 2021年4月20日</p>
+  <div class="row" style="justify-content: center; font-weight: lighter;">
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  </div>
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Logistic-Regression/" class="">
-            
-              ML-Logistic Regression
-            
-          </a>
-        </div>
-      </div>
-    </article>
+  
+  <hr>
+<section id="comments" class="mt-2 mb-3">
 
-    <article>
-      <div class="row">
+  <div id="disqus_thread">
+    <a href="#" class="button button-primary" onclick="loadDisqus();return false;">View / Make Comments</a>
+  </div>
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Classification/" class="">
-            
-              ML-Classification
-            
-          </a>
-        </div>
-      </div>
-    </article>
+  <script>
+    var disqus_config = function() {
+      this.page.url = 'http://136.244.107.20/2021/04/20/ML-Introduction/index.html';
+      this.page.identifier = '2021/04/20/ML-Introduction/index.html';
+      this.page.title = 'ML-Introduction';
+    };
 
-    <article>
-      <div class="row">
+    var is_disqus_loaded = false;
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Normal-Equation/" class="">
-            
-              ML-Normal Equation
-            
-          </a>
-        </div>
-      </div>
-    </article>
+    function loadDisqus() {
+      if (!is_disqus_loaded) {
+        is_disqus_loaded = true;
 
-    <article>
-      <div class="row">
+        var d = document,
+          s = d.createElement('script');
+        s.src = 'https://spaghetti-ink.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+    }
 
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Multivariate-Linear-Regression/" class="">
-            
-              ML-Multivariate Linear Regression
-            
-          </a>
-        </div>
-      </div>
-    </article>
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
 
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Gradient-Descent/" class="">
-            
-              ML-Gradient Descent
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Cost-Function/" class="">
-            
-              ML-Cost Function
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月20日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/20/ML-Introduction/" class="">
-            
-              ML-Introduction
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月19日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/19/JavaSE-OOP-01/" class="">
-            
-              JavaSE-OOP(01)
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月16日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/16/JavaSE-Flow-Control-Array/" class="">
-            
-              JavaSE-Flow Control&Array
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <article>
-      <div class="row">
-
-        <div class="three columns left lit">
-          <p class="bottom">2021年4月16日</p>
-        </div>
-        <div class="nine columns left mb-3">
-          <a href="/2021/04/16/Control/" class="">
-            
-              Control
-            
-          </a>
-        </div>
-      </div>
-    </article>
-
-<div class="pagination-bar">
-  <ul class="pagination">
-    
-    
-
-    <a class="" href="/archives/page/2/">
-      <span>Older</span>
-      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z" />
-      </svg>
-    </a>
-
-    
-  </ul>
-</div>
 
 
           <div class="row mt-2">
