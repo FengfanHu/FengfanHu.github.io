@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>【毕设专栏-5】PLWAP算法及Python实现</title>
+  
+  <link rel="canonical" href="http://136.244.107.20/2021/06/26/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E6%A0%8F-5%E3%80%91PLWAP%E7%AE%97%E6%B3%95/">
+  
+  <meta name="description" content="频繁序列挖掘算法序列模式由关联规则发展而来，都属于频繁模式挖掘算法，其核心思想为：“频繁序列的非空子序列一定是频繁的”。 频繁序列挖掘也称频繁序列模式，是频繁模式挖掘中针对序列挖掘的分支。频繁序列模式挖掘分为候选集生成算法与无候选集生成算法两种。典型的有候选集生成算法有Apriori算法与GSP算法">
+  
+  
+  <meta name="keywords" content="blog">
+  
+  <meta name="author" content="Frank">
+  
+  <meta property="og:image" content="http://136.244.107.20undefined">
+  
+  <meta property="og:site_name" content="Spaghetti" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="【毕设专栏-5】PLWAP算法及Python实现" />
+  
+  <meta property="og:description" content="频繁序列挖掘算法序列模式由关联规则发展而来，都属于频繁模式挖掘算法，其核心思想为：“频繁序列的非空子序列一定是频繁的”。 频繁序列挖掘也称频繁序列模式，是频繁模式挖掘中针对序列挖掘的分支。频繁序列模式挖掘分为候选集生成算法与无候选集生成算法两种。典型的有候选集生成算法有Apriori算法与GSP算法">
+  
+  <meta property="og:url" content="http://136.244.107.20/2021/06/26/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E6%A0%8F-5%E3%80%91PLWAP%E7%AE%97%E6%B3%95/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="【毕设专栏-5】PLWAP算法及Python实现">
+  
+  <meta name="twitter:description" content="频繁序列挖掘算法序列模式由关联规则发展而来，都属于频繁模式挖掘算法，其核心思想为：“频繁序列的非空子序列一定是频繁的”。 频繁序列挖掘也称频繁序列模式，是频繁模式挖掘中针对序列挖掘的分支。频繁序列模式挖掘分为候选集生成算法与无候选集生成算法两种。典型的有候选集生成算法有Apriori算法与GSP算法">
+  
+  
+  <meta name="twitter:image" content="http://136.244.107.20undefined">
+  
+  <meta name="twitter:url" content="http://136.244.107.20/2021/06/26/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E6%A0%8F-5%E3%80%91PLWAP%E7%AE%97%E6%B3%95/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="/fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+  
+<link rel="stylesheet" href="/css/user.css">
+
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="https://franksbsbsb.oss-cn-hangzhou.aliyuncs.com/favicon.png">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    );
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+  <!-- 不蒜子 Statistics -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <div class="row" style="position: relative;">
+
+  <div class="three columns" >
+    <svg t="1616396308608" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3678" width="120" height="120">
+      <title>作者：小啊小二饼(iconfont)</title>
+      <path d="M512 512m-511.982387 0a511.982387 511.982387 0 1 0 1023.964774 0 511.982387 511.982387 0 1 0-1023.964774 0Z" fill="#F9C228" p-id="3679"></path><path d="M917.619539 199.639491C761.536154-3.082215 483.485105-56.554248 265.951152 62.930031a531.620502 531.620502 0 0 0-166.598142 387.161472c0 294.430822 238.686756 533.099966 533.099966 533.099966a535.424837 535.424837 0 0 0 101.219951-9.598899 514.289646 514.289646 0 0 0 90.705195-55.973031C1048.393533 745.138768 1090.223598 423.672515 917.619539 199.639491z" fill="#FCDC22" p-id="3680"></path><path d="M972.042656 550.272308c-111.329618 114.904988-252.600757 198.670795-415.482628 260.033299 0 0 55.867355 156.664603 207.829377 101.53698 250.628139-90.846096 207.653251-361.570279 207.653251-361.570279z" fill="#FC9B88" p-id="3681"></path><path d="M522.690884 570.08655a80.119986 64.145304 90 1 0 128.290609 0 80.119986 64.145304 90 1 0-128.290609 0Z" fill="#282828" p-id="3682"></path><path d="M860.519298 429.449467a80.119986 54.881046 90 1 0 109.762092 0 80.119986 54.881046 90 1 0-109.762092 0Z" fill="#282828" p-id="3683"></path><path d="M953.813553 724.584795a261.319023 261.319023 0 0 0-116.014585-59.988717C754.121225 723.616099 659.699759 771.434469 556.560028 810.305607c0 0 55.867355 156.664603 207.829377 101.53698 110.959752-40.209701 164.361335-115.64472 189.424148-187.257792z" fill="#EA0F1A" p-id="3684"></path>
+    </svg>
+  </div>
+
+  <div style="max-width: 50px; position: absolute; right: 20px; top: 0;">
+    <h1 class="mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>💡</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div>
+
+  <div class="nine columns">
+    <div class="row">
+      <h1 class="five columns mt-1 typing">
+        Spaghetti<spn style="color: #0FA0CE">.ink</spn>
+      </h1>
+    </div>
+    <div class="twelve columns">
+      <div class="row">
+        <div class="nine columns left">
+          <a href="/">主页</a>
+          
+            
+            <a href="/tags" class="ml">标签</a>
+            
+          
+            
+            <a href="/about" class="ml">关于</a>
+            
+          
+          
+            
+              <a href="mailto:fengfanhu@outlook.com" target="_blank" class="ml">邮箱</a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="twelve columns mt-half">
+      <p style="margin-bottom: 0; font-weight: lighter; font-style: italic;" >Appreciation, Modesty, Persistence</p>
+    </div>
+  </div>
+</div>
+
+<hr style="margin-bottom: 2.6rem">
+
+        <div class="trans">
+            <h1>【毕设专栏-5】PLWAP算法及Python实现</h1>
+
+  <h2 id="频繁序列挖掘算法"><a href="#频繁序列挖掘算法" class="headerlink" title="频繁序列挖掘算法"></a>频繁序列挖掘算法</h2><p>序列模式由关联规则发展而来，都属于频繁模式挖掘算法，其核心思想为：<strong>“频繁序列的非空子序列一定是频繁的”</strong>。</p>
+<p>频繁序列挖掘也称频繁序列模式，是频繁模式挖掘中针对序列挖掘的分支。频繁序列模式挖掘分为候选集生成算法与无候选集生成算法两种。典型的有候选集生成算法有Apriori算法与GSP算法。无候选集产生算法主要有PrefixSpan算法与WAP算法。</p>
+<p>有候选集生成的频繁序列挖掘算法也称为Apriori-like算法，此类算法以Apriori为基础，主要有连接和剪枝两个操作。但是Apriori-like算法存在两个严重缺陷:</p>
+<ol>
+<li>连接操作会生成大量候选集，特别是第一连接操作产生的2阶候选集。若存在104个1阶繁项，那么第一次连接操作将会产生约<script type="math/tex">10^4 * (10^4-1) / 2 \simeq 10^7</script>个2阶候选集。</li>
+<li>剪枝操作需要频繁扫描数据库，检验候选集是否满足最小支持度。虽然GSP（Generalized Sequential Pattern, 广义序列模式）优化了连接操作，让部分无用候选集在连接阶段就不会生成，进而减少候选集数量。但是依旧无法避免大量候选集的产生，所以Apriori-like效率较低，不具有实用性。</li>
+</ol>
+<hr>
+<h2 id="WAP算法介绍"><a href="#WAP算法介绍" class="headerlink" title="WAP算法介绍"></a>WAP算法介绍</h2><p>WAP（Web Access Pattern，Web访问模式算法）由Jian Pei与Jiawei Han等人提出。WAP算法首先扫描WASD数据库中所有的1阶频繁项，再在1阶频繁项的基础上，再次扫描WASD数据库并构建WAP树，最后使用条件搜索递归地挖掘频繁序列。其中关键操作为构建WAP树和使用WAP树进行数据挖掘：</p>
+<ul>
+<li><p>构建WAP树</p>
+<ul>
+<li>WAP树中每个节点包含两部分信息：标签与支持度计数。标签用于标记当前节点代表的项，在访问路径挖掘中即当前记录的URL；支持度计数用于统计符合前缀路径的当前节点总数。对于根节点来说比较特殊，他的标签为空且支持度计数为0。</li>
+<li>WAP树将通过遍历除去非频繁序列的序列数据库，依次插入建立节点。如果当前序列路径不存在则创建节点，节点支持度计数为1,否则无需新增节点，在路径经过的节点处支持度计数+1即可。<br>针对每一个项建立一个链表，从该项出现直到该项不再出现。每一个链表叫作一个e_i-queue，所有链表的表头集合叫作header table（链头表）。</li>
+</ul>
+</li>
+<li><p>WAP树频繁模式挖掘</p>
+<ul>
+<li>如果WAP树只有一条分支，那么返回所有节点的唯一序列组合。</li>
+<li>初始频繁序列F为空，WAP树中每一个1阶序列都加入频繁序列F。</li>
+<li>对于WAP树中的每一个项e_i<ul>
+<li>创建基于e_i的条件树，记录e_i所有前缀序列的支持度计数，如果前缀序列中存在S与S^’，满足S^’⊂S,其中S的支持度计数为c，S^’的支持度计数为c^’，那么S^’的支持度计数为c^’-c。</li>
+<li>如果条件频繁项不为空，则递归创建、挖掘条件树。</li>
+<li>将条件树中得到的频繁序列，拼接上e_i后加入频繁序列F。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>尽管WAP算法只需要扫描两次数据库，且避免了大量候选序列的产生，比Apriori-like算法更加高效。但是它在递归过程中的会生成大量的条件WAP树，而构建这些条件WAP树所需的额外的开销会导致算法性能下降。</p>
+<hr>
+<h2 id="PLWAP算法"><a href="#PLWAP算法" class="headerlink" title="PLWAP算法"></a>PLWAP算法</h2><p>针对WAP需要递归构建条件WAP树的问题，Ezeife和Lu提出了PLWAP算法。不同于WAP算法，PLWAP（Pre-Order Linked WAP-tree）算法采用先序遍历对每个节点进行二进制位置编码以用于快速确定节点间的父子关系，因此不需要递归地创建条件WAP树。</p>
+<ul>
+<li><p>二进制位置编码（binary position code）<br>  给定一个PLWAP树，每个节点的位置编码（position code）遵循以下规则：</p>
+<ul>
+<li>根节点的位置编码为null。</li>
+<li>根节点最左侧节点的位置编码为1。其余所有节点的最左侧子节点的位置编码为在其父节点位置编码的基础上拼接1。非最左侧节点的位置编码则根据其位置排序在其父节点位置编码的基础上拼接1和0。总的来说，对于第n个左侧节点，其位置编码为父节点位置编码拼接2^(n-1)。<br>通过二进制位置编码，可以知道节点之间的关系。如果节点α是节点β的父节点，那么β的位置编码以α的位置编码拼接1开头。如，α位置编码为10、β位置编码为101、γ的位置编码为100，那么α为β的父节点且α与γ为兄弟节点。</li>
+</ul>
+</li>
+<li><p>PLWAP算法步骤</p>
+<ul>
+<li>扫描访问序列数据库，挑选出大于最小支持度的频繁1阶序列。所有节点的数据结构由标签、支持度计数与编码位置三部分组成，其中根节点的标签与编码位置为空，支持度计数为0。</li>
+<li>与WAP算法相同，删除序列数据库中的非频繁项，同时生成PLWAP树，其构建过程与WAP相似。不同的是，PLWAP算法的链头表（head table）由先序遍历产生，它确保了链表中当前节点后侧的节点总是子孙节点或兄弟分支节点，这一点对于PLWAP序列挖掘来说至关重要。</li>
+<li>使用PLWAP挖掘算法以前缀序列的方式递归的挖掘所有频繁序列，并最终输出所有的频繁序列。</li>
+</ul>
+</li>
+</ul>
+<h4 id="PLWAP树构造伪代码"><a href="#PLWAP树构造伪代码" class="headerlink" title="PLWAP树构造伪代码"></a>PLWAP树构造伪代码</h4><pre class="line-numbers language-none"><code class="language-none">PLWAP构造过程
+输入：访问日志数据库(WASD)，频繁1阶序列L_1
+输出：链头表 Head Table与PLWAP-tree
+    1）设当前节点为 R(label&#x3D;Null,position code&#x3D;Null,count&#x3D;0)
+    For each 序列 S∈WASD
+        提取序列S中所有频繁子序列FE
+    For each event e_i∈FE
+        If 当前节点有子节点
+            If e_i∈ 子节点
+                子节点计数+1
+        Else
+            将e_i作为新节点插入支持度计数为1
+            位置编码为最左侧子节点编码+“0”
+        Else
+            将e_i作为新节点插入支持度计数为1
+                位置编码为最左侧子节点编码+“1”
+    2）从根节点开始，对PLWAP树作先序遍历，获得Head table
+    3）返回Head table与PLWAP树<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="PLWAP挖掘过程伪代码"><a href="#PLWAP挖掘过程伪代码" class="headerlink" title="PLWAP挖掘过程伪代码"></a>PLWAP挖掘过程伪代码</h4><pre class="line-numbers language-none"><code class="language-none">PLWAP挖掘过程
+输入：PLWAP-tree T，Head linkage table L
+最小支持度，后缀树节点列表（初始值包括根节点）R，频繁序列集合F
+输出：频繁序列集合F^&#39;
+其他变量：S存储当前节点，C存储e_i 的支持度计数
+    1) If R为空，return
+    2) For each e_i∈L.找到找到e_i 的后缀树
+        令S为e_i-queue的第一个节点
+        遍历e_i-queue
+            If e_i 为R中任意项的子孙节点且不为S的子孙节点
+                令e_i 加入后缀树R得到R^&#39;
+                C&#x3D;C+e_i.count
+                令S&#x3D;e_i
+            If C≥最小支持度
+                将e_i 拼接上F得到F^&#39;
+                递归调用PLWAP-Mine算法,入参为R^&#39; 和F^&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>事务（会话）ID</th>
+<th>会话访问序列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>P1→P2→P1→P3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>P1→P2→P3→P1→P3</td>
+</tr>
+<tr>
+<td>3</td>
+<td>P2→P1→P2→P1→P3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>P1→P2→P1→P3→P3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="PLWAP-Tree-构建过程"><a href="#PLWAP-Tree-构建过程" class="headerlink" title="PLWAP-Tree 构建过程"></a>PLWAP-Tree 构建过程</h4><p><img src="4-3.png" alt="WAP_build"></p>
+<h4 id="PLWAP-Tree-挖掘过程"><a href="#PLWAP-Tree-挖掘过程" class="headerlink" title="PLWAP-Tree 挖掘过程"></a>PLWAP-Tree 挖掘过程</h4><p><img src="4-4.png" alt="WAP_build"></p>
+<hr>
+<h2 id="代码【转载使用请引用】"><a href="#代码【转载使用请引用】" class="headerlink" title="代码【转载使用请引用】"></a>代码【转载使用请引用】</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#! /usr/bin/env python3</span>
+<span class="token comment"># Author: Fengfan Hu</span>
+<span class="token comment"># Date: 2021.06.26</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Node</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    Node 类型
+    @param url 节点Url - .i.e event in sequential mining.
+    @param code 节点编码
+    @param count 节点频数
+    @param children 子节点列表
+    '''</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> url<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span> children<span class="token punctuation">,</span> code<span class="token punctuation">,</span> count<span class="token punctuation">:</span> <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>url <span class="token operator">=</span> url<span class="token punctuation">;</span>
+        self<span class="token punctuation">.</span>count <span class="token operator">=</span> count<span class="token punctuation">;</span>
+        self<span class="token punctuation">.</span>code <span class="token operator">=</span> code<span class="token punctuation">;</span>
+        self<span class="token punctuation">.</span>children <span class="token operator">=</span> children<span class="token punctuation">;</span>
+        
+    <span class="token keyword">def</span> <span class="token function">isDescendantOf</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>code<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">:</span>x<span class="token punctuation">.</span>code<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> x<span class="token punctuation">.</span>code<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">+</span><span class="token string">'1'</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">def</span> <span class="token function">isDescendantOfR</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> R<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> event <span class="token keyword">in</span> R<span class="token punctuation">:</span>
+            code <span class="token operator">=</span> event<span class="token punctuation">.</span>code<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>code<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">:</span>code<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">==</span> code<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">+</span><span class="token string">'1'</span> <span class="token keyword">or</span> self<span class="token punctuation">.</span>code<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">:</span>code<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">==</span> code<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">return</span> <span class="token boolean">True</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">False</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">PLWAP</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> sequences<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>root <span class="token operator">=</span> Node<span class="token punctuation">(</span><span class="token string">'root'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        self<span class="token punctuation">.</span>linked_head <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+        self<span class="token punctuation">.</span>sequences <span class="token operator">=</span> sequences<span class="token punctuation">;</span>
+        self<span class="token punctuation">.</span>F <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token comment"># Init linked header</span>
+        self<span class="token punctuation">.</span>initLinkedHeader<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        self<span class="token punctuation">.</span>createWAPTree<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        self<span class="token punctuation">.</span>getPreOrderedLink<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment"># Init linked header</span>
+    <span class="token keyword">def</span> <span class="token function">initLinkedHeader</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        uniqueUrl <span class="token operator">=</span> <span class="token builtin">set</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> session <span class="token keyword">in</span> self<span class="token punctuation">.</span>sequences<span class="token punctuation">:</span>
+            uniqueUrl <span class="token operator">=</span> uniqueUrl<span class="token punctuation">.</span>union<span class="token punctuation">(</span><span class="token builtin">set</span><span class="token punctuation">(</span>session<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> url <span class="token keyword">in</span> uniqueUrl<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>linked_head<span class="token punctuation">[</span>url<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    
+    <span class="token comment"># WAP-Tree</span>
+    <span class="token keyword">def</span> <span class="token function">createWAPTree</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> sequence <span class="token keyword">in</span> self<span class="token punctuation">.</span>sequences<span class="token punctuation">:</span>
+            currentNode <span class="token operator">=</span> self<span class="token punctuation">.</span>root<span class="token punctuation">;</span>
+            <span class="token keyword">for</span> event <span class="token keyword">in</span> sequence<span class="token punctuation">:</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>event <span class="token keyword">not</span> <span class="token keyword">in</span> currentNode<span class="token punctuation">.</span>children<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    <span class="token comment"># root case</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>currentNode<span class="token punctuation">.</span>code <span class="token operator">==</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">not</span> currentNode<span class="token punctuation">.</span>children<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                            <span class="token comment"># first non-root node</span>
+                            code <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token keyword">else</span><span class="token punctuation">:</span>
+                            keys <span class="token operator">=</span> currentNode<span class="token punctuation">.</span>children<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            code_val <span class="token operator">=</span> currentNode<span class="token punctuation">.</span>children<span class="token punctuation">[</span><span class="token builtin">list</span><span class="token punctuation">(</span>keys<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>code<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token builtin">len</span><span class="token punctuation">(</span>keys<span class="token punctuation">)</span><span class="token operator">*</span><span class="token string">'0'</span><span class="token punctuation">;</span>
+                            code <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>code_val<span class="token punctuation">)</span><span class="token punctuation">,</span> code_val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">else</span><span class="token punctuation">:</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">not</span> currentNode<span class="token punctuation">.</span>children<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                            code_val <span class="token operator">=</span> currentNode<span class="token punctuation">.</span>code<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">'1'</span><span class="token punctuation">;</span>
+                            code <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>code_val<span class="token punctuation">)</span><span class="token punctuation">,</span> code_val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token keyword">else</span><span class="token punctuation">:</span>
+                            keys <span class="token operator">=</span> currentNode<span class="token punctuation">.</span>children<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            code_val <span class="token operator">=</span> currentNode<span class="token punctuation">.</span>children<span class="token punctuation">[</span><span class="token builtin">list</span><span class="token punctuation">(</span>keys<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>code<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token builtin">len</span><span class="token punctuation">(</span>keys<span class="token punctuation">)</span><span class="token operator">*</span><span class="token string">'0'</span><span class="token punctuation">;</span>
+                            code <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>code_val<span class="token punctuation">)</span><span class="token punctuation">,</span> code_val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    newNode <span class="token operator">=</span> Node<span class="token punctuation">(</span>event<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> code<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    currentNode<span class="token punctuation">.</span>children<span class="token punctuation">[</span>event<span class="token punctuation">]</span> <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    currentNode<span class="token punctuation">.</span>children<span class="token punctuation">[</span>event<span class="token punctuation">]</span><span class="token punctuation">.</span>count <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                    newNode <span class="token operator">=</span> currentNode<span class="token punctuation">.</span>children<span class="token punctuation">[</span>event<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                currentNode <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+
+    <span class="token comment"># Get Pre-ordered header linkage</span>
+    <span class="token keyword">def</span> <span class="token function">getPreOrderedLink</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        root <span class="token operator">=</span> self<span class="token punctuation">.</span>root<span class="token punctuation">;</span>
+        linked_head <span class="token operator">=</span> self<span class="token punctuation">.</span>linked_head<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> root <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        stack <span class="token operator">=</span> <span class="token punctuation">[</span>root<span class="token punctuation">,</span> <span class="token punctuation">]</span>
+        <span class="token keyword">while</span> stack<span class="token punctuation">:</span>
+            root <span class="token operator">=</span> stack<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token punctuation">.</span>url <span class="token operator">!=</span> <span class="token string">'root'</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment"># root Node need not add in</span>
+                linked_head<span class="token punctuation">[</span>root<span class="token punctuation">.</span>url<span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            stack<span class="token punctuation">.</span>extend<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>children<span class="token punctuation">.</span>values<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">PLWAP_Mine</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> minimum_support<span class="token punctuation">,</span> header_linkage <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">,</span> frequent_sequence <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">,</span> suffix_tree_roots <span class="token operator">=</span> <span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># Initialization</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">not</span> header_linkage<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            header_linkage <span class="token operator">=</span> self<span class="token punctuation">.</span>linked_head<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">not</span> frequent_sequence<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            frequent_sequence <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">not</span> suffix_tree_roots<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            suffix_tree_roots <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>root<span class="token punctuation">.</span>children<span class="token punctuation">.</span>values<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment"># 1. If R is empty, return</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">not</span> suffix_tree_roots<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token comment"># 2. For each event, e_i in header_linkage, find the suffix tree of e_i in wap_tree, do</span>
+        <span class="token keyword">for</span> event <span class="token keyword">in</span> <span class="token builtin">list</span><span class="token punctuation">(</span>header_linkage<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            e_i_queue <span class="token operator">=</span> header_linkage<span class="token punctuation">[</span>event<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token comment"># 2a. Save first event in e_i-queue to S </span>
+            S <span class="token operator">=</span> e_i_queue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token comment"># 2b. Following the e_i-queue</span>
+            R_bar <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            C <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> idx<span class="token punctuation">,</span> e_i <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>e_i_queue<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token comment"># If event e_i is the descendant of any event in R, and is not descendant of S</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>e_i<span class="token punctuation">.</span>isDescendantOfR<span class="token punctuation">(</span>suffix_tree_roots<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">not</span> e_i<span class="token punctuation">.</span>isDescendantOf<span class="token punctuation">(</span>S<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        <span class="token comment"># Insert it into suffix-tree-header set R'</span>
+                        R_bar<span class="token punctuation">.</span>extend<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">(</span>e_i<span class="token punctuation">.</span>children<span class="token punctuation">.</span>values<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token comment"># Add count of e_i to C</span>
+                        C <span class="token operator">+=</span> e_i<span class="token punctuation">.</span>count<span class="token punctuation">;</span>
+                        <span class="token comment"># Replace the S with e_i</span>
+                        S <span class="token operator">=</span> e_i<span class="token punctuation">;</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>idx<span class="token operator">+</span><span class="token number">1</span> <span class="token operator">&lt;</span> <span class="token builtin">len</span><span class="token punctuation">(</span>e_i_queue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        S <span class="token operator">=</span> e_i_queue<span class="token punctuation">[</span>idx<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+            <span class="token comment"># 2c. If C is greater than minimum_support</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>C <span class="token operator">>=</span> minimum_support<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token comment"># Append e_i after F to F' and output F'</span>
+                frequent_sequence_bar <span class="token operator">=</span> frequent_sequence<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                frequent_sequence_bar<span class="token punctuation">.</span>append<span class="token punctuation">(</span>event<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                self<span class="token punctuation">.</span>F<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token string">'+'</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>frequent_sequence_bar<span class="token punctuation">)</span><span class="token punctuation">:</span> C<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token string">'+'</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>frequent_sequence_bar<span class="token punctuation">)</span><span class="token punctuation">:</span> C<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment"># Call Algorithm PLWAP-MINE by passing R_bar and F_bar</span>
+                self<span class="token punctuation">.</span>PLWAP_Mine<span class="token punctuation">(</span>minimum_support<span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">,</span> frequent_sequence_bar<span class="token punctuation">,</span> R_bar<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    testSessions <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    testSessions<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    testSessions<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">,</span> <span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    testSessions<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    testSessions<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    plwap <span class="token operator">=</span> PLWAP<span class="token punctuation">(</span>testSessions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    plwap<span class="token punctuation">.</span>PLWAP_Mine<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>plwap<span class="token punctuation">.</span>F<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <p>
+    本文由
+    <a href="http://136.244.107.20/2021/06/26/%E3%80%90%E6%AF%95%E8%AE%BE%E4%B8%93%E6%A0%8F-5%E3%80%91PLWAP%E7%AE%97%E6%B3%95/">Frank</a>采用
+    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/deed.zh?__cf_chl_captcha_tk__=38df848514690e2d9dc35f174d93f404b2dc17a9-1616641417-0-AcSDyu81x_9yKoS9Tkscc967EBylerhw7ZXx062rI3FTN9IjaKqw2cZ5GiLvpW80nM_q_WYmrM-st0hhHJ6_HxbPNrd1mxX-_bTwGjP7mto90c8bMm2UBOVshXle-9tVCWF9ENZWc0b-MgwIgFFV0smZb1HrBYHsKDXV-LUaQkbPVSDj90E24trDNzbTOJ-SIsnE7e7NTp4kxSX--N7aMlpJZ90Zg_X6lqt9VB8ZBcJY_DCUkSCXBp1JAZPpif2TEsZaRMs_mRpxreW9-mYPr6pdKy1kTYpoaYgspVsJGpaWmdjOLclo-9VThCdcTOPsIDJMaAk_swSsD-fKDEMH1aRy2puX5LLIvXmo6vzCK_aG7nts0YsLLi8NdsoDkG2XYr7UR3sn3D3NFCfMf4a-inD8PyeEVCXzV64VxFFgLfZMYQso7PrHyggAevumlO68HMIeebWRlHegO9NXQtOHBve-81hzY_k1Nl5gv4QKENylQvSRGvtfxqz8MFVA9pmAlsUfaaFR_JbWL4S6XvhA35zt6sBUpjSwoG2Ie5iPKlzll2hXLjNTrXkkVe9yUPiuhxaGzPx4za6GvuEjX9c7amS2priqMr2tPF4lyN98_1n6qac38yy5yhgIO5zRHMGUBg">署名 4.0 国际 (CC BY 4.0)</a>许可
+  </p>
+  <p><a class="classtest-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag">数据分析</a>, <a class="classtest-link" href="/tags/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" rel="tag">毕业设计</a> — 2021年6月26日</p>
+  <div class="row" style="justify-content: center; font-weight: lighter;">
+    <span id="busuanzi_container_page_pv">
+      本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+    </span>
+  </div>
+
+  
+  <hr>
+<section id="comments" class="mt-2 mb-3">
+
+  <div id="disqus_thread">
+    <a href="#" class="button button-primary" onclick="loadDisqus();return false;">View / Make Comments</a>
+  </div>
+
+  <script>
+    var disqus_config = function() {
+      this.page.url = 'http://136.244.107.20/2021/06/26/【毕设专栏-5】PLWAP算法/index.html';
+      this.page.identifier = '2021/06/26/【毕设专栏-5】PLWAP算法/index.html';
+      this.page.title = '【毕设专栏-5】PLWAP算法及Python实现';
+    };
+
+    var is_disqus_loaded = false;
+
+    function loadDisqus() {
+      if (!is_disqus_loaded) {
+        is_disqus_loaded = true;
+
+        var d = document,
+          s = d.createElement('script');
+        s.src = 'https://spaghetti-ink.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+    }
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤ and
+        <a class="footer-link icon" href="https://hexo.io" target="_blank" style="text-decoration: none;" rel="noreferrer" aria-label="Hexo.io">
+        <svg class="hexo svg-hov" width="14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Hexo.js</title><path d="M12 .007L1.57 6.056V18.05L12 23.995l10.43-6.049V5.952L12 .007zm4.798 17.105l-.939.521-.939-.521V12.94H9.08v4.172l-.94.521-.938-.521V6.89l.939-.521.939.521v4.172h5.84V6.89l.94-.521.938.521v10.222z"/></svg>
+        </a>
+        
+        at <a href="https://zh.wikipedia.org/wiki/%E6%9D%AD%E5%B7%9E%E5%B8%82" target="_blank" rel="noreferrer">Hangzhou</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/FengfanHu" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://www.linkedin.com/in/%E9%A3%8E%E5%B8%86-%E8%83%A1-569753185/" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://www.zhihu.com/people/hu-feng-fan-52-54" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Zhihu">
+        <svg t="1616332069632" class="zhihu svg-hov" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4542" width="18" height="18"><title>Zhihu</title><path d="M932.571429 54.857143H91.428571c-20.228571 0-36.571429 16.342857-36.571428 36.571428v841.142858c0 20.228571 16.342857 36.571429 36.571428 36.571428h841.142858c20.228571 0 36.571429-16.342857 36.571428-36.571428V91.428571c0-20.228571-16.342857-36.571429-36.571428-36.571428zM420.914286 604.342857l81.142857 92.228572c10.514286 37.714286-3.771429 72.114286-3.771429 72.114285l-109.371428-127.885714v-0.114286c-10.171429 33.142857-22.971429 65.485714-38.057143 96.8-25.828571 52.228571-63.085714 62.514286-102.285714 65.942857-39.314286 3.428571-26.628571-6.057143-26.628572-6.057142 77.714286-63.428571 89.142857-100.342857 110.628572-140.685715 13.6-25.485714 23.314286-73.485714 28.914285-110.628571H228.685714s5.485714-35.657143 21.942857-47.657143h116.114286c0.685714-17.485714-1.485714-117.485714-2.285714-150.171429h-56.457143c-10.514286 51.428571-46.857143 64.8-54.971429 68.685715-8 3.885714-26.971429 8.114286-24.114285 0 2.971429-8.114286 30.857143-52.8 49.371428-126.514286 18.628571-73.828571 73.028571-70.857143 73.028572-70.857143-14.628571 25.714286-25.6 84.114286-25.6 84.114286h182.514285c11.542857 0 12.114286 44.571429 12.114286 44.571428h-103.771428c-0.8 25.942857-3.2 95.771429-5.714286 150.171429H520s13.942857 17.6 13.942857 47.657143h-125.714286l-0.114285 1.714286c-1.714286 23.314286-7.2 50.171429-14.742857 77.257142l27.542857-20.685714z m383.428571 132.571429h-100.114286l-79.428571 53.257143-18.742857-53.257143h-45.828572V294.285714h244.114286v442.628572zM393.371429 625.142857s0-0.114286 0 0z m246.857142 107.771429l64.914286-43.542857h52.114286-0.114286V343.657143H608.8v345.714286h16.114286z" p-id="4543" fill="#1296db"></path></svg>
+        
+      </a>
+      
+
+    </div>
+  
+</div>
+
+<div class="row" style="justify-content: center; font-weight: lighter;">
+  <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+</div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>
