@@ -15,11 +15,11 @@
   <link rel="dns-prefetch" href="//cdn.mathjax.org" />
 
   
-  <title>SQL01-DQL01</title>
+  <title>SQL01-DQL02</title>
   
-  <link rel="canonical" href="http://136.244.107.20/2021/09/17/SQL01-DQL/">
+  <link rel="canonical" href="http://136.244.107.20/2021/09/19/SQL01-DQL02/">
   
-  <meta name="description" content="条件查询 按条件表达式筛选常见的条件运算符：&amp;gt;, &amp;lt;, !=, =, &amp;lt;&amp;gt;, &amp;lt;=, &amp;gt;= 按逻辑表达式筛选常见的逻辑运算符：&amp;amp;&amp;amp;, ||, !, and, or, NOT 模糊查询LIKE, BETWEEN AND, IN, IS NULL LI">
+  <meta name="description" content="分组查询：SELECT 分组函数, 列（要求出现在 GROUP BY 之后） FROM 表 [WHERE CONDITION] # 分组前的筛选-数据来源于原始表 GROUP BY 分组的列表1, 分组的列表2 ... # (多字段分组无先后顺序) [HAVING CONDITION] # 分组后的">
   
   
   <meta name="keywords" content="blog">
@@ -30,21 +30,21 @@
   
   <meta property="og:site_name" content="Spaghetti" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="SQL01-DQL01" />
+  <meta property="og:title" content="SQL01-DQL02" />
   
-  <meta property="og:description" content="条件查询 按条件表达式筛选常见的条件运算符：&amp;gt;, &amp;lt;, !=, =, &amp;lt;&amp;gt;, &amp;lt;=, &amp;gt;= 按逻辑表达式筛选常见的逻辑运算符：&amp;amp;&amp;amp;, ||, !, and, or, NOT 模糊查询LIKE, BETWEEN AND, IN, IS NULL LI">
+  <meta property="og:description" content="分组查询：SELECT 分组函数, 列（要求出现在 GROUP BY 之后） FROM 表 [WHERE CONDITION] # 分组前的筛选-数据来源于原始表 GROUP BY 分组的列表1, 分组的列表2 ... # (多字段分组无先后顺序) [HAVING CONDITION] # 分组后的">
   
-  <meta property="og:url" content="http://136.244.107.20/2021/09/17/SQL01-DQL/" />
+  <meta property="og:url" content="http://136.244.107.20/2021/09/19/SQL01-DQL02/" />
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SQL01-DQL01">
+  <meta name="twitter:title" content="SQL01-DQL02">
   
-  <meta name="twitter:description" content="条件查询 按条件表达式筛选常见的条件运算符：&amp;gt;, &amp;lt;, !=, =, &amp;lt;&amp;gt;, &amp;lt;=, &amp;gt;= 按逻辑表达式筛选常见的逻辑运算符：&amp;amp;&amp;amp;, ||, !, and, or, NOT 模糊查询LIKE, BETWEEN AND, IN, IS NULL LI">
+  <meta name="twitter:description" content="分组查询：SELECT 分组函数, 列（要求出现在 GROUP BY 之后） FROM 表 [WHERE CONDITION] # 分组前的筛选-数据来源于原始表 GROUP BY 分组的列表1, 分组的列表2 ... # (多字段分组无先后顺序) [HAVING CONDITION] # 分组后的">
   
   
   <meta name="twitter:image" content="http://136.244.107.20undefined">
   
-  <meta name="twitter:url" content="http://136.244.107.20/2021/09/17/SQL01-DQL/" />
+  <meta name="twitter:url" content="http://136.244.107.20/2021/09/19/SQL01-DQL02/" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -213,165 +213,161 @@
 <hr style="margin-bottom: 2.6rem">
 
         <div class="trans">
-            <h1>SQL01-DQL01</h1>
+            <h1>SQL01-DQL02</h1>
 
-  <h2 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h2><ul>
-<li>按条件表达式筛选<br>常见的条件运算符：<code>&gt;, &lt;, !=, =, &lt;&gt;, &lt;=, &gt;=</code></li>
-<li>按逻辑表达式筛选<br>常见的逻辑运算符：<code>&amp;&amp;, ||, !, and, or, NOT</code></li>
-<li>模糊查询<br><code>LIKE, BETWEEN AND, IN, IS NULL</code></li>
-<li><p>LIKE:</p>
-<ol>
-<li>一般和通配符一起使用。<br> 通配符：<pre><code> %: 任意多个字符 // 特别注意通配符是%不是*
- _: 任意单个字符
-</code></pre> 转义 ESCAPE:<pre><code> 默认 ESCAPE
-     /: /_ -&gt; 下划线
- 指定 ESCAPE
-     LIKE &#39;_$_&#39; ESCAPE &#39;$&#39;; -&gt; 使用$作为转义符号
-</code></pre></li>
-<li><strong>LIKE的查询结果并不包括NULL的情况！！</strong></li>
-</ol>
-</li>
-<li><p>BETWEEN AND 可以取到临界值但是不能调换位置</p>
-</li>
-<li>IN的值类型必须一致或者兼容，且不支持通配符</li>
-<li>IS NULL<br>普通的 =, != 并不能用于判断 NULL, 只能使用 IS NULL<ul>
-<li>ISNULL(exp) 函数，如果表达式为null，返回1，否则0</li>
-</ul>
-</li>
-<li>IS 后面只能跟 boolean_value, can be TRUE, FALSE, or UNKNOWN.<ul>
-<li>IS NULL 和 IS 是两个不同的关键词</li>
-</ul>
-</li>
-<li>NULL-safe equal &lt;=&gt; 可以判断 NULL 但是可读性不高    </li>
-</ul>
-<hr>
-<h2 id="排序查询："><a href="#排序查询：" class="headerlink" title="排序查询："></a>排序查询：</h2><ul>
-<li>Syntax:<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 查询列表
+  <h2 id="分组查询："><a href="#分组查询：" class="headerlink" title="分组查询："></a>分组查询：</h2><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 分组函数<span class="token punctuation">,</span> 列（要求出现在 <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> 之后）
 <span class="token keyword">FROM</span> 表
-【<span class="token keyword">WHERE</span> CONDITION】
-<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> 排序列表 <span class="token punctuation">[</span><span class="token keyword">asc</span><span class="token operator">|</span><span class="token keyword">desc</span><span class="token punctuation">]</span><span class="token punctuation">,</span> field_2 <span class="token punctuation">[</span><span class="token keyword">asc</span><span class="token operator">|</span><span class="token keyword">desc</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">[</span><span class="token keyword">WHERE</span> CONDITION<span class="token punctuation">]</span> <span class="token comment"># 分组前的筛选-数据来源于原始表</span>
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> 分组的列表<span class="token number">1</span><span class="token punctuation">,</span> 分组的列表<span class="token number">2</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token comment"># (多字段分组无先后顺序)</span>
+<span class="token punctuation">[</span><span class="token keyword">HAVING</span> CONDITION<span class="token punctuation">]</span> <span class="token comment"># 分组后的筛选-数据来源于分组后的临时表</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> 子句<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol>
+<li>一般分组条件作为条件，一定是用HAVING。</li>
+<li>优先使用分组前筛选。</li>
+</ol>
+<hr>
+<h2 id="连接查询："><a href="#连接查询：" class="headerlink" title="连接查询："></a>连接查询：</h2><h3 id="笛卡尔积：X-Y"><a href="#笛卡尔积：X-Y" class="headerlink" title="笛卡尔积：X * Y"></a>笛卡尔积：X * Y</h3><ul>
+<li><p>sql92 语法</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">COLUMNS</span>
+<span class="token keyword">FROM</span> <span class="token keyword">TABLE</span> 别名<span class="token punctuation">,</span> <span class="token keyword">TABLE</span> 别名
+<span class="token keyword">WHERE</span> 筛选条件 <span class="token operator">AND</span> 连接条件 <span class="token operator">AND</span> 连接条件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>sql99 语法<br><strong> 可读性比sql92要高一些 </strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">COLUMNS</span>
+<span class="token keyword">FROM</span> <span class="token keyword">TABLE</span> 别名 <span class="token comment"># 注意满足连接条件的先后顺序</span>
+<span class="token punctuation">[</span>连接类型<span class="token punctuation">]</span> <span class="token keyword">JOIN</span> <span class="token keyword">TABLE</span> 别名 <span class="token keyword">ON</span> 连接条件
+<span class="token punctuation">[</span>连接类型<span class="token punctuation">]</span> <span class="token keyword">JOIN</span> <span class="token keyword">TABLE</span> 别名 <span class="token keyword">ON</span> 连接条件
+<span class="token keyword">WHERE</span> 筛选条件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
-<p><strong> ORDER BY 一般放在查询语句最后 除 LIMIT 子句 </strong></p>
-<ul>
-<li>查询列表：</li>
+<h3 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h3><ul>
+<li>查询交集</li>
+<li>[INNER JOIN | JOIN 默认为内连接]<br>  等值连接： WHERE a.name = b.name<pre><code>  1. 表于表的交集部分
+  2. 表的顺序没有要求
+  3. 表可以使用别名
+  4. n个表的连接需要n-1个条件
+</code></pre>  非等值连接：无非是 = 变成了表达式<br>  自连接：自己（表）连接自己（表）</li>
 </ul>
-<ol>
-<li>表中的字段；2.常量；3.表达式；4.函数</li>
+<h3 id="外连接："><a href="#外连接：" class="headerlink" title="外连接："></a>外连接：</h3><ol>
+<li>查询结果为主表中的所有记录，如果从表匹配则显示，不匹配则显示 NULL</li>
+<li>外连接结果 = 内连接结果 + 主表中为匹配的记录</li>
 </ol>
 <ul>
-<li><p>ORDER BY:</p>
+<li>[OUTER JOIN]<br>  左外连接：[LEFT JOIN] 左为主表<br>  右外连接：[RIGHT JOIN] 右为主表<br>  全外连接：MYSQL 不支持 = [LEFT JOIN] UNION [RIGHT JOIN]<br>交叉连接：[CROSS JOIN] 笛卡尔积<br>  SELECT * FROM A CROSS JOIN B;</li>
+</ul>
+<hr>
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><blockquote>
+<p>出现在其他语句中的 SELECT 语句（嵌套查询）</p>
+<ul>
+<li>外部的查询叫 主查询 或 外查询</li>
+<li>子查询查不到时，返回NULL</li>
+</ul>
+</blockquote>
+<h3 id="子查询分类"><a href="#子查询分类" class="headerlink" title="子查询分类:"></a>子查询分类:</h3><ul>
+<li>位置:<ul>
+<li>SELECT<ul>
+<li>标量子查询 （一行一列）<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token punctuation">(</span>
+    <span class="token keyword">SELECT</span> department_name
+    <span class="token keyword">FROM</span> departments
+    <span class="token keyword">WHERE</span> department_id <span class="token operator">=</span> e<span class="token punctuation">.</span>department_id
+<span class="token punctuation">)</span> <span class="token keyword">AS</span> 部门名
+<span class="token keyword">FROM</span> employees e
+<span class="token keyword">WHERE</span> e<span class="token punctuation">.</span>employee_id <span class="token operator">=</span> <span class="token number">102</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+<li>FROM<ul>
+<li>表子查询 （多行多列）[相当于生产了临时表，必须起别名 !!!]</li>
+</ul>
+</li>
+<li>WHERE or HAVING **<ul>
+<li>标量子查询 （一行一列）</li>
+<li>列子查询 （一列多行）</li>
+<li>行字查询 （一行多列）</li>
+</ul>
+</li>
+<li>EXISTS<ul>
+<li>表子查询 </li>
+<li>结果: 1 或 0</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>结果集:</p>
+<ul>
+<li>标量子查询 （一行一列）</li>
+<li>列子查询 （一列多行）</li>
+<li>行字查询 （一行多列）<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment"># 查询员工编号最小且工资最高的员工信息</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> employees
+<span class="token keyword">WHERE</span> <span class="token punctuation">(</span>employee_id<span class="token punctuation">,</span> salary<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token comment"># 同时操作两个子查询</span>
+    <span class="token keyword">SELECT</span> <span class="token function">MIN</span><span class="token punctuation">(</span>employee_id<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">MAX</span><span class="token punctuation">(</span>salary<span class="token punctuation">)</span>
+    <span class="token keyword">FROM</span> employees
+<span class="token punctuation">)</span>
+
+<span class="token comment"># 等价于</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> employees
+<span class="token keyword">WHERE</span> employee_id <span class="token operator">=</span> <span class="token punctuation">(</span>
+    <span class="token keyword">SELECT</span> <span class="token function">MIN</span><span class="token punctuation">(</span>employee_id<span class="token punctuation">)</span>
+    <span class="token keyword">FROM</span> employees
+<span class="token punctuation">)</span> <span class="token operator">AND</span> salary <span class="token operator">=</span> <span class="token punctuation">(</span>
+    <span class="token keyword">SELECT</span> <span class="token function">MAX</span><span class="token punctuation">(</span>salary<span class="token punctuation">)</span>
+    <span class="token keyword">FROM</span> employees
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>表子查询 （多行多列）</p>
+<p>子查询的特点:</p>
 <ol>
-<li>默认 asc;</li>
-<li>asc | desc </li>
+<li>在括号()内</li>
+<li>标量子查询一般配合 单行操作符 使用<br> <code>&gt;, &lt;, =, &gt;=, &lt;=</code></li>
+<li>列子查询一般配合 多行操作符 使用<br> <code>IN, NOT IN, ANY/SOME (any 与 some 等价，所以还是用some比较符合正常逻辑), ALL
+ &lt;&gt;ALL, = ANY, &gt; or &lt; ANY or ALL (不存在 = ALL 和 != ANY)
+ IN 可以兼容 =</code></li>
+<li>子查询总是优先于主查询，因为主查询需要使用到子查询的结果</li>
+<li>效率比较低，一般能用连接查询 绝不用 子查询</li>
 </ol>
 </li>
-<li><p>常见错误：</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span>
-    <span class="token operator">*</span><span class="token punctuation">,</span> salary<span class="token operator">*</span><span class="token number">12</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">+</span>IFNULL<span class="token punctuation">(</span>commission_pct<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> <span class="token punctuation">`</span>annual salary<span class="token punctuation">`</span>
-<span class="token keyword">FROM</span> 
-    employees
-<span class="token keyword">ORDER</span> <span class="token keyword">BY</span>
-    <span class="token string">"annual salary"</span> <span class="token keyword">DESC</span><span class="token punctuation">;</span> <span class="token operator">&lt;</span><span class="token comment">-- 无效</span>
-    <span class="token punctuation">`</span>annual salary<span class="token punctuation">`</span> <span class="token keyword">DESC</span><span class="token punctuation">;</span> <span class="token operator">&lt;</span><span class="token comment">-- Right</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  反引号、单引号、双引号的区别：</p>
-<pre><code>  `: 用于区别 保留关键字 与 变量名（字段名）等
-  &#39;: 用于表示文本值
-  &quot;: 只在MYSQL适用，推荐使用&#39;
-</code></pre></li>
-<li><p>字节长度 LENGTH(str)</p>
+</ul>
 </li>
 </ul>
 <hr>
-<h2 id="常用函数："><a href="#常用函数：" class="headerlink" title="常用函数："></a>常用函数：</h2><p>封装的一组逻辑语句，对外暴露方法名</p>
-<p>Syntax:<br><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">FUNCTION</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token keyword">FROM</span> TABLE_NAME<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></p>
-<ul>
-<li>Category:</li>
-</ul>
+<h2 id="分页查询："><a href="#分页查询：" class="headerlink" title="分页查询："></a>分页查询：</h2><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 查询列表
+<span class="token keyword">FROM</span> 表
+<span class="token keyword">LIMIT</span> <span class="token punctuation">[</span><span class="token keyword">OFFSET</span><span class="token punctuation">,</span><span class="token punctuation">]</span> SIZE<span class="token punctuation">;</span>
+	
+	<span class="token keyword">LIMIT</span> 后不能跟 运算符，只能跟常量！！！
+
+<span class="token operator">-</span> <span class="token keyword">OFFSET</span>: 起始索引
+<span class="token operator">-</span> SIZE: 大小<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果使用传统的第几页的形式:<br>假设一页有Size条记录，那么</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 查询列表
+<span class="token keyword">FROM</span> 表
+<span class="token keyword">LIMIT</span> <span class="token punctuation">[</span><span class="token punctuation">(</span>Page<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span>Size<span class="token punctuation">,</span><span class="token punctuation">]</span> SIZE<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></h2><h2 id="联合查询："><a href="#联合查询：" class="headerlink" title="联合查询："></a>联合查询：</h2><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">查询<span class="token number">1</span>
+    <span class="token keyword">UNION</span> <span class="token punctuation">[</span><span class="token keyword">ALL</span><span class="token punctuation">]</span>
+查询<span class="token number">2</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>特点:</p>
 <ol>
-<li>单行函数<br><code>CONCAT(str1,str2,...), LENGTH(str), IFNULL(expr1,expr2)...</code></li>
+<li>表不同也可以联合</li>
+<li>查询的列数必须一致</li>
+<li>建议查询每一列的 数据类型 一致</li>
+<li>会去掉输出重复的记录 使用 UNION ALL 避免去重</li>
 </ol>
-<ul>
-<li>字符函数；<ul>
-<li>LENGTH(str): 字节数。UTF-8下，汉字的字节数为3</li>
-<li>CONCAT(str1,str2,…): 拼接字符</li>
-<li>UPPER(str): Upper case</li>
-<li>LOWER(str): Lower case</li>
-<li>SUBSTR: <strong>索引从 1 开始</strong><ul>
-<li>SUBSTR(str,pos): 截取pos后的字符串；</li>
-<li>SUBSTR(str,pos,len): 从pos开始截止len长度的字符串</li>
-</ul>
-</li>
-<li>INSTR(str,substr): 返回substr在str中第一次出现的索引，找不到则为0</li>
-<li>TRIM([remstr FROM] str): 去前后空格，当存在 remstr 时去掉前后的remstr</li>
-<li>LPAD(str,len,padstr): 左填充len-LENGTH(str)长度的padStr</li>
-<li>RPAD(str,len,padstr): 右填充</li>
-<li>REPLACE(str,from_str,to_str): replace from_str to to_str</li>
-</ul>
-</li>
-<li>数学函数；<ul>
-<li>ROUND(X): 四舍五入<ul>
-<li>ROUND(X,D): 四舍五入(保留D位小数)</li>
-</ul>
-</li>
-<li>CEIL(X): 向上取整 &gt;=</li>
-<li>FLOOR(X): 向下取整 &lt;=</li>
-<li>TRUNCATE(X,D): 截断D后位的小数</li>
-<li>MOD(N,M): 取余数 a-(a/b)*b</li>
-</ul>
-</li>
-<li>日期函数；<ul>
-<li>NOW(): 当前系统 日期 与 时间</li>
-<li>CURDATE(): 当前日期</li>
-<li>CURTIME(): 当前时间</li>
-<li>获取指定的部分 年、月、日、时、分、秒<ul>
-<li>YEAR(date), MONTH(date), MONTHNAME(date), DAY(date), HOUR(time)…</li>
-</ul>
-</li>
-<li>STR_TO_DATE(str,format): 日期格式字符串转换成日志<pre><code>  SELECT STR_TO_DATE(&#39;1998-3-2&#39;,&#39;%Y-%c-%d&#39;);
-</code></pre></li>
-<li>DATE_FORMAT(date,format): 日期转化为指定格式字符串</li>
-<li>TIMEDIFF(expr1,expr2): 日期差</li>
-</ul>
-</li>
-<li>其他函数；<ul>
-<li>VERSION()</li>
-<li>DATABASE()</li>
-<li>USER()</li>
-</ul>
-</li>
-<li>流程控制函数；<br>  IF(expr1,expr2,expr3): 三元运算</li>
-</ul>
-<ol>
-<li><p>分组函数 (统计作用, 聚合函数)</p>
-<ul>
-<li>sum, avg, max, min, count</li>
-<li>参数类型:<pre><code>  SUM(), AVG(): 支持 数值
-  MAX(), MIN(): 支持 数值，日期，字符 （因为日期和字符都可以排序）
-  COUNT(): 计算非空的个数
-</code></pre></li>
-<li>是否忽略NULL？ 以上分组函数都忽略NULL值</li>
-<li>与 DISTINCT 搭配:<pre><code>  SUM([DISTINCT] expr)
-  COUNT([DISTINCT] expr)
-</code></pre></li>
-<li><p>COUNT 函数使用:</p>
-<pre><code>  COUNT(*): 统计总行数（只要每条记录有一条不为null，就计数）
-  COUNT(1): 统计总行数（相当于加了一个字段使值都为1）
-</code></pre><p><code># 不使用GROUP BY对记录进行分组那么默认就是以行进行分组（哪怕说记录的值是相同的）</code></p>
-</li>
-<li>分组函数一同查询的字段限制:<pre><code>  * 要求是GROUP BY之后的字段
-  如 AVG(salary), employee_id 一起查询没有意义，因为AVG输出只有一个值
-</code></pre></li>
-</ul>
-</li>
-</ol>
+<hr>
+<p>查询顺序：<br><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 查询列表										<span class="token comment">#6.</span>
+<span class="token keyword">FROM</span> 表											    <span class="token comment">#1.</span>
+<span class="token punctuation">[</span>连接类型 <span class="token keyword">JOIN</span> TABLE_2 <span class="token keyword">ON</span> CONDITION<span class="token punctuation">]</span>	                <span class="token comment">#2.</span>
+<span class="token punctuation">[</span><span class="token keyword">WHERE</span> CONDITION<span class="token punctuation">]</span>									<span class="token comment">#3.</span>
+<span class="token punctuation">[</span><span class="token keyword">GROUP</span> <span class="token keyword">BY</span> <span class="token keyword">FIELDS</span><span class="token punctuation">]</span>								    <span class="token comment">#4.</span>
+<span class="token punctuation">[</span><span class="token keyword">HAVING</span> CONDITION<span class="token punctuation">]</span>									<span class="token comment">#5.</span>
+<span class="token punctuation">[</span><span class="token keyword">ORDER</span> <span class="token keyword">BY</span> <span class="token keyword">FIELDS</span><span class="token punctuation">]</span>									<span class="token comment">#7.</span>
+<span class="token punctuation">[</span><span class="token keyword">LIMIT</span> <span class="token keyword">OFFSET</span><span class="token punctuation">,</span> SIZE<span class="token punctuation">]</span>								<span class="token comment">#8.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 
   <p>
     本文由
-    <a href="http://136.244.107.20/2021/09/17/SQL01-DQL/">Frank</a>采用
+    <a href="http://136.244.107.20/2021/09/19/SQL01-DQL02/">Frank</a>采用
     <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/deed.zh?__cf_chl_captcha_tk__=38df848514690e2d9dc35f174d93f404b2dc17a9-1616641417-0-AcSDyu81x_9yKoS9Tkscc967EBylerhw7ZXx062rI3FTN9IjaKqw2cZ5GiLvpW80nM_q_WYmrM-st0hhHJ6_HxbPNrd1mxX-_bTwGjP7mto90c8bMm2UBOVshXle-9tVCWF9ENZWc0b-MgwIgFFV0smZb1HrBYHsKDXV-LUaQkbPVSDj90E24trDNzbTOJ-SIsnE7e7NTp4kxSX--N7aMlpJZ90Zg_X6lqt9VB8ZBcJY_DCUkSCXBp1JAZPpif2TEsZaRMs_mRpxreW9-mYPr6pdKy1kTYpoaYgspVsJGpaWmdjOLclo-9VThCdcTOPsIDJMaAk_swSsD-fKDEMH1aRy2puX5LLIvXmo6vzCK_aG7nts0YsLLi8NdsoDkG2XYr7UR3sn3D3NFCfMf4a-inD8PyeEVCXzV64VxFFgLfZMYQso7PrHyggAevumlO68HMIeebWRlHegO9NXQtOHBve-81hzY_k1Nl5gv4QKENylQvSRGvtfxqz8MFVA9pmAlsUfaaFR_JbWL4S6XvhA35zt6sBUpjSwoG2Ie5iPKlzll2hXLjNTrXkkVe9yUPiuhxaGzPx4za6GvuEjX9c7amS2priqMr2tPF4lyN98_1n6qac38yy5yhgIO5zRHMGUBg">署名 4.0 国际 (CC BY 4.0)</a>许可
   </p>
-  <p><a class="classtest-link" href="/tags/SQL/" rel="tag">SQL</a> — 2021年9月17日</p>
+  <p><a class="classtest-link" href="/tags/SQL/" rel="tag">SQL</a> — 2021年9月19日</p>
   <div class="row" style="justify-content: center; font-weight: lighter;">
     <span id="busuanzi_container_page_pv">
       本文总阅读量<span id="busuanzi_value_page_pv"></span>次
@@ -407,9 +403,6 @@
               
               
                    
-                  
-              
-                   
                    <!-- 在找到当前文章所在的 index -->
                       
                       <div>
@@ -421,20 +414,23 @@
                                
                                 
                                 
-                                 <!-- 下一篇文章 --> 
-                                    <div class="twelve columns">
-                                        <span>下一章</span>
-                                        <a href="/2021/09/19/SQL01-DQL02/"> SQL01-DQL02</a>
-                                    </div>
                                 
                           
                                
+                                  <!-- 上一篇文章 --> 
+                                  <div class="twelve columns">
+                                      <span>上一章</span>
+                                      <a href="/2021/09/17/SQL01-DQL/"> SQL01-DQL01</a>
+                                  </div>
                                 
                                 
                                 
                           
                         </div>
                       </div>
+                  
+              
+                   
                   
               
           
@@ -452,9 +448,9 @@
 
   <script>
     var disqus_config = function() {
-      this.page.url = 'http://136.244.107.20/2021/09/17/SQL01-DQL/index.html';
-      this.page.identifier = '2021/09/17/SQL01-DQL/index.html';
-      this.page.title = 'SQL01-DQL01';
+      this.page.url = 'http://136.244.107.20/2021/09/19/SQL01-DQL02/index.html';
+      this.page.identifier = '2021/09/19/SQL01-DQL02/index.html';
+      this.page.title = 'SQL01-DQL02';
     };
 
     var is_disqus_loaded = false;
