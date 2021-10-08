@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>Cloud Service Model</title>
+      <link href="2021/10/08/Cloud-Service-Model/"/>
+      <url>2021/10/08/Cloud-Service-Model/</url>
+      
+        <content type="html"><![CDATA[<h2 id="What-is-cloud-service-model"><a href="#What-is-cloud-service-model" class="headerlink" title="What is cloud service model?"></a>What is cloud service model?</h2><p>Cloud service model are divided into three models, Iaas(Infrastructure as a service), Paas(Platform as a service), Saas(Software as a service).  </p><div class="table-container"><table><thead><tr><th>Cloud Service Model</th><th>Features</th><th>Example</th><th></th></tr></thead><tbody><tr><td>Iaas (Infrastructure as a service)</td><td><strong>Highest level of flexibility and management control</strong> over IT resources.</td><td>Google Computing Engine</td><td>Self-config Server</td></tr><tr><td>Paas (Platform as a service)</td><td><strong>Focus on the deployment and management of applications</strong>, reduce the need for managing underlying infrastructure.</td><td>Google App Engine</td><td>Foucus on business logic development</td></tr><tr><td>Saas (Software as a service)</td><td><strong>Focus on how plan to use that particular piece of software.</strong></td><td>Gmail, Google+, DingTalk(钉钉), WeCom(企业微信)</td><td>Using services from software</td></tr></tbody></table></div><p>As the following figure illustrates, from Iass to Saas, it’s less control over IT resources.</p><p><img src="https://pic3.zhimg.com/80/v2-1a82f8a4997b0ba53d801639d4c6706e_720w.jpg?source=1940ef5c" alt="img"></p><h2 id="Confusing-point"><a href="#Confusing-point" class="headerlink" title="Confusing point"></a>Confusing point</h2><p>It’s easy to understand that Iaas use cloud computing, storage, management, security services provided by cloud computing companies who may own millions of hosts and using virtual technologies to divide computing resources into small piecies.</p><h3 id="Saas-Modal"><a href="#Saas-Modal" class="headerlink" title="Saas Modal"></a>Saas Modal</h3><p>In some cases, it’s hard to state the distinct difference among these three models. Especially for we chinese, we tend to regard software applications more as tools than services. When talking about cloud, we sometimes take it for granted that the services are offerd by cloud companies. However, most Saas services are provided by third-party companies who use cloud services to run their services. <strong>So, Saas means using services through software applications, and we are not supposed to care anything about the business logic behind the application development.</strong></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 数据分析 </tag>
+            
+            <tag> 杂文 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SQL01-DQL02</title>
       <link href="2021/09/19/SQL01-DQL02/"/>
       <url>2021/09/19/SQL01-DQL02/</url>
